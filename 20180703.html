@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Spring Boot 学习笔记(三) 整合 MyBatis + Druid | 
+        
+        U+2647&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="Spring Boot 学习笔记(三) 整合 MyBatis + Druid">
+    <meta name="keywords" content="java,U+2647,SpringBoot,MyBatis,Druid">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        <!-- highlight 代码高亮 -->
+        
+            <style id="highlight_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("highlight_css","/css/highlight-styles/googlecode.css?psPj0oLv8UYArA4bjklUGQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(https://p.130014.xyz/2020/11/19/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="U+2647&#39;s blog">
+    <meta name="msapplication-starturl" content="https://zdran.com/20180703.html">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="U+2647&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="cjZqB5nJc_iCpbllUCFCsJfhsLKhkKeU2DeYvh56fcE" />
+    <meta name="baidu-site-verification" content="j93yLiKLFj" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://zdran.com/20180703.html">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Spring Boot 学习笔记(三) 整合 MyBatis + Druid | U+2647&#39;s blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="Spring Boot 学习笔记(三) 整合 MyBatis + Druid">
+    <meta property="og:article:tag" content="SpringBoot"> <meta property="og:article:tag" content="MyBatis"> <meta property="og:article:tag" content="Druid"> 
+
+    
+        <meta property="article:published_time" content="Tue Jul 03 2018 16:47:43 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://zdran.com/20180703.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://zdran.com/20180703.html",
+    "headline": "Spring Boot 学习笔记(三) 整合 MyBatis + Druid",
+    "datePublished": "Tue Jul 03 2018 16:47:43 GMT+0800",
+    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "U+2647",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "evolving code monkey"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "U+2647&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",SpringBoot,MyBatis,Druidjava,U+2647",
+    "description": "Spring Boot 学习笔记(三) 整合 MyBatis + Druid",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?08728d2af6039aac16d6a30b8c700589';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle" style="background-color: rgba(255,251,251,0.7)">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon" style="background-color: rgba(255, 251, 251, 0.7); display: initial;">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0-%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="post-toc-number">1.</span> <span class="post-toc-text">0. 环境说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-MyBatis-Generator"><span class="post-toc-number">2.</span> <span class="post-toc-text">1. MyBatis Generator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">3.</span> <span class="post-toc-text">2. 创建本地数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E4%BD%BF%E7%94%A8MyBatis-Generator"><span class="post-toc-number">4.</span> <span class="post-toc-text">3. 使用MyBatis Generator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-%E6%B7%BB%E5%8A%A0MyBatis%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="post-toc-number">5.</span> <span class="post-toc-text">4. 添加MyBatis的配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B"><span class="post-toc-number">6.</span> <span class="post-toc-text">5. 测试一下</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E9%9B%86%E6%88%90-druid"><span class="post-toc-number">7.</span> <span class="post-toc-text">5. 集成 druid</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Spring Boot 学习笔记(三) 整合 MyBatis + Druid
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>U+2647</strong>
+        <span>7月 03, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/Druid/" rel="tag">Druid</a></li><li class="mdl-menu__item"><a class="post_tag-none-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="mdl-menu__item"><a class="post_tag-none-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring Boot 学习笔记(三) 整合 MyBatis + Druid&url=https://zdran.com/20180703.html&pic=https://zdran.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring Boot 学习笔记(三) 整合 MyBatis + Druid&url=https://zdran.com/20180703.html&via=U+2647" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://zdran.com/20180703.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zdran.com/20180703.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=U+2647&#39;s blog&title=Spring Boot 学习笔记(三) 整合 MyBatis + Druid&summary=evolving code monkey&pics=https://zdran.com/img/favicon.png&url=https://zdran.com/20180703.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <ul>
+<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Spring Boot 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180628.html" target="_blank" rel="noopener">Spring Boot 学习笔记(一) hello world</a></li>
+<li><a href="https://zdran.com/20180629.html" target="_blank" rel="noopener">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
+<li><a href="https://zdran.com/20180703.html" target="_blank" rel="noopener">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
+<li><a href="https://zdran.com/20180706.html" target="_blank" rel="noopener">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
+<li><a href="https://zdran.com/20180718.html" target="_blank" rel="noopener">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
+<li><a href="https://zdran.com/20180725.html" target="_blank" rel="noopener">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
+<li><a href="https://zdran.com/20180730.html" target="_blank" rel="noopener">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
+<li><a href="https://zdran.com/20180809.html" target="_blank" rel="noopener">Spring Boot 学习笔记(八) 整合 Filter</a></li>
+<li><a href="https://zdran.com/20180830.html" target="_blank" rel="noopener">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
+<li><a href="https://zdran.com/20180904.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
+<li><a href="https://zdran.com/20180911.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
+<li><a href="https://zdran.com/20181016.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
+<li><a href="https://zdran.com/20190418.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
+<li><a href="https://zdran.com/20190909.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
+</ul>
+<hr>
+<h2 id="0-环境说明"><a href="#0-环境说明" class="headerlink" title="0. 环境说明"></a>0. 环境说明</h2><ul>
+<li>MyBatis Generator 1.3.6</li>
+<li>MySQL 5.7.17</li>
+<li>驱动:mysql-connector-java-5.1.2.jar</li>
+</ul>
+<h2 id="1-MyBatis-Generator"><a href="#1-MyBatis-Generator" class="headerlink" title="1. MyBatis Generator"></a>1. MyBatis Generator</h2><p><a href="https://github.com/mybatis/generator" target="_blank" rel="noopener">MyBatis Generator</a>是一款在使用mybatis框架时，自动生成model，dao和mapper的工具，很大程度上减少了业务开发人员的手动编码时间。</p>
+<p>我们将使用这个工具自动化的构建 MVC 框架中 M 层所需要的东西。</p>
+<h2 id="2-创建本地数据库"><a href="#2-创建本地数据库" class="headerlink" title="2. 创建本地数据库"></a>2. 创建本地数据库</h2><p>在本地的数据库中创建一张表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 创建数据库</span><br><span class="line">CREATE DATABASE LEARNING CHARACTER SET utf8;</span><br><span class="line"></span><br><span class="line">USE LEARNING;</span><br><span class="line"></span><br><span class="line"># 创建表结构</span><br><span class="line">CREATE TABLE ACCOUNT_INFO(</span><br><span class="line">	ACCOUNT_ID INTEGER PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">	NAME VARCHAR(50),</span><br><span class="line">	PWD VARCHAR(50),</span><br><span class="line">	BALANCE INTEGER</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 插入一条数据</span><br><span class="line">INSERT INTO ACCOUNT_INFO VALUES(NULL,&#39;root&#39;,&#39;root&#39;,100);</span><br></pre></td></tr></table></figure>
+<h2 id="3-使用MyBatis-Generator"><a href="#3-使用MyBatis-Generator" class="headerlink" title="3. 使用MyBatis Generator"></a>3. 使用MyBatis Generator</h2><p>下载地址：</p>
+<ul>
+<li><a href="https://github.com/mybatis/generator/releases" target="_blank" rel="noopener">mybatis-generator-core-1.3.6.zip</a></li>
+<li><a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="noopener">mysql-connector-java-5.1.2.jar</a></li>
+</ul>
+<p><strong>如果你是Windows用户,下载mysql-connector的时候可以选择 Platform Independent 版本</strong></p>
+<p>将下载好的MySQL驱动jar包放到generator的lib目录下，</p>
+<p>确保<code>mybatis-generator-core-1.3.6.jar</code>和<code>mysql-connector-java-5.1.2.jar</code>在同一个目录下。</p>
+<p>准备一个 configuration.xml 的配置文件，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">  PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD MyBatis Generator Configuration 1.0&#x2F;&#x2F;EN&quot;</span><br><span class="line">  &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line"> 	&lt;!-- 配置驱动jar包路径.用了相对路径 --&gt;</span><br><span class="line">	&lt;classPathEntry location&#x3D;&quot;mysql-connector-java-5.1.2.jar&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">	&lt;context id&#x3D;&quot;DB2Tables&quot; targetRuntime&#x3D;&quot;MyBatis3&quot;&gt;</span><br><span class="line">    	&lt;!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 --&gt;</span><br><span class="line">		&lt;commentGenerator&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;suppressDate&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;suppressAllComments&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;commentGenerator&gt;</span><br><span class="line">     	&lt;!-- 数据库连接 --&gt;</span><br><span class="line">		&lt;jdbcConnection driverClass&#x3D;&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">			connectionURL&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost&#x2F;LEARNING&quot; userId&#x3D;&quot;root&quot;</span><br><span class="line">			password&#x3D;&quot;********&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;remarks&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">		&lt;javaTypeResolver&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;forceBigDecimals&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;javaTypeResolver&gt;</span><br><span class="line">    	&lt;!-- 数据表对应的model 层  --&gt;</span><br><span class="line">		&lt;javaModelGenerator targetPackage&#x3D;&quot;com.zdran.springboot.dao&quot;</span><br><span class="line">			targetProject&#x3D;&quot;D:\bxwzh&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;javaModelGenerator&gt;</span><br><span class="line">    	&lt;!-- sql mapper 隐射配置文件 --&gt;</span><br><span class="line">		&lt;sqlMapGenerator targetPackage&#x3D;&quot;com.zdran.springboot.mapping&quot;</span><br><span class="line">			targetProject&#x3D;&quot;D:\bxwzh&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;sqlMapGenerator&gt;</span><br><span class="line">    	&lt;!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 --&gt;</span><br><span class="line">		&lt;javaClientGenerator type&#x3D;&quot;XMLMAPPER&quot;</span><br><span class="line">			targetPackage&#x3D;&quot;com.zdran.springboot.mapper&quot; targetProject&#x3D;&quot;D:\bxwzh&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 要对哪些数据表进行生成操作，必须要有一个. --&gt;</span><br><span class="line">	&lt;table tableName&#x3D;&quot;ACCOUNT_INFO&quot; domainObjectName&#x3D;&quot;AccountInfo&quot;&gt;&lt;&#x2F;table&gt;</span><br><span class="line">	&lt;&#x2F;context&gt;</span><br><span class="line">&lt;&#x2F;generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：数据库的密码需要换成你自己的。targetProject=”D:\bxwzh，这个目录尽量是空文件夹</strong></p>
+<p>在 generator 的lib目录下执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -jar mybatis-generator-core-1.3.6.jar -configfile configuration.xml  -overwrite</span><br><span class="line"></span><br><span class="line">出现：MyBatis Generator finished successfully. 就说明成功了。</span><br></pre></td></tr></table></figure>
+<p>我们直接将com目录拷贝到项目目录下面去</p>
+<p>在resources 新建 mybaits 目录，然后将 mapping 文件夹移动到 mybaits 下</p>
+<p>现在我们的项目结构是下面这样的：</p>
+<div align="center">
+    ![项目结构](/images/3001.jpg)
+</div>
+
+<p>添加 mybaits依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--springBoot和mybatis继承--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.2&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;!-- 移除 logging --&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-logging&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;exclusion&gt;</span><br><span class="line">    &lt;&#x2F;exclusions&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!-- mysql 驱动--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.1.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-添加MyBatis的配置"><a href="#4-添加MyBatis的配置" class="headerlink" title="4. 添加MyBatis的配置"></a>4. 添加MyBatis的配置</h2><p>在配置文件里添加下面的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapperLocations: classpath:mybatis&#x2F;mapping&#x2F;*.xml</span><br><span class="line">  typeAliasesPackage: com.zdran.springboot.dao</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">    datasource:</span><br><span class="line">        name: test</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;LEARNING</span><br><span class="line">        username: root</span><br><span class="line">        password: ********</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
+<h2 id="5-测试一下"><a href="#5-测试一下" class="headerlink" title="5. 测试一下"></a>5. 测试一下</h2><p>在 SpringbootApplication 类上面添加包的扫描路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 启动程序</span><br><span class="line"> * Create by zdRan on 2018&#x2F;6&#x2F;28</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@MapperScan(basePackages &#x3D; &quot;com.zdran.springboot.mapper&quot;)</span><br><span class="line">public class SpringbootApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面我们实现一个根据姓名查询账号信息的接口。创建对应的controller、service等</p>
+<p>Service 层的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;7&#x2F;2</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Service</span><br><span class="line">public class AccountServiceImpl implements AccountService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    AccountInfoMapper accountInfoMapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public AccountInfo queryByName(String name) &#123;</span><br><span class="line">        AccountInfoExample example &#x3D; new AccountInfoExample();</span><br><span class="line">        example.createCriteria().andNameEqualTo(name);</span><br><span class="line">        List&lt;AccountInfo&gt; accountInfoList &#x3D; accountInfoMapper.selectByExample(example);</span><br><span class="line">        if (accountInfoList !&#x3D; null &amp;&amp; accountInfoList.size() !&#x3D; 0) &#123;</span><br><span class="line">            return accountInfoList.get(0);</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Controller层的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;7&#x2F;3</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;&#x2F;account&quot;)</span><br><span class="line">public class AccountController &#123;</span><br><span class="line">    private Logger logger &#x3D; LoggerFactory.getLogger(AccountController.class);</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    AccountService accountService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;get&#x2F;&#123;name&#125;&quot;)</span><br><span class="line">    public AccountInfo getAccountByName(@PathVariable String name) &#123;</span><br><span class="line">        logger.info(&quot;根据姓名获取账号信息。入参：name：&#123;&#125;&quot;, name);</span><br><span class="line">        AccountInfo accountInfo &#x3D; accountService.queryByName(name);</span><br><span class="line">        if (accountInfo &#x3D;&#x3D; null) &#123;</span><br><span class="line">            logger.info(&quot;根据姓名获取账号信息。获取失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(&quot;根据姓名获取账号信息。出参：accountInfo：&#123;&#125;&quot;, accountInfo.toString());</span><br><span class="line">        return accountInfo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行一下，访问 <code>http://localhost:9090/learning/account/get/root</code></p>
+<p><strong>url最后的 root 用户名</strong></p>
+<h2 id="5-集成-druid"><a href="#5-集成-druid" class="headerlink" title="5. 集成 druid"></a>5. 集成 druid</h2><p>上面的配置方法是最简单的配置方法。还有一种常常用于生产环境的配置方法。</p>
+<p>添加 druid 依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加druid配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">spring:</span><br><span class="line">    datasource:</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;LEARNING</span><br><span class="line">        username: root</span><br><span class="line">        password: ********</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">        initialSize: 5</span><br><span class="line">        minIdle: 5</span><br><span class="line">        maxActive: 10</span><br><span class="line">        maxWait: 10000</span><br><span class="line">        timeBetweenEvictionRunsMillis: 60000</span><br><span class="line">        minEvictableIdleTimeMillis: 300000</span><br><span class="line">        testOnBorrow: false</span><br><span class="line">        testOnReturn: false</span><br><span class="line">        testWhileIdle: true</span><br><span class="line">        keepAlive: true</span><br><span class="line">        removeAbandoned: true</span><br><span class="line">        removeAbandonedTimeout: 80</span><br><span class="line">        logAbandoned: true</span><br><span class="line">        poolPreparedStatements: true</span><br><span class="line">        maxPoolPreparedStatementPerConnectionSize: 20</span><br><span class="line">        filters: stat,slf4j,wall</span><br></pre></td></tr></table></figure>
+
+<p>添加依赖，方便使用 ConfigurationProperties 注解，来读取yml里的配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 为了方便使用@ConfigurationProperties注解 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-configuration-processor&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;&#x2F;optional&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>创建 druid 配置文件读取类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;7&#x2F;3</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Configuration</span><br><span class="line">@ConfigurationProperties(prefix &#x3D; &quot;spring.datasource&quot;)</span><br><span class="line">public class DruidDataSourceProperties &#123;</span><br><span class="line"></span><br><span class="line">    private String driverClassName;</span><br><span class="line">    private String url;</span><br><span class="line">    private String username;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    private int initialSize;</span><br><span class="line">    private int minIdle;</span><br><span class="line">    private int maxActive;</span><br><span class="line">    private long maxWait;</span><br><span class="line">    private long timeBetweenEvictionRunsMillis;</span><br><span class="line">    private long minEvictableIdleTimeMillis;</span><br><span class="line">    private boolean testOnBorrow;</span><br><span class="line">    private boolean testOnReturn;</span><br><span class="line">    private boolean testWhileIdle;</span><br><span class="line">    private boolean keepAlive;</span><br><span class="line">    private boolean removeAbandoned;</span><br><span class="line">    private int removeAbandonedTimeout;</span><br><span class="line">    private boolean logAbandoned;</span><br><span class="line">    private boolean poolPreparedStatements;</span><br><span class="line">    private int maxPoolPreparedStatementPerConnectionSize;</span><br><span class="line">    private String filters;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;省略了所有属性的 get 、set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>上面的代码省略了所有属性的 get 、set方法，你的本地代码一定要有get、set方法</strong></p>
+<p>删除 yml 里的 mybaits 配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapperLocations: classpath:mybatis&#x2F;mapping&#x2F;*.xml</span><br><span class="line">  typeAliasesPackage: com.zdran.springboot.dao</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">删除 SpringbootApplication 类上面的 MapperScan 注解</span><br></pre></td></tr></table></figure>
+<p>@MapperScan(basePackages = “com.zdran.springboot.mapper”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">创建 mybaits 的配置类：</span><br></pre></td></tr></table></figure>
+<p>/**</p>
+<ul>
+<li><p>Create by ranzd on 2018/7/3</p>
+</li>
+<li></li>
+<li><p>@author <a href="mailto:cm.zdran@gmail.com">cm.zdran@gmail.com</a></p>
+</li>
+<li><p>/<br>@Configuration<br>@EnableTransactionManagement<br>@MapperScan(</p>
+<pre><code>basePackages = &quot;com.zdran.springboot.mapper&quot;, 
+sqlSessionFactoryRef = &quot;learningSqlSessionFactory&quot;)</code></pre><p>public class MyBatisConfig {<br>  private Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);</p>
+<p>  @Autowired<br>  DruidDataSourceProperties druidDataSourceProperties;</p>
+<p>  @Bean(name = “learningSqlSessionFactory”)<br>  @Primary<br>  public SqlSessionFactory learningSqlSessionFactory() throws Exception {</p>
+<pre><code>final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+sessionFactory.setDataSource(getDruidDataSource());
+sessionFactory.setTypeAliasesPackage(&quot;com.zdran.springboot.dao&quot;);
+sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+        .getResources(&quot;classpath:/mybatis/mapping/*.xml&quot;));
+return sessionFactory.getObject();</code></pre><p>  }</p>
+<p>  @Bean(name = “learningDataSource”)<br>  public DataSource getDruidDataSource() {</p>
+<pre><code>DruidDataSource druidDataSource = new DruidDataSource();
+druidDataSource.setDriverClassName(druidDataSourceProperties.getDriverClassName());
+druidDataSource.setUrl(druidDataSourceProperties.getUrl());
+druidDataSource.setUsername(druidDataSourceProperties.getUsername());
+druidDataSource.setPassword(druidDataSourceProperties.getPassword());
+druidDataSource.setInitialSize(druidDataSourceProperties.getInitialSize());
+druidDataSource.setMinIdle(druidDataSourceProperties.getMinIdle());
+druidDataSource.setMaxActive(druidDataSourceProperties.getMaxActive());
+druidDataSource.setMaxWait(druidDataSourceProperties.getMaxWait());
+druidDataSource.setTimeBetweenEvictionRunsMillis(
+    druidDataSourceProperties.getTimeBetweenEvictionRunsMillis());
+druidDataSource.setMinEvictableIdleTimeMillis(
+    druidDataSourceProperties.getMinEvictableIdleTimeMillis());
+druidDataSource.setTestOnBorrow(druidDataSourceProperties.isTestOnBorrow());
+druidDataSource.setTestOnReturn(druidDataSourceProperties.isTestOnReturn());
+druidDataSource.setTestWhileIdle(druidDataSourceProperties.isTestWhileIdle());
+druidDataSource.setKeepAlive(druidDataSourceProperties.isKeepAlive());
+druidDataSource.setRemoveAbandoned(druidDataSourceProperties.isRemoveAbandoned());
+druidDataSource.setRemoveAbandonedTimeout(
+    druidDataSourceProperties.getRemoveAbandonedTimeout());
+druidDataSource.setLogAbandoned(druidDataSourceProperties.isLogAbandoned());
+
+druidDataSource.setPoolPreparedStatements(
+    druidDataSourceProperties.isPoolPreparedStatements());
+druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(
+    druidDataSourceProperties.getMaxPoolPreparedStatementPerConnectionSize());
+try {
+    druidDataSource.setFilters(druidDataSourceProperties.getFilters());
+    druidDataSource.init();
+} catch (SQLException e) {
+    logger.error(&quot;数据源初始化失败&quot;, e);
+}
+return druidDataSource;</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<pre><code>OK!重新启动测试一下刚才的接口。
+
+</code></pre>
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            版权声明：本博客所有文章除特别声明外，均采用 <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 4.0 </a>许可协议。转载请注明出处！
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://zdran.com/20180703.html">https://zdran.com/20180703.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '07532e6021e94ce04ea5',
+            clientSecret: '511fa8b9dbc91a4520694798eb668931598eb678',
+            repo: 'zdran.github.io',
+            owner: 'zdRan',
+            admin: ['zdRan'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/20180706.html" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/20180629.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="U+2647's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        cm.zdran@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: cm.zdran@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/11/">十一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/09/">九月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">八月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/05/">五月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">二月 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Debug/">Debug<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/DesignPattern/">DesignPattern<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Dubbo/">Dubbo<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Flutter/">Flutter<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/LeetCode/">LeetCode<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Notes/">Notes<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Python/">Python<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Redis/">Redis<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/SpringBoot/">SpringBoot<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">tab</i>
+                
+                标签云
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">57</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zdRan" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;U+2647's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+                <div class="footer-develop-div">Hosted by <a href="https://pages.coding.me" target="_blank" class="footer-develop-a">Coding Pages</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import highlight.js -->
+
+    
+        <script>lsloader.load("highlight_js","/js/highlight.pack.js?acYmXTaIUms2RHozguiBzg==", true)</script>
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            <!-- 加载 highlight 代码高亮-->
+            hljs.initHighlightingOnLoad();
+        
+    
+
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2017;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

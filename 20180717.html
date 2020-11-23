@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            FindBugs 常见错误类型整理 | 
+        
+        U+2647&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="FindBugs 常见错误类型整理">
+    <meta name="keywords" content="java,U+2647,FindBugs">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        <!-- highlight 代码高亮 -->
+        
+            <style id="highlight_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("highlight_css","/css/highlight-styles/googlecode.css?psPj0oLv8UYArA4bjklUGQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(https://p.130014.xyz/2020/11/19/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="U+2647&#39;s blog">
+    <meta name="msapplication-starturl" content="https://zdran.com/20180717.html">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="U+2647&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="cjZqB5nJc_iCpbllUCFCsJfhsLKhkKeU2DeYvh56fcE" />
+    <meta name="baidu-site-verification" content="j93yLiKLFj" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://zdran.com/20180717.html">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="FindBugs 常见错误类型整理 | U+2647&#39;s blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="FindBugs 常见错误类型整理">
+    <meta property="og:article:tag" content="FindBugs"> 
+
+    
+        <meta property="article:published_time" content="Tue Jul 17 2018 16:17:22 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://zdran.com/20180717.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://zdran.com/20180717.html",
+    "headline": "FindBugs 常见错误类型整理",
+    "datePublished": "Tue Jul 17 2018 16:17:22 GMT+0800",
+    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "U+2647",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "evolving code monkey"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "U+2647&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",FindBugsjava,U+2647",
+    "description": "FindBugs 常见错误类型整理",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?08728d2af6039aac16d6a30b8c700589';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle" style="background-color: rgba(255,251,251,0.7)">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon" style="background-color: rgba(255, 251, 251, 0.7); display: initial;">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Dodgy-code-%E7%B3%9F%E7%B3%95%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.Dodgy code 糟糕的代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-Misuse-of-static-fields"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 Misuse of static fields</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-Null-pointer-dereference"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 Null pointer dereference</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-Dead-local-store"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 Dead local store</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-Useless-code"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">1.4 Useless code</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-RuntimeException-capture"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1.5 RuntimeException capture</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-6-Bad-use-of-return-value-from-method"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">1.6 Bad use of return value from method</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-7-Redundant-comparison-to-null"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">1.7 Redundant comparison to null</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-7-Suspicious-integer-expression"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">1.7 Suspicious integer expression</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-8-Duplicate-Branches"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">1.8 Duplicate Branches</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-9-Dubious-method-invocation"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">1.9 Dubious method invocation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-10-Test-for-floating-point-equality"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">1.10 Test for floating point equality</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-11-Null-pointer-dereference"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">1.11 Null pointer dereference</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-12-Switch-case-falls-through"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">1.12 Switch case falls through</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Correctness-%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.Correctness 正确性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-Null-pointer-dereference"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 Null pointer dereference</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-Useless-non-informative-string-generated"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 Useless&#x2F;non-informative string generated</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-Bad-use-of-return-value-from-method"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3 Bad use of return value from method</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-Format-string-problem"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">2.4 Format string problem</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-Comparing-incompatible-types-for-equality"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">2.5 Comparing incompatible types for equality</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-6-Questionable-use-of-reference-equality-rather-than-calling-equals"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">2.6 Questionable use of reference equality rather than calling equals</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-7-Redundant-comparison-to-null"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">2.7 Redundant comparison to null</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Bad-practice-%E4%B8%8D%E5%A5%BD%E7%9A%84%E5%81%9A%E6%B3%95"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.Bad practice 不好的做法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-Stream-not-closed-on-all-paths"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 Stream not closed on all paths</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-Dropped-or-ignored-exception"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 Dropped or ignored exception</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-Bad-use-of-return-value-from-method"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 Bad use of return value from method</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-4-Incorrect-definition-of-Serializable-class"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 Incorrect definition of Serializable class</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-Checking-String-equality-using-or"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.5 Checking String equality using &#x3D;&#x3D; or !&#x3D;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-Confusing-method-name"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">3.6 Confusing method name</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Malicious-code-vulnerability-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%BC%8F%E6%B4%9E"><span class="post-toc-number">4.</span> <span class="post-toc-text">4 Malicious code vulnerability 恶意代码漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-Method-returning-array-may-expose-internal-representation"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 Method returning array may expose internal representation</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                FindBugs 常见错误类型整理
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>U+2647</strong>
+        <span>7月 17, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/FindBugs/" rel="tag">FindBugs</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=FindBugs 常见错误类型整理&url=https://zdran.com/20180717.html&pic=https://zdran.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=FindBugs 常见错误类型整理&url=https://zdran.com/20180717.html&via=U+2647" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://zdran.com/20180717.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zdran.com/20180717.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=U+2647&#39;s blog&title=FindBugs 常见错误类型整理&summary=evolving code monkey&pics=https://zdran.com/img/favicon.png&url=https://zdran.com/20180717.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-Dodgy-code-糟糕的代码"><a href="#1-Dodgy-code-糟糕的代码" class="headerlink" title="1.Dodgy code 糟糕的代码"></a>1.Dodgy code 糟糕的代码</h2><h3 id="1-1-Misuse-of-static-fields"><a href="#1-1-Misuse-of-static-fields" class="headerlink" title="1.1 Misuse of static fields"></a>1.1 Misuse of static fields</h3><p>滥用静态字段</p>
+<ul>
+<li>Write to static field from instance method </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">由于在方法内对静态属性进行赋值操作</span><br><span class="line">class A&#123;</span><br><span class="line">	private static int count;</span><br><span class="line"></span><br><span class="line">	public void init(int num)&#123;</span><br><span class="line">		count &#x3D; num;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-Null-pointer-dereference"><a href="#1-2-Null-pointer-dereference" class="headerlink" title="1.2 Null pointer dereference"></a>1.2 Null pointer dereference</h3><p>引用null对象</p>
+<ul>
+<li>Load of known null value</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">引用了一个为 NULL 的对象</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	private static int count;</span><br><span class="line"></span><br><span class="line">	public void init(int num)&#123;</span><br><span class="line">		Integer num &#x3D; null;</span><br><span class="line">		num.intValue();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-Dead-local-store"><a href="#1-3-Dead-local-store" class="headerlink" title="1.3 Dead local store"></a>1.3 Dead local store</h3><p>本地变量存储了闲置不用的对象</p>
+<ul>
+<li>Dead store to local variable</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">对变量进行赋值，但是后面的代码没有用到这个变量</span><br><span class="line">class A&#123;</span><br><span class="line">	&#x2F;&#x2F;第一种情况</span><br><span class="line">	public void init(int a)&#123;</span><br><span class="line">		int num &#x3D; 3;</span><br><span class="line">		num &#x3D; a;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;第二种情况</span><br><span class="line">	public void init(int a)&#123;</span><br><span class="line">		int num &#x3D; 3;</span><br><span class="line">		&#x2F;&#x2F;...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-Useless-code"><a href="#1-4-Useless-code" class="headerlink" title="1.4 Useless code"></a>1.4 Useless code</h3><p>无用的代码</p>
+<ul>
+<li>Useless object created</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">创建了无用的对象</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int a)&#123;</span><br><span class="line">		List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Useless non-empty void method</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">创建了无用的方法</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line">		List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">		list.add(&quot;123&quot;);</span><br><span class="line">		list.add(&quot;234&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-RuntimeException-capture"><a href="#1-5-RuntimeException-capture" class="headerlink" title="1.5 RuntimeException capture"></a>1.5 RuntimeException capture</h3><p>（滥用）异常捕获</p>
+<ul>
+<li>Exception is caught when Exception is not thrown</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">在不会抛出异常的代码里尝试捕获异常</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line">		try&#123;</span><br><span class="line">			List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">		&#125;catch (Exception e) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-6-Bad-use-of-return-value-from-method"><a href="#1-6-Bad-use-of-return-value-from-method" class="headerlink" title="1.6 Bad use of return value from method"></a>1.6 Bad use of return value from method</h3><p>方法的返回值使用不当</p>
+<ul>
+<li>Return value of method without side effect is ignored</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">忽略没有副作用的方法的返回值</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line">		List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">		list.size();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-7-Redundant-comparison-to-null"><a href="#1-7-Redundant-comparison-to-null" class="headerlink" title="1.7 Redundant comparison to null"></a>1.7 Redundant comparison to null</h3><p>对 null 值的冗余校验</p>
+<ul>
+<li>Redundant nullcheck of value known to be non-null</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">对已知的非空对象进行null值校验</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line"></span><br><span class="line">		if(getList() !&#x3D; null)&#123;</span><br><span class="line"></span><br><span class="line">		&#125;else&#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private List&lt;String&gt; getList()&#123;</span><br><span class="line">		List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">		return list</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Redundant nullcheck of value known to be null</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">对已知的空对象进行null值校验</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line"></span><br><span class="line">		if(getList() &#x3D;&#x3D; null)&#123;</span><br><span class="line"></span><br><span class="line">		&#125;else&#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private List&lt;String&gt; getList()&#123;</span><br><span class="line">		return null</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-7-Suspicious-integer-expression"><a href="#1-7-Suspicious-integer-expression" class="headerlink" title="1.7 Suspicious integer expression"></a>1.7 Suspicious integer expression</h3><p>可疑的整数表达式</p>
+<ul>
+<li>Vacuous bit mask operation on integer value</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">整数值上的空位掩码操作</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int num)&#123;</span><br><span class="line">		int a &#x3D; num &amp; 0xFFFFFFFF;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-8-Duplicate-Branches"><a href="#1-8-Duplicate-Branches" class="headerlink" title="1.8 Duplicate Branches"></a>1.8 Duplicate Branches</h3><p>重复分支</p>
+<ul>
+<li>Method uses the same code for two branches</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">两个分支内的代码一样</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int num)&#123;</span><br><span class="line">		if(num&gt;0)&#123;</span><br><span class="line">			num &#x3D; 0;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			num &#x3D; 0;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-9-Dubious-method-invocation"><a href="#1-9-Dubious-method-invocation" class="headerlink" title="1.9 Dubious method invocation"></a>1.9 Dubious method invocation</h3><p>可疑的方法调用</p>
+<ul>
+<li>Code contains a hard coded reference to an absolute pathname</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">代码包含绝对路径的硬编码引用</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int num)&#123;</span><br><span class="line">		File file &#x3D; new File(&quot;D:\test\test.txt&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-10-Test-for-floating-point-equality"><a href="#1-10-Test-for-floating-point-equality" class="headerlink" title="1.10 Test for floating point equality"></a>1.10 Test for floating point equality</h3><p>比较两个浮点数是否相等</p>
+<ul>
+<li>Test for floating point equality</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">比较两个浮点数是否相等</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(double a,double b)&#123;</span><br><span class="line">		if (a &#x3D;&#x3D; b)&#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-11-Null-pointer-dereference"><a href="#1-11-Null-pointer-dereference" class="headerlink" title="1.11 Null pointer dereference"></a>1.11 Null pointer dereference</h3><p>引用空对象</p>
+<ul>
+<li>Load of known null value</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">引用已知为null的对象</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(List&lt;String&gt; list)&#123;</span><br><span class="line">		if (list &#x3D;&#x3D; null)&#123;</span><br><span class="line">			System.out.print(list.toString());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-12-Switch-case-falls-through"><a href="#1-12-Switch-case-falls-through" class="headerlink" title="1.12 Switch case falls through"></a>1.12 Switch case falls through</h3><p>switch 语句使用不当</p>
+<ul>
+<li>Switch statement found where default case is missing</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">switch 语句缺少 default 分支</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int a)&#123;</span><br><span class="line">		switch a &#123;</span><br><span class="line">			case 1:</span><br><span class="line">				break;</span><br><span class="line">			case 2: </span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Correctness-正确性"><a href="#2-Correctness-正确性" class="headerlink" title="2.Correctness 正确性"></a>2.Correctness 正确性</h2><h3 id="2-1-Null-pointer-dereference"><a href="#2-1-Null-pointer-dereference" class="headerlink" title="2.1 Null pointer dereference"></a>2.1 Null pointer dereference</h3><p>引用空指针</p>
+<ul>
+<li>Possible null pointer dereference</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">可能会抛出空指针异常</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(List&lt;String&gt; list)&#123;</span><br><span class="line">		System.out.print(list.size());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Possible null pointer dereference in method on exception path</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">引用了某个异常控制的对象。</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line">		List&lt;String&gt; list &#x3D; null；</span><br><span class="line">		try&#123;</span><br><span class="line"></span><br><span class="line">			list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">			</span><br><span class="line">		&#125;catch (Exception e) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.print(list.size());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Method call passes null for non-null parameter</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">方法调用对非null参数传递null值</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(String str)&#123;</span><br><span class="line">		&#x2F;&#x2F;compareTo方法要求参数不能为null，否则会抛出NullPointerException</span><br><span class="line">		&quot;abc&quot;.compareTo(str)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Null value is guaranteed to be dereferenced</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">保证不能引用空值</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(boolean flag)&#123;</span><br><span class="line">		List&lt;String&gt; list &#x3D; null;</span><br><span class="line">		if(flag)&#123;</span><br><span class="line">			list.add(&quot;abc&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-Useless-non-informative-string-generated"><a href="#2-2-Useless-non-informative-string-generated" class="headerlink" title="2.2 Useless/non-informative string generated"></a>2.2 Useless/non-informative string generated</h3><p>生成了无用/非信息的字符串</p>
+<ul>
+<li>Invocation of toString on an array</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">无效的 toString 方法</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int[] arr)&#123;</span><br><span class="line">		&#x2F;&#x2F;会打印出 arr 的哈希值，而不是数组的的内容</span><br><span class="line">		System.out.print(arr);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-Bad-use-of-return-value-from-method"><a href="#2-3-Bad-use-of-return-value-from-method" class="headerlink" title="2.3 Bad use of return value from method"></a>2.3 Bad use of return value from method</h3><p>方法的返回值使用不当</p>
+<ul>
+<li>Method ignores return value</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">该方法的返回值应该进行检查</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(int[] arr)&#123;</span><br><span class="line">		String dateString &#x3D; getHeaderField(name);</span><br><span class="line">		dateString.trim();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PS：这种警告通常出现在调用一个不可变对象的方法，认为它更新了对象的值。</span><br><span class="line"></span><br><span class="line">程序员似乎以为trim（）方法将更新dateString引用的字符串。</span><br><span class="line"></span><br><span class="line">但由于字符串是不可改变的，trim（）函数返回一个新字符串值，在这里它是被忽略了。</span><br><span class="line"></span><br><span class="line">该代码应更正：</span><br><span class="line"></span><br><span class="line">String dateString &#x3D; getHeaderField(name);</span><br><span class="line">dateString &#x3D; dateString.trim();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Format-string-problem"><a href="#2-4-Format-string-problem" class="headerlink" title="2.4 Format string problem"></a>2.4 Format string problem</h3><p>字符串格式化问题</p>
+<ul>
+<li>More arguments are passed than are actually used in the format string</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">传递的参数多于格式字符串中实际使用的参数</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(String num1,String num2)&#123;</span><br><span class="line">		&#x2F;&#x2F;错误，这种写法不会格式化字符串</span><br><span class="line">		String dateString &#x3D; String.format(&quot;num1: &#123;&#125;,num2：&#123;&#125;&quot;, num1,num2)</span><br><span class="line">		String dateString2 &#x3D; String.format(&quot;num1: &#123;0&#125;,num2：&#123;1&#125;&quot;, num1,num2)</span><br><span class="line">		&#x2F;&#x2F;正确的写法</span><br><span class="line">		String dateString3 &#x3D; String.format(&quot;num1: %s,num2：%s&quot;, num1,num2)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-Comparing-incompatible-types-for-equality"><a href="#2-5-Comparing-incompatible-types-for-equality" class="headerlink" title="2.5 Comparing incompatible types for equality"></a>2.5 Comparing incompatible types for equality</h3><p>比较不兼容的类型是否相等</p>
+<ul>
+<li>Call to equals() comparing different types</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">调用equals（）比较不同的类型</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(String str)&#123;</span><br><span class="line">		Integer num &#x3D; new Integer()</span><br><span class="line">		if(str.equals(num))&#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-Questionable-use-of-reference-equality-rather-than-calling-equals"><a href="#2-6-Questionable-use-of-reference-equality-rather-than-calling-equals" class="headerlink" title="2.6 Questionable use of reference equality rather than calling equals"></a>2.6 Questionable use of reference equality rather than calling equals</h3><p>对象的比较使用了 “==” 而不是调用 equals 方法</p>
+<ul>
+<li>Suspicious reference comparison</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">可疑的比较</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(String str)&#123;</span><br><span class="line">		if(&quot;abc&quot; &#x3D;&#x3D; str)&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-Redundant-comparison-to-null"><a href="#2-7-Redundant-comparison-to-null" class="headerlink" title="2.7 Redundant comparison to null"></a>2.7 Redundant comparison to null</h3><p>与null值的冗余比较</p>
+<ul>
+<li>Nullcheck of value previously dereferenced</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">没有对参数进行空值校验</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init(String str)&#123;</span><br><span class="line">		System.out.println(getStr().size())</span><br><span class="line">	&#125;</span><br><span class="line">	private List&lt;String&gt; getList()&#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Bad-practice-不好的做法"><a href="#3-Bad-practice-不好的做法" class="headerlink" title="3.Bad practice 不好的做法"></a>3.Bad practice 不好的做法</h2><h3 id="3-1-Stream-not-closed-on-all-paths"><a href="#3-1-Stream-not-closed-on-all-paths" class="headerlink" title="3.1 Stream not closed on all paths"></a>3.1 Stream not closed on all paths</h3><p>IO流没有关闭</p>
+<ul>
+<li>Method may fail to close stream</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法体内没有对IO流进行关闭</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Dropped-or-ignored-exception"><a href="#3-2-Dropped-or-ignored-exception" class="headerlink" title="3.2 Dropped or ignored exception"></a>3.2 Dropped or ignored exception</h3><p>忽略了异常</p>
+<ul>
+<li>Method might ignore exception</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">方法忽略了异常</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line">		try&#123;</span><br><span class="line">			</span><br><span class="line">		&#125;catch (Exception e) &#123;</span><br><span class="line">            &#x2F;&#x2F;当抛出异常时什么都没有做</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-Bad-use-of-return-value-from-method"><a href="#3-3-Bad-use-of-return-value-from-method" class="headerlink" title="3.3 Bad use of return value from method"></a>3.3 Bad use of return value from method</h3><p>方法返回值使用不当（多为忽略了方法返回值）</p>
+<ul>
+<li>Method ignores exceptional return value</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">忽略了方法的异常返回值</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	public void init()&#123;</span><br><span class="line">		File file &#x3D; new File(&quot;&#x2F;aaa&quot;)</span><br><span class="line">		&#x2F;&#x2F;文件mkdir可能返回false</span><br><span class="line">		file.getParentFile().mkdirs()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-Incorrect-definition-of-Serializable-class"><a href="#3-4-Incorrect-definition-of-Serializable-class" class="headerlink" title="3.4 Incorrect definition of Serializable class"></a>3.4 Incorrect definition of Serializable class</h3><p>序列化的类定义不正确</p>
+<ul>
+<li>Non-transient non-serializable instance field in serializable class</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">可序列化的类中存在不可序列化的属性</span><br><span class="line"></span><br><span class="line">class A implements Serializable&#123;</span><br><span class="line">	&#x2F;&#x2F;List对象不能直接序列化</span><br><span class="line">	private List&lt;String&gt; list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-Checking-String-equality-using-or"><a href="#3-5-Checking-String-equality-using-or" class="headerlink" title="3.5 Checking String equality using == or !="></a>3.5 Checking String equality using == or !=</h3><p>Stirng 对象的比较使用了 == 或 !=</p>
+<ul>
+<li>Comparison of String parameter using == or !=</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stirng 对象的比较使用了 &#x3D;&#x3D; 或 !&#x3D;</span><br><span class="line"></span><br><span class="line">String对象的比较应该使用 equals() 方法</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-6-Confusing-method-name"><a href="#3-6-Confusing-method-name" class="headerlink" title="3.6 Confusing method name"></a>3.6 Confusing method name</h3><p>不规范的方法名</p>
+<ul>
+<li>Method names should start with a lower case letter</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法名应该以小写字母开头，符合驼峰式命名格式</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Malicious-code-vulnerability-恶意代码漏洞"><a href="#4-Malicious-code-vulnerability-恶意代码漏洞" class="headerlink" title="4 Malicious code vulnerability 恶意代码漏洞"></a>4 Malicious code vulnerability 恶意代码漏洞</h2><h3 id="4-1-Method-returning-array-may-expose-internal-representation"><a href="#4-1-Method-returning-array-may-expose-internal-representation" class="headerlink" title="4.1 Method returning array may expose internal representation"></a>4.1 Method returning array may expose internal representation</h3><p>返回数组的方法可以暴露内部表示</p>
+<ul>
+<li>May expose internal representation by returning reference to mutable object</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">可以通过返回的可变对象的引用来公开内部表示</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	private List&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">	public List&lt;String&gt; getList()&#123;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>May expose internal representation by incorporating reference to mutable object</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">可以通过引用可变对象来公开内部表示</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">	private List&lt;String&gt; list;</span><br><span class="line">	public void setList(List&lt;String&gt; list)&#123;</span><br><span class="line">		this.list &#x3D; list;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            版权声明：本博客所有文章除特别声明外，均采用 <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 4.0 </a>许可协议。转载请注明出处！
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://zdran.com/20180717.html">https://zdran.com/20180717.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '07532e6021e94ce04ea5',
+            clientSecret: '511fa8b9dbc91a4520694798eb668931598eb678',
+            repo: 'zdran.github.io',
+            owner: 'zdRan',
+            admin: ['zdRan'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/20180718.html" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/20180706.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="U+2647's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        cm.zdran@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: cm.zdran@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/11/">十一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/09/">九月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">八月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/05/">五月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">二月 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Debug/">Debug<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/DesignPattern/">DesignPattern<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Dubbo/">Dubbo<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Flutter/">Flutter<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/LeetCode/">LeetCode<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Notes/">Notes<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Python/">Python<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Redis/">Redis<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/SpringBoot/">SpringBoot<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">tab</i>
+                
+                标签云
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">57</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zdRan" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;U+2647's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+                <div class="footer-develop-div">Hosted by <a href="https://pages.coding.me" target="_blank" class="footer-develop-a">Coding Pages</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import highlight.js -->
+
+    
+        <script>lsloader.load("highlight_js","/js/highlight.pack.js?acYmXTaIUms2RHozguiBzg==", true)</script>
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            <!-- 加载 highlight 代码高亮-->
+            hljs.initHighlightingOnLoad();
+        
+    
+
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2017;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

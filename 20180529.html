@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            MySQL 学习笔记 | 
+        
+        U+2647&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="MySQL 学习笔记">
+    <meta name="keywords" content="java,U+2647,MySQL">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        <!-- highlight 代码高亮 -->
+        
+            <style id="highlight_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("highlight_css","/css/highlight-styles/googlecode.css?psPj0oLv8UYArA4bjklUGQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(https://p.130014.xyz/2020/11/19/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="U+2647&#39;s blog">
+    <meta name="msapplication-starturl" content="https://zdran.com/20180529.html">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="U+2647&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="cjZqB5nJc_iCpbllUCFCsJfhsLKhkKeU2DeYvh56fcE" />
+    <meta name="baidu-site-verification" content="j93yLiKLFj" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://zdran.com/20180529.html">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="MySQL 学习笔记 | U+2647&#39;s blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="MySQL 学习笔记">
+    <meta property="og:article:tag" content="MySQL"> 
+
+    
+        <meta property="article:published_time" content="Tue May 29 2018 09:22:22 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://zdran.com/20180529.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://zdran.com/20180529.html",
+    "headline": "MySQL 学习笔记",
+    "datePublished": "Tue May 29 2018 09:22:22 GMT+0800",
+    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "U+2647",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "evolving code monkey"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "U+2647&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",MySQLjava,U+2647",
+    "description": "MySQL 学习笔记",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?08728d2af6039aac16d6a30b8c700589';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle" style="background-color: rgba(255,251,251,0.7)">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon" style="background-color: rgba(255, 251, 251, 0.7); display: initial;">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="post-toc-number">1.</span> <span class="post-toc-text">1 定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-MySQL-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-number">2.</span> <span class="post-toc-text">2 MySQL 的数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-%E6%95%B0%E5%80%BC"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 数值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-%E6%97%A5%E6%9C%9F"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 日期</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3 字符串</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-SQL%E8%AF%AD%E5%8F%A5"><span class="post-toc-number">3.</span> <span class="post-toc-text">3 SQL语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 数据库的创建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 创建表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 插入数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-4-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 查询数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-1-WHERE-%E6%9F%A5%E8%AF%A2"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">3.4.1 WHERE 查询</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-2-WHERE-%E5%90%8E%E7%9A%84%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">3.4.2 WHERE 后的条件语句</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-3-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="post-toc-number">3.4.3.</span> <span class="post-toc-text">3.4.3 聚合函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-4-%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="post-toc-number">3.4.4.</span> <span class="post-toc-text">3.4.4 分组查询</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-5-%E5%88%86%E7%BB%84%E8%BF%87%E6%BB%A4"><span class="post-toc-number">3.4.5.</span> <span class="post-toc-text">3.4.5 分组过滤</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-6-%E7%BB%93%E6%9E%9C%E6%8E%92%E5%BA%8F"><span class="post-toc-number">3.4.6.</span> <span class="post-toc-text">3.4.6 结果排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.5 更新数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">3.6 删除数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-%E8%A1%A8%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="post-toc-number">4.</span> <span class="post-toc-text">4 表属性的修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-%E8%A1%A8%E9%87%8D%E5%91%BD%E5%90%8D"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 表重命名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84%E4%B8%80%E5%88%97"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 添加新的一列</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-%E4%BF%AE%E6%94%B9%E5%88%97"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 修改列</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="post-toc-number">5.</span> <span class="post-toc-text">5 完整性约束</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-1-%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">5.1 实体完整性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">5.2 参照完整性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-3-%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">5.3 用户自定义完整性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-4-%E6%B7%BB%E5%8A%A0%E7%BA%A6%E6%9D%9F"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">5.4 添加约束</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-5-%E5%B8%B8%E8%A7%81%E7%BA%A6%E6%9D%9F%E7%B1%BB%E5%9E%8B"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">5.5 常见约束类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-%E8%8C%83%E5%BC%8F"><span class="post-toc-number">6.</span> <span class="post-toc-text">6 范式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-1-1NF-%E7%AC%AC%E4%B8%80%E8%8C%83%E5%BC%8F"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">6.1 1NF(第一范式)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-2-2NF-%E7%AC%AC%E4%BA%8C%E8%8C%83%E5%BC%8F"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">6.2 2NF(第二范式)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-3-3NF-%E7%AC%AC%E4%B8%89%E8%8C%83%E5%BC%8F"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">6.3 3NF(第三范式)</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                MySQL 学习笔记
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>U+2647</strong>
+        <span>5月 29, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=MySQL 学习笔记&url=https://zdran.com/20180529.html&pic=https://zdran.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=MySQL 学习笔记&url=https://zdran.com/20180529.html&via=U+2647" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://zdran.com/20180529.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zdran.com/20180529.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=U+2647&#39;s blog&title=MySQL 学习笔记&summary=evolving code monkey&pics=https://zdran.com/img/favicon.png&url=https://zdran.com/20180529.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1 定义"></a>1 定义</h2><p>数据库中的表：一行叫一条记录。每一列叫一个属性，或一个字段。<br>主键：表中的某个特殊字段，具有唯一的确定的值，可以根据该字段唯一的确定一条记录<br>外键：表中的某个字段的值为另一张表（也可以是自身）中的某个字段的值。</p>
+<h2 id="2-MySQL-的数据类型"><a href="#2-MySQL-的数据类型" class="headerlink" title="2 MySQL 的数据类型"></a>2 MySQL 的数据类型</h2><h3 id="2-1-数值"><a href="#2-1-数值" class="headerlink" title="2.1 数值"></a>2.1 数值</h3><ol>
+<li>TINYINT 小整型</li>
+<li>INT/INTEGER 整型</li>
+<li>BIGINT 长整型</li>
+<li>FLOAT 小数</li>
+<li>DOUBLIE 双精度小数</li>
+</ol>
+<h3 id="2-2-日期"><a href="#2-2-日期" class="headerlink" title="2.2 日期"></a>2.2 日期</h3><ol>
+<li>DATE  YYYY-MM-DD</li>
+<li>TIME  HH:MM:SS</li>
+<li>YEAT  YYYY</li>
+<li>DATETIME 混合</li>
+<li>TIMESTAMP 高精度</li>
+</ol>
+<h3 id="2-3-字符串"><a href="#2-3-字符串" class="headerlink" title="2.3 字符串"></a>2.3 字符串</h3><ol>
+<li>CHAR 定长字符串</li>
+<li>VARCHAR 不定长</li>
+<li>BLOB 二进制文件</li>
+<li>LONGBLOB 长二进制文件</li>
+<li>TEXT 长文本数据</li>
+<li>LONGTEXT 长文本数据</li>
+</ol>
+<p><strong>注：以上仅总结了常用类型，并不是所有类型</strong></p>
+<h2 id="3-SQL语句"><a href="#3-SQL语句" class="headerlink" title="3 SQL语句"></a>3 SQL语句</h2><h3 id="3-1-数据库的创建"><a href="#3-1-数据库的创建" class="headerlink" title="3.1 数据库的创建"></a>3.1 数据库的创建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE 数据库名 [参数]</span><br></pre></td></tr></table></figure>
+<p>例如创建一个名为test的数据库，设置字符集为utf-8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test CHARACTER SET utf8;</span><br></pre></td></tr></table></figure>
+<p>出现下面的内容即说明创建成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>你可以使用下面的语句查看新创建的数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW DATABASES;</span><br></pre></td></tr></table></figure>
+<p>选择需要操作的数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE test;</span><br></pre></td></tr></table></figure>
+<p>执行完上面的语句后出现Database changed，<br>你所有的操作都将在test数据库中进行。</p>
+<h3 id="3-2-创建表"><a href="#3-2-创建表" class="headerlink" title="3.2 创建表"></a>3.2 创建表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 表名 (</span><br><span class="line">	列名 列数据属性 [约束]，</span><br><span class="line">	列名 列数据属性，</span><br><span class="line">	... ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>例如创建一个users表id是主键，自增长。<br>PRIMARY KEY：约束 主键约束<br>AUTO_INCREMENT：约束 自增长</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE users(</span><br><span class="line">id INTEGER PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">account VARCHAR(50),</span><br><span class="line">pwd VARCHAR(50),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-插入数据"><a href="#3-3-插入数据" class="headerlink" title="3.3 插入数据"></a>3.3 插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名 VALUES (值1, 值2,...,NULL，...);</span><br></pre></td></tr></table></figure>
+<p>这种插入方式一定要将所有的值都写上，如果为空的话写NULL。值与列要一一对应<br><strong>主键如果设置为自增的话写NULL</strong></p>
+<p>也可以指定所要插入数据的列，向下面这样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名 (列1, 列2,...) VALUES (值1, 值2,....);</span><br></pre></td></tr></table></figure>
+
+<p>按回车后出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query Ok, 1 row affected (0.05 sec)</span><br></pre></td></tr></table></figure>
+<p>说明成功。否则请检查SQL语句。</p>
+<p>例如向刚刚创建的users表中插入一条数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO users VALUES(NULL,&#39;admin&#39;,&#39;admin&#39;);</span><br></pre></td></tr></table></figure>
+<p>第一列是id，主键自增，不需要插入。</p>
+<h3 id="3-4-查询数据"><a href="#3-4-查询数据" class="headerlink" title="3.4 查询数据"></a>3.4 查询数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM 表名 [WHERE 条件]  [参数];</span><br></pre></td></tr></table></figure>
+<p>例如查询users表里的所有数据的 account 列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT account FROM users;</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-1-WHERE-查询"><a href="#3-4-1-WHERE-查询" class="headerlink" title="3.4.1 WHERE 查询"></a>3.4.1 WHERE 查询</h4><p>可以给FROM后面的表起一个别名。例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT tn.id,tn.account FROM tablename AS tn</span><br><span class="line">WHERE tn.id &#x3D; 1;</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-2-WHERE-后的条件语句"><a href="#3-4-2-WHERE-后的条件语句" class="headerlink" title="3.4.2 WHERE 后的条件语句"></a>3.4.2 WHERE 后的条件语句</h4><pre><code>WHERE后面可以写多种条件语句。
+1. 关系语句: =,&gt;,&lt;,!=,&gt;=,&lt;=
+2. 逻辑语句: AND,OR,NOT
+3. IS NULL: 是否为空
+4. BETWEEN:在两者之间 
+    WHERE u.id BETWEEN 11 AND 15;
+    id 在11-15之间。
+5. IN:在..之中
+    WHERE u.account IN (值1,值2,...);
+    查询 account 在(值1,值2,...)之中的数据
+5. LIKE:模糊匹配 
+    WHERE  u.id LIKE &apos;通配符&apos;;
+
+    通配符
+    &apos;%&apos;:替代零个或多个字符
+    &apos;_&apos;:替代一个字符
+        WHERE u.account LIKE &apos;%A%&apos;;查询account字段中含有&apos;A&apos;的数据。
+
+     [charlist]:字符列中的任何单一字符 
+        WHERE u.account LIKE &apos;[ASD]%&apos;; 查询以A S D 开头的数据。
+    [!charlist]:不在字符列中的任何单一字符
+        WHERE u.account LIKE &apos;[!ASD]%&apos;; 查询不以A S D 开头的数据 </code></pre><h4 id="3-4-3-聚合函数"><a href="#3-4-3-聚合函数" class="headerlink" title="3.4.3 聚合函数"></a>3.4.3 聚合函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(列名) FROM 表名</span><br></pre></td></tr></table></figure>
+<pre><code>1. AVG(列名):返回某一列的平均值
+2. COUNT(列名):返回匹配指定条件的行数
+3. FIRST(列名):返回指定的字段中第一个记录的值。
+4. LAST(列名):返回指定的字段中最后一个记录的值。
+5. MAX(列名):返回一列中的最大值。NULL 值不包括在计算中。 
+6. MIN(列名):返回一列中的最小值。NULL 值不包括在计算中。
+7. SUM(列名):返回数值列的总数（总额）。
+8. UCASE(列名):把字段的值转换为大写。
+9. LCASE(列名):把字段的值转换为小写。 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10. MID(列名,开始位置，截取长度):用于从文本字段中提取字符。</span><br><span class="line">SELECT MID(account,1,3) as uname FROM users;</span><br></pre></td></tr></table></figure>
+<pre><code>11. LEN(列名):返回文本字段中值的长度。
+12. ROUND(列名,小数位数):用于把数值字段舍入为指定的小数位数。
+13. CURDATE():返回当前日期。YYYY-MM-DD。
+14. CURTIME():返回当前时间。HH:MM:SS。
+15. NOW():返回当前时间。YYYY-MM-DD HH:MM:SS。
+16. YEAR(d)，MONTH(d),DAY(d):分别返回参数的年，月，日。
+17. ADDDATE(d,n):在d的时间上加n天。
+18. SUBDATE(d,n):在d的时间上减n天。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">19. DATE_FORMAT(d,f):格式化时间d。</span><br><span class="line">%a 缩写星期名</span><br><span class="line">%b 缩写月名</span><br><span class="line">%c 月，数值</span><br><span class="line">%D 带有英文前缀的月中的天</span><br><span class="line">%d 月的天，数值(00-31)</span><br><span class="line">%e 月的天，数值(0-31)</span><br><span class="line">%f 微秒</span><br><span class="line">%H 小时 (00-23)</span><br><span class="line">%h 小时 (01-12)</span><br><span class="line">%I(大写的i) 小时 (01-12)</span><br><span class="line">%i 分钟，数值(00-59)</span><br><span class="line">%j 年的天 (001-366)</span><br><span class="line">%k 小时 (0-23)</span><br><span class="line">%l(小写的L) 小时 (1-12)</span><br><span class="line">%M 月名</span><br><span class="line">%m 月，数值(00-12)</span><br><span class="line">%p AM 或 PM</span><br><span class="line">%r 时间，12-小时（hh:mm:ss AM 或 PM）</span><br><span class="line">%S 秒(00-59)</span><br><span class="line">%s 秒(00-59)</span><br><span class="line">%T 时间, 24-小时 (hh:mm:ss)</span><br><span class="line">%U 周 (00-53) 星期日是一周的第一天</span><br><span class="line">%u 周 (00-53) 星期一是一周的第一天</span><br><span class="line">%V 周 (01-53) 星期日是一周的第一天，与 %X 使用</span><br><span class="line">%v 周 (01-53) 星期一是一周的第一天，与 %x 使用</span><br><span class="line">%W 星期名</span><br><span class="line">%w 周的天 （0&#x3D;星期日, 6&#x3D;星期六）</span><br><span class="line">%X 年，其中的星期日是周的第一天，4 位，与 %V 使用</span><br><span class="line">%x 年，其中的星期一是周的第一天，4 位，与 %v 使用</span><br><span class="line">%Y 年，4 位</span><br><span class="line">%y 年，2 位</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-4-分组查询"><a href="#3-4-4-分组查询" class="headerlink" title="3.4.4 分组查询"></a>3.4.4 分组查询</h4><p>GROUP BY 语句用于结合聚合函数，根据一个或多个列对结果集进行分组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列名, 聚合函数</span><br><span class="line">FROM 表名</span><br><span class="line">WHERE 条件</span><br><span class="line">GROUP BY 列名</span><br></pre></td></tr></table></figure>
+<p>例如根据用户表中的role属性分组统计每组的人数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT role, COUNT(id)</span><br><span class="line">FROM users</span><br><span class="line">GROUP BY role;</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-5-分组过滤"><a href="#3-4-5-分组过滤" class="headerlink" title="3.4.5 分组过滤"></a>3.4.5 分组过滤</h4><p>在 SQL 中增加 HAVING 子句原因是，WHERE 关键字无法与合计函数一起使用。<br>例如根据用户表中的role属性分组统计每组的人数，查找人数大于10的role</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT role, COUNT(id)</span><br><span class="line">FROM users</span><br><span class="line">GROUP BY role</span><br><span class="line">HAVING COUNT(id)&gt;10;</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-6-结果排序"><a href="#3-4-6-结果排序" class="headerlink" title="3.4.6 结果排序"></a>3.4.6 结果排序</h4><p>ORDER BY 语句用于根据指定的列对结果集进行排序。<br>默认为升序，降序使用关键字DESC。<br>例如根据用户表中的role属性分组统计每组的人数，按照人数降序排列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT role, COUNT(id) count</span><br><span class="line">FROM users</span><br><span class="line">GROUP BY role</span><br><span class="line">ORDER BY count DESC;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-更新数据"><a href="#3-5-更新数据" class="headerlink" title="3.5 更新数据"></a>3.5 更新数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表名 SET 列名 &#x3D; 新值 WHERE 条件</span><br></pre></td></tr></table></figure>
+<p>WHERE的修改条件是可选的，不写的话修改表的所有数据</p>
+<p>例如修改users表里的数据，将admin用户的密码改为root</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE users SET pwd &#x3D; &#39;root&#39; WHERE account &#x3D; &#39;admin&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-6-删除数据"><a href="#3-6-删除数据" class="headerlink" title="3.6 删除数据"></a>3.6 删除数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM 表名 WHERE 条件</span><br></pre></td></tr></table></figure>
+<p>WHERE的修改条件是可选的，不写的话删除表的所有数据</p>
+<h2 id="4-表属性的修改"><a href="#4-表属性的修改" class="headerlink" title="4 表属性的修改"></a>4 表属性的修改</h2><h3 id="4-1-表重命名"><a href="#4-1-表重命名" class="headerlink" title="4.1 表重命名"></a>4.1 表重命名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 RENAME 新表名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-添加新的一列"><a href="#4-2-添加新的一列" class="headerlink" title="4.2 添加新的一列"></a>4.2 添加新的一列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 ADD 列名 列数据类型 [AFTER 插入位置]</span><br></pre></td></tr></table></figure>
+<p>例如在users表的pwd字段后面添加一个role字段类型是INTEGER</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE users ADD role INTEGER AFTER pwd;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-修改列"><a href="#4-3-修改列" class="headerlink" title="4.3 修改列"></a>4.3 修改列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 CHANGE 列名称 新列名称 新数据类型;</span><br></pre></td></tr></table></figure>
+<p>例如修改users表里的pwd字段改为password，类型是varchar(20)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE users CHANGE pwd password varchar(20);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5-完整性约束"><a href="#5-完整性约束" class="headerlink" title="5 完整性约束"></a>5 完整性约束</h2><pre><code>约束：对表中的列添加的一些限制条件。只有满足这些条件时才能数据才能插入。</code></pre><h3 id="5-1-实体完整性"><a href="#5-1-实体完整性" class="headerlink" title="5.1 实体完整性"></a>5.1 实体完整性</h3><pre><code>主键不能为空</code></pre><h3 id="5-2-参照完整性"><a href="#5-2-参照完整性" class="headerlink" title="5.2 参照完整性"></a>5.2 参照完整性</h3><pre><code>外键的值必须是某张表中存在的值，可以为空</code></pre><h3 id="5-3-用户自定义完整性"><a href="#5-3-用户自定义完整性" class="headerlink" title="5.3 用户自定义完整性"></a>5.3 用户自定义完整性</h3><pre><code>唯一性约束，某一列虽然不为主键，但是依然不能重复。</code></pre><h3 id="5-4-添加约束"><a href="#5-4-添加约束" class="headerlink" title="5.4 添加约束"></a>5.4 添加约束</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名</span><br><span class="line">	ADD CONSTRAINT 约束名 约束类型(列名);</span><br></pre></td></tr></table></figure>
+<p>例如，给users表的role列添加外键约束，引用自roles表的id列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE users</span><br><span class="line">	ADD CONSTRAINT uq_phone FOREIGN KEY (&#96;role&#96;) </span><br><span class="line">	REFERENCES &#96;roles&#96; (&#96;id&#96;);</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-常见约束类型"><a href="#5-5-常见约束类型" class="headerlink" title="5.5 常见约束类型"></a>5.5 常见约束类型</h3><pre><code>1. PRIMARY KEY: 主键 
+2. CHECK:限制列中的值的范围。MySQL好像不支持
+3. UNIQUE:唯一性约束
+4. NOT NULL：非空约束
+5. FOREIGN KEY:外键约束</code></pre><h2 id="6-范式"><a href="#6-范式" class="headerlink" title="6 范式"></a>6 范式</h2><p>函数依赖:如果A依赖B，那么当确定A值后，B值也就确定了。<br>例如，在一张表中由于主键是唯一确定且不重复的。所以，当主键的值确定了，那么其他列的值也就确定了。我们便说，其他列都依赖主键。</p>
+<p>完全函数依赖：如果B函数依赖于A，并且对于A的任何一个真子集A1,都有 B不依赖与A1,称A对B完全函数依赖。</p>
+<p>部分函数依赖：如果B函数依赖于A，但是B不完全函数依赖于A，称B对A部分函数依赖。<br>例如，在一张表中，有两列，一列是用户名，而另一列里某些行里记录的是用户的id，而某些行里在这一列里记录的是用户所在部门的id，那么用户名列便部分函数依赖于id列，因为存在某些行依赖于id列的子集(记录是部门id的行)。</p>
+<p>传递函数依赖：如果A函数依赖于B，B函数依赖于C，则称A传递函数依赖于C。</p>
+<h3 id="6-1-1NF-第一范式"><a href="#6-1-1NF-第一范式" class="headerlink" title="6.1 1NF(第一范式)"></a>6.1 1NF(第一范式)</h3><p>确保列不可分，即每一列只描述一个属性，即达到1NF</p>
+<h3 id="6-2-2NF-第二范式"><a href="#6-2-2NF-第二范式" class="headerlink" title="6.2 2NF(第二范式)"></a>6.2 2NF(第二范式)</h3><p>在1NF的基础上消除部分函数依赖即达到2NF。即每一个非主属性(非主键列)完全函数依赖于主键。<br>例如，可以将上面部分函数依赖的例子中的表，改成两张表，一张用户表，一张部门表，所有的用户名列都完全依赖于主键。便达到2NF。</p>
+<h3 id="6-3-3NF-第三范式"><a href="#6-3-3NF-第三范式" class="headerlink" title="6.3 3NF(第三范式)"></a>6.3 3NF(第三范式)</h3><p>在2NF的基础上消除传递函数依赖便达到3NF。即每一个非主属性(非主键列)即不部分依赖于主键，也不传递依赖于主键。</p>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            版权声明：本博客所有文章除特别声明外，均采用 <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 4.0 </a>许可协议。转载请注明出处！
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://zdran.com/20180529.html">https://zdran.com/20180529.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '07532e6021e94ce04ea5',
+            clientSecret: '511fa8b9dbc91a4520694798eb668931598eb678',
+            repo: 'zdran.github.io',
+            owner: 'zdRan',
+            admin: ['zdRan'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/20180601.html" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/20180524.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="U+2647's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        cm.zdran@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: cm.zdran@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/11/">十一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/09/">九月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">八月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/05/">五月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">二月 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Debug/">Debug<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/DesignPattern/">DesignPattern<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Dubbo/">Dubbo<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Flutter/">Flutter<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/LeetCode/">LeetCode<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Notes/">Notes<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Python/">Python<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Redis/">Redis<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/SpringBoot/">SpringBoot<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">tab</i>
+                
+                标签云
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">57</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zdRan" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;U+2647's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+                <div class="footer-develop-div">Hosted by <a href="https://pages.coding.me" target="_blank" class="footer-develop-a">Coding Pages</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import highlight.js -->
+
+    
+        <script>lsloader.load("highlight_js","/js/highlight.pack.js?acYmXTaIUms2RHozguiBzg==", true)</script>
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            <!-- 加载 highlight 代码高亮-->
+            hljs.initHighlightingOnLoad();
+        
+    
+
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2017;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

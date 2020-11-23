@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Git 学习笔记 | 
+        
+        U+2647&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="Git 学习笔记">
+    <meta name="keywords" content="java,U+2647,Git">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        <!-- highlight 代码高亮 -->
+        
+            <style id="highlight_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("highlight_css","/css/highlight-styles/googlecode.css?psPj0oLv8UYArA4bjklUGQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(https://p.130014.xyz/2020/11/19/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="U+2647&#39;s blog">
+    <meta name="msapplication-starturl" content="https://zdran.com/20180524.html">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="U+2647&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="cjZqB5nJc_iCpbllUCFCsJfhsLKhkKeU2DeYvh56fcE" />
+    <meta name="baidu-site-verification" content="j93yLiKLFj" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://zdran.com/20180524.html">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Git 学习笔记 | U+2647&#39;s blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="Git 学习笔记">
+    <meta property="og:article:tag" content="Git"> 
+
+    
+        <meta property="article:published_time" content="Thu May 24 2018 13:22:22 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://zdran.com/20180524.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://zdran.com/20180524.html",
+    "headline": "Git 学习笔记",
+    "datePublished": "Thu May 24 2018 13:22:22 GMT+0800",
+    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "U+2647",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "evolving code monkey"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "U+2647&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",Gitjava,U+2647",
+    "description": "Git 学习笔记",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?08728d2af6039aac16d6a30b8c700589';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle" style="background-color: rgba(255,251,251,0.7)">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon" style="background-color: rgba(255, 251, 251, 0.7); display: initial;">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-%E5%9F%BA%E7%A1%80"><span class="post-toc-number">1.</span> <span class="post-toc-text">Git 基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">用户配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">创建仓库</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Git 学习笔记
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>U+2647</strong>
+        <span>5月 24, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/Git/" rel="tag">Git</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Git 学习笔记&url=https://zdran.com/20180524.html&pic=https://zdran.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Git 学习笔记&url=https://zdran.com/20180524.html&via=U+2647" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://zdran.com/20180524.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zdran.com/20180524.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=U+2647&#39;s blog&title=Git 学习笔记&summary=evolving code monkey&pics=https://zdran.com/img/favicon.png&url=https://zdran.com/20180524.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p><strong>环境声明：本人用的是ubuntu14.04的系统，所以本文内容均基于该平台</strong><br>本文是学习<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">Git教程 廖雪峰</a> 时的一些笔记。想深学习的可以查看原文。</p>
+<h1 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>网上有很多关于git的起源，简介，用途，这里就不多数了（或许是我不知道。。。）</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>sudo apt-get install git-core</code></pre><h2 id="用户配置"><a href="#用户配置" class="headerlink" title="用户配置"></a>用户配置</h2><p>git是分布式版本控制系统，所以每次提交时需要一个用户名，让人知道是谁提交的。<br>还需要提供一个邮箱，出了问题让别人能够联系到你。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;zdran&quot;</span><br><span class="line">git config --global user.email &quot;cm.zdran@foxmail.com&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>需要注意的是，config –global 参数是指在本台计算机中的所有仓库都使用该配置当然你也可以给每个仓库都配置一个name和email</strong></p>
+<h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><p><strong>创建一个新的文件夹，虽然也可以用不空的文件，但是出了问题不要找我</strong><br><strong>路径不要出现空格，中文，特殊字符</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir learnGit</span><br><span class="line">cd learnGit</span><br><span class="line">git init</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">看到下面的显示说明你成功了</span><br></pre></td></tr></table></figure>
+<p>Initialized empty Git repository in /home/woody/Documents/learnGit/.git/</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">需要注意的是，成功后会多出一个.git的文件夹，在没有必须打开的情况下</span><br><span class="line">**强烈不建议打开这个文件夹**</span><br><span class="line"></span><br><span class="line">## 添加文件</span><br><span class="line">**友情提示：创建的文件尽量使用utf-8的编码，Windows下的同学尽量不要使用记事本编辑，推荐sublime**</span><br><span class="line">在当前文件夹下创建一个readme.txt文件，随便写点东西比如</span><br><span class="line"></span><br><span class="line">    hello git</span><br><span class="line"></span><br><span class="line">然后保存</span><br><span class="line"></span><br><span class="line">使用下面的命令可以查看当前仓库的状态</span><br><span class="line"></span><br><span class="line">    git status</span><br><span class="line"></span><br><span class="line">显示结果：</span><br></pre></td></tr></table></figure>
+<p>On branch master</p>
+<p>Initial commit</p>
+<p>Untracked files:<br>  (use “git add <file>…” to include in what will be committed)</p>
+<pre><code>readme.txt
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">意思就是说，你修改了一个文件，但是还没有提交。</span><br><span class="line">使用下面的命令添加到仓库</span><br><span class="line"></span><br><span class="line">    git add readme.txt</span><br><span class="line"></span><br><span class="line">注意这仅仅是添加到仓库了，告诉git，这个文件是需要版本控制的。但是还没有提交。</span><br><span class="line">使用下面的命令提交到仓库</span><br><span class="line"></span><br><span class="line">    git commit -m &quot;创建readme.txt文件&quot;</span><br><span class="line"></span><br><span class="line">-m 的参数是对这次提交的一次说明</span><br><span class="line">显示结果：</span><br></pre></td></tr></table></figure>
+<p>[master (root-commit) 3eb5f77] 创建readme.txt文件<br> 1 file changed, 1 insertion(+)<br>  create mode 100644 readme.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">**注意：虽然-m参数是可选的额，但是强烈建议你添加上，因为默认的配置是不添加-m参数是没有办法提交的**</span><br><span class="line"></span><br><span class="line">## 时光倒流(版本回退)</span><br><span class="line">我想大部分同学使用git的最初的动力就是因为这个功能吧。</span><br><span class="line"></span><br><span class="line">现在我们对readme文件进行修改，再随便添加些东西，然后readme内容就变成下面这样</span><br></pre></td></tr></table></figure>
+<p>hello git<br>hello git 2.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">然后再次add commit。</span><br><span class="line"></span><br><span class="line">现在我们的仓库里有两个版本了，我们可以用下面的命令查看git的提交历史</span><br><span class="line"></span><br><span class="line">    git log</span><br><span class="line"></span><br><span class="line">显示结果</span><br></pre></td></tr></table></figure>
+<p>commit b5934a2d9f80d257ca50b9b80a4b31d5bb9fe03c<br>Author: = <a href="mailto:&#119;&#x6f;&#x6f;&#100;&#x79;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#119;&#x6f;&#x6f;&#100;&#x79;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a><br>Date:   Sun Jan 22 16:27:59 2017 +0800</p>
+<pre><code>第二次提交</code></pre><p>commit 3eb5f7721cb86c617faf0d2ad13a5cee9d1a3764<br>Author: = <a href="mailto:&#x77;&#x6f;&#111;&#100;&#121;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;">&#x77;&#x6f;&#111;&#100;&#121;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;</a><br>Date:   Sun Jan 22 16:16:10 2017 +0800</p>
+<p>创建readme.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">**注意：commit字段是自动生成的，所以你的结果一定与我的不一样，以你的为准**</span><br><span class="line"></span><br><span class="line">好了，下面下面我们将readme.txt回退到最开始创建的状态。git使用HEAD表示当前的版本，就是最新的版本。</span><br><span class="line">上一个版本是HEAD^,再上一个版本是HEAD^^,上一百个版本是HEAD～100(当然你也可以打100个^)。</span><br><span class="line">使用下面的命令回退到指定版本</span><br><span class="line"></span><br><span class="line">    git reset --hard HEAD^</span><br><span class="line">    HEAD is now at 3eb5f77 创建readme.txt文件</span><br><span class="line"></span><br><span class="line">看看内容改了没有。</span><br><span class="line">现在我们再查看下log，结果如下：</span><br></pre></td></tr></table></figure>
+<p>commit 3eb5f7721cb86c617faf0d2ad13a5cee9d1a3764<br>Author: = <a href="mailto:&#x63;&#111;&#x64;&#x65;&#114;&#46;&#x30;&#x30;&#x31;&#x32;&#x66;&#102;&#55;&#99;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#x6d;">&#x63;&#111;&#x64;&#x65;&#114;&#46;&#x30;&#x30;&#x31;&#x32;&#x66;&#102;&#55;&#99;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a><br>Date:   Sun Jan 22 16:16:10 2017 +0800</p>
+<pre><code>创建readme.txt文件</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">好了，时光倒流成功！但是悲哀的发现我们回不到未来了。还是有办法的，--hard 参数支持commit值。</span><br><span class="line">就是说你可以在--hard后面跟一个commit值，就能跳到那个版本。</span><br><span class="line">执行下面的代码</span><br></pre></td></tr></table></figure>
+<p>git reset –hard b5934a<br>HEAD is now at b5934a2 第二次提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">不用将所有的字符都写上，只要能区分出不同就好，git会自动去匹配</span><br><span class="line"></span><br><span class="line">但是万一找不到commit值呢，没关系。使用下面的命令可以查看所有的历史</span><br><span class="line"></span><br><span class="line">    git reflog</span><br><span class="line"></span><br><span class="line">显示结果：</span><br></pre></td></tr></table></figure>
+<p>b5934a2 HEAD@{0}: reset: moving to b5934a<br>3eb5f77 HEAD@{1}: reset: moving to HEAD^<br>b5934a2 HEAD@{2}: commit: 第二次提交<br>3eb5f77 HEAD@{3}: commit (initial): 创建readme.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最前面那串字符就是。好了。搞定！</span><br><span class="line"></span><br><span class="line">## 工作区，暂存区，版本库</span><br><span class="line">工作区：就是指当前的目录，比如我们创建的learnGit目录</span><br><span class="line">暂存区：通过git add 命令将文件添加到暂存区。</span><br><span class="line">版本库：就是指创建仓库时自动生成的那个.git目录，也是强烈建议不要乱动的目录。</span><br><span class="line">git中的文件必须先添加到暂存区，然后才能添加到版本库。</span><br><span class="line"></span><br><span class="line">重新创建一个文件Hello.java，随便写点内容比如</span><br><span class="line"></span><br><span class="line">    hello java</span><br><span class="line"></span><br><span class="line">然后再修改下readme文件，添加一行</span><br><span class="line"></span><br><span class="line">    添加 hello.java 文件 </span><br><span class="line"></span><br><span class="line">然后查看下仓库状态</span><br><span class="line"></span><br><span class="line">    git status</span><br><span class="line"></span><br><span class="line">显示结果：</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>Changes not staged for commit:<br>  (use “git add <file>…” to update what will be committed)<br>  (use “git checkout – <file>…” to discard changes in working directory)</p>
+<pre><code>modified:   readme.txt
+
+Untracked files:</code></pre><p>  (use “git add <file>…” to include in what will be committed)</p>
+<pre><code>Hello.java</code></pre><p>no changes added to commit (use “git add” and/or “git commit -a”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">说明readme.txt被修改了，而hello.java还没有被添加到仓库。</span><br><span class="line">然后我们将这两个文件添加到暂存区</span><br></pre></td></tr></table></figure>
+<p>git add readme.txt<br>git add Hello.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">你也可以使用下面的命令将当前文件夹下的所有文件都添加到暂存区</span><br><span class="line">    git add --all</span><br><span class="line"></span><br><span class="line">再查看下状态显示结果：</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>Changes to be committed:<br>  (use “git reset HEAD <file>…” to unstage)</p>
+<pre><code>new file:   Hello.java
+modified:   readme.txt</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">然后再用commit命令添加到版本库</span><br><span class="line">    git commit -m &quot;添加Hello.java文件&quot;</span><br><span class="line">再查看下状态显示结果为</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>nothing to commit, working tree clean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 撤销修改</span><br><span class="line"></span><br><span class="line">### 仅仅是修改了工作区，并没有add到暂存区</span><br><span class="line"></span><br><span class="line">我们对Hello.java做一些修改，如下：</span><br></pre></td></tr></table></figure>
+<p>public class Hello{<br>    public static void main(String[] args){</p>
+<pre><code>}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">如果这个时候我们需要回到上一个版本，当然，你可以手动的修改Hello.java文件。</span><br><span class="line">但是要是万一你哪里再记错了，就尴尬了。</span><br><span class="line">查看一下状态</span><br><span class="line"></span><br><span class="line">	git status</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>Changes not staged for commit:<br>  (use “git add <file>…” to update what will be committed)<br>  (use “git checkout – <file>…” to discard changes in working directory)</p>
+<pre><code>modified:   Hello.java</code></pre><p>no changes added to commit (use “git add” and/or “git commit -a”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git告诉你说，使用 git checkout -- &lt;file&gt;... 可以放弃当前工作区的修改。试一下，</span><br><span class="line"></span><br><span class="line">	git checkout Hello.java </span><br><span class="line"></span><br><span class="line">查看下Hello.java 文件，是不是恢复了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 不仅仅修改了工作区，而且还add到了暂存区。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">我们对Hello.java再次做一些修改，如下：</span><br></pre></td></tr></table></figure>
+<p>public class Hello{<br>    public static void main(String[] args){</p>
+<pre><code>}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">然后add到暂存区</span><br><span class="line"></span><br><span class="line">	git add Hello.java</span><br><span class="line">查看一下状态</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>Changes to be committed:<br>  (use “git reset HEAD <file>…” to unstage)</p>
+<pre><code>modified:   Hello.java</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git告诉你说，使用 git reset HEAD &lt;file&gt;... 可以撤销缓存。然后我们尝试一下</span><br><span class="line"></span><br><span class="line">	git reset HEAD Hello.java</span><br><span class="line"></span><br><span class="line">运行结果</span><br></pre></td></tr></table></figure>
+<p>Unstaged changes after reset:<br>M    Hello.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看一下状态</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>Changes not staged for commit:<br>  (use “git add <file>…” to update what will be committed)<br>  (use “git checkout – <file>…” to discard changes in working directory)</p>
+<pre><code>modified:   Hello.java</code></pre><p>no changes added to commit (use “git add” and/or “git commit -a”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">是不是又回到第一种的状态了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 不仅仅修改了工作区，还add到了暂存区，而且手贱的我还commit到了版本库。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果你目前还没有推送到远程仓库，还有的救，还记得上面说的时光倒流么。不记得的可以翻一翻。</span><br><span class="line"></span><br><span class="line">	git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line">这样就回到了第二种情况。</span><br><span class="line"></span><br><span class="line">## 文件删除</span><br><span class="line"></span><br><span class="line">在仓库里新建一个文件，然后添加到版本库</span><br><span class="line">	</span><br><span class="line">	git add test.txt</span><br><span class="line">	git commit -m &quot;add test.txt&quot;</span><br><span class="line"></span><br><span class="line">然后我们将这个文件删除掉。</span><br><span class="line">	</span><br><span class="line">	rm test.txt</span><br><span class="line"></span><br><span class="line">查看一下状态</span><br></pre></td></tr></table></figure>
+<p>On branch master<br>Changes not staged for commit:<br>  (use “git add/rm <file>…” to update what will be committed)<br>  (use “git checkout – <file>…” to discard changes in working directory)</p>
+<pre><code>deleted:    test.txt</code></pre><p>no changes added to commit (use “git add” and/or “git commit -a”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">git 检测到有文件被删除了，git告诉你有两种方式</span><br><span class="line">	1. git rm &lt;file&gt;... ：从版本库删除文件，并重新commit</span><br><span class="line">	2. 撤销删除操作，test.txt将被恢复。</span><br><span class="line"></span><br><span class="line">使用下面的命令从版本库删除文件。</span><br><span class="line"></span><br><span class="line">	git rm test.txt</span><br><span class="line">	git commit -m &quot;remove test.txt&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">小结：通过以上的学习我们已经可以熟练的操作本地的git仓库了。</span><br><span class="line">____</span><br><span class="line"></span><br><span class="line"># Git远程仓库</span><br><span class="line"></span><br><span class="line">## 创建远程仓库</span><br><span class="line">git是分布式版本控制系统。分布式，即最开始仅有一个仓库作为服务器，然后其他人从这个仓库克隆出代码，提交到这个仓库，</span><br><span class="line">每个克隆的仓库都可以是一个服务器，各个仓库之间没有主次之分。</span><br><span class="line"></span><br><span class="line">要学习远程仓库，首先得有个远程仓库，由于搭建远程git仓库有(本)点(人)复(不)杂(会)。这里使用github作为远程仓库</span><br><span class="line"></span><br><span class="line">由于之前写过类似的，这里不再赘述。</span><br><span class="line"></span><br><span class="line">**需要注意的是，在创建仓库是使用learnGit作为仓库名**</span><br><span class="line"></span><br><span class="line">[在github创建远程仓库](http:&#x2F;&#x2F;blog.csdn.net&#x2F;u013451048&#x2F;article&#x2F;details&#x2F;52399278)</span><br><span class="line"></span><br><span class="line">你只需做到使用下面的命令测试成功就好</span><br><span class="line">	</span><br><span class="line">	ssh -v git@github.com </span><br><span class="line"></span><br><span class="line">## 推送到远程仓库</span><br><span class="line">将本地仓库与远程仓库关联，在本地仓库目录下执行下面的命令。</span><br><span class="line">	</span><br><span class="line">	git remote add origin git@github.com:coderRan&#x2F;learnGit.git</span><br><span class="line"></span><br><span class="line">**注意：git@github.com:coderRan&#x2F;learnGit.git一定是你自己的创建的仓库，不要复制我的，</span><br><span class="line">因为这是我的仓库，关联不会出问题，推送的时候你是推送不上去的，因为我的github没有添加你的ssh key**</span><br><span class="line"></span><br><span class="line">现在仅仅是关联起来了，还没有将代码推送到远程仓库，执行下面的命令</span><br><span class="line"></span><br><span class="line">	git push -u origin master</span><br><span class="line"></span><br><span class="line">**要是没有出现下面的结果请看0x03**</span><br><span class="line"></span><br><span class="line">上传文件是需要时间的，所以要耐心等待一下。执行结果</span><br></pre></td></tr></table></figure>
+<p>Counting objects: 16, done.<br>Delta compression using up to 4 threads.<br>Compressing objects: 100% (9/9), done.<br>Writing objects: 100% (16/16), 1.29 KiB | 0 bytes/s, done.<br>Total 16 (delta 1), reused 0 (delta 0)<br>remote: Resolving deltas: 100% (1/1), done.<br>To github.com:coderRan/learnGit.git</p>
+<ul>
+<li>[new branch]      master -&gt; master<br>Branch master set up to track remote branch master from origin.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">去你刚才创建的仓库看一下，应该上传上去了。</span><br><span class="line"></span><br><span class="line">第一次推送有点麻烦，因为git需要将本地仓库的分支与远程仓库的分支进行关联。以后推送的话可以使用下面的命令</span><br><span class="line">	</span><br><span class="line">	git push origin master</span><br><span class="line"></span><br><span class="line">## SSH警告</span><br><span class="line">在第一次使用 push 或者 clone 这个命令时，会弹出一个警告</span><br></pre></td></tr></table></figure>
+<p>The authenticity of host ‘github.com (xx.xx.xx.xx)’ can’t be established.<br>RSA key fingerprint is xx.xx.xx.xx.xx.<br>Are you sure you want to continue connecting (yes/no)?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这个是SSH链接需要你确认ssh key。</span><br><span class="line">输入yes，结果</span><br></pre></td></tr></table></figure>
+<p>Warning: Permanently added ‘github.com’ (RSA) to the list of known hosts.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">这些警告只出现在第一次提交时，以后就不会出来了。</span><br><span class="line"></span><br><span class="line">## 从远程仓库克隆</span><br><span class="line"></span><br><span class="line">新建一个 目录</span><br><span class="line">	mkdir newGit</span><br><span class="line">	cd newGit</span><br><span class="line">然后从我们刚刚新建的仓库克隆一个</span><br><span class="line">	</span><br><span class="line">	git clone git@github.com:coderRan&#x2F;learnGit.git</span><br><span class="line"></span><br><span class="line">执行结果：</span><br></pre></td></tr></table></figure>
+<p>Cloning into ‘learnGit’…<br>remote: Counting objects: 16, done.<br>remote: Compressing objects: 100% (8/8), done.<br>remote: Total 16 (delta 1), reused 16 (delta 1), pack-reused 0<br>Receiving objects: 100% (16/16), done.<br>Resolving deltas: 100% (1/1), done.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">____</span><br><span class="line"></span><br><span class="line"># Git 分支</span><br><span class="line">## 分支简介</span><br><span class="line">分支是什么呢？</span><br><span class="line">你可以理解成树枝。</span><br><span class="line">分支可以用来干什么呢？ </span><br><span class="line">使用分支意味着你可以把你的工作从开发主线上分离开来,以免影响开发主线。</span><br><span class="line"></span><br><span class="line">假如，你开发了一个支付宝，然后想添加一个扫福的功能，你总不能直接在你的版本库里乱改吧，这个版本正常用着呢，万一改错，不能用了就麻烦了。话说不是有clone么，克隆一份就好了，再怎么改也不会出问题，但是，你在开发过程中，完成一部分工作后总得提交到远程仓库吧。(有人说，不用提交啊，自己在本地仓库搞就好了。注意，协同作业)</span><br><span class="line"></span><br><span class="line">这个时候就用到分支了。把仓库看成一棵树，随着一次次的commit，这棵树越长越高，分支就向树枝一样。在分支上可以随便撒野，不会搞坏主分支。你可以把你的修改先提交到自己创建的分支上，等你把这个扫福的功能开发完了，还能合并到主分支上。</span><br><span class="line"></span><br><span class="line">## 分支的创建</span><br><span class="line">在我们创建好仓库后，版本库的状态是下面这样的，其中的[A],[B],[C] 代表一个commit</span><br></pre></td></tr></table></figure>
+<p>  HEAD-&gt;master–&gt;|<br>                 |<br>    [A]–&gt;[B]–&gt;[C] </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">其中 master 代表的是主分支，而HEAD代表的是当前分支，由于只有一个分支所以HEAD指向的是 master</span><br><span class="line">我们使用下面的命令创建一个分支，然后切换到新建的分支。</span><br><span class="line"></span><br><span class="line">	git branch mybranch</span><br><span class="line">	git checkout mybranch</span><br><span class="line">你也可以使用一条命令，创建并切换</span><br><span class="line"></span><br><span class="line">	git checkout -b mybranch</span><br><span class="line"></span><br><span class="line">查看下分支</span><br><span class="line"></span><br><span class="line">	git branch</span><br><span class="line">	  master</span><br><span class="line">	* mybranch</span><br><span class="line"></span><br><span class="line">现在git仓库的状态是下面这样的</span><br></pre></td></tr></table></figure>
+<pre><code>master--&gt;|
+         |</code></pre><p>[A]–&gt;[B]–&gt;[C]<br>             |<br>             |&lt;–mybranch&lt;–HEAD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">然后我们再次对Hello.java文件做一下修改</span><br></pre></td></tr></table></figure>
+<p>public class Hello{<br>    public static void main(String[] args){</p>
+<pre><code>}
+public void addBranch(){
+
+}</code></pre><p>}    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">然后commit到版本库</span><br><span class="line"></span><br><span class="line">## 分支的合并</span><br><span class="line"></span><br><span class="line">现在git仓库的状态是下面这样的</span><br></pre></td></tr></table></figure>
+<pre><code>master--&gt;|
+         |</code></pre><p>[A]–&gt;[B]–&gt;[C]~~&gt;[D]<br>                   |<br>                   |&lt;–mybranch&lt;–HEAD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">然后切换到 master 分支</span><br><span class="line">	</span><br><span class="line">	git checkout master</span><br><span class="line">现在git仓库的状态是下面这样的</span><br></pre></td></tr></table></figure>
+<p> HEAD–&gt;master–&gt;|<br>                 |<br>    [A]–&gt;[B]–&gt;[C]~~&gt;[D]<br>                       |<br>                       |&lt;–mybranch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">合并到 master 分支 </span><br><span class="line">	</span><br><span class="line">	git merge mybranch </span><br><span class="line">执行结果</span><br></pre></td></tr></table></figure>
+<p>Updating 28c1cc8..11d62a7<br>Fast-forward<br> Hello.java | 3 +++<br> 1 files changed, 3 insertions(+)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">现在git仓库的状态是下面这样的</span><br></pre></td></tr></table></figure>
+<p>   HEAD–&gt;master–&gt;|<br>                   |<br>[A]–&gt;[B]–&gt;[C]~~&gt;[D]<br>                   |<br>                   |&lt;–mybranch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 分支的删除</span><br><span class="line"></span><br><span class="line">	git branch -d mybranch</span><br><span class="line"></span><br><span class="line">## 解决冲突</span><br><span class="line"></span><br><span class="line">快速合并的速度确实很快，但是前提是两个分支没有冲突。</span><br><span class="line"></span><br><span class="line">重新创建新的分支</span><br><span class="line"></span><br><span class="line">	git checkout -b newbranch</span><br><span class="line"></span><br><span class="line">修改 readme.txt 文件</span><br><span class="line">	</span><br><span class="line">	hello git</span><br><span class="line">  	hello git 2.0</span><br><span class="line">  	添加 hello.java 文件</span><br><span class="line">  	在 newbranch 分支上做的修改    </span><br><span class="line"></span><br><span class="line">提交</span><br><span class="line">	</span><br><span class="line">	git add readme.txt </span><br><span class="line">	git commit -m &quot;newbranch 修改&quot;</span><br><span class="line"></span><br><span class="line">	[newbranch b8ac4ad] newbranch 修改</span><br><span class="line">	 1 file changed, 1 insertion(+)</span><br><span class="line">	</span><br><span class="line">切换到 master 分支 </span><br><span class="line"></span><br><span class="line">	git checkout master</span><br><span class="line"></span><br><span class="line">打开 readme.txt 文件，发现并没有改变，因为我们的修改不是在master分支上的。</span><br><span class="line"></span><br><span class="line">添加一行</span><br><span class="line">	</span><br><span class="line">	hello git</span><br><span class="line">  	hello git 2.0</span><br><span class="line">  	添加 hello.java 文件</span><br><span class="line">  	在 master 分支上做的修改</span><br><span class="line"></span><br><span class="line">提交</span><br><span class="line">	</span><br><span class="line">	git add readme.txt </span><br><span class="line">	git commit -m &quot;master 修改&quot;</span><br><span class="line">	</span><br><span class="line">	[master 80c56bf] master 修改</span><br><span class="line">	 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">现在 两个分支上对一个文件的同一个地方（同一行）做了不同的修改，是没办法快速合并的。</span><br><span class="line"></span><br><span class="line">合并下试试</span><br><span class="line"></span><br><span class="line">	git merge newbranch</span><br><span class="line"></span><br><span class="line">	git merge newbranch </span><br><span class="line">	Auto-merging readme.txt</span><br><span class="line">	CONFLICT (content): Merge conflict in readme.txt</span><br><span class="line">	Automatic merge failed; fix conflicts and then commit the result.</span><br><span class="line"></span><br><span class="line">果然，git说， readme.txt 文件冲突了，修复后重新提交。</span><br><span class="line">使用 git status 看看状态</span><br><span class="line"></span><br><span class="line">	git status</span><br><span class="line"></span><br><span class="line">	On branch master</span><br><span class="line">	Your branch is ahead of &#39;origin&#x2F;master&#39; by 3 commits.</span><br><span class="line">	  (use &quot;git push&quot; to publish your local commits)</span><br><span class="line">	You have unmerged paths.</span><br><span class="line">	  (fix conflicts and run &quot;git commit&quot;)</span><br><span class="line">	  (use &quot;git merge --abort&quot; to abort the merge)</span><br><span class="line"></span><br><span class="line">	Unmerged paths:</span><br><span class="line">	  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)</span><br><span class="line"></span><br><span class="line">		both modified:   readme.txt</span><br><span class="line"></span><br><span class="line">	no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br><span class="line"></span><br><span class="line">git说 对 readme.txt 共同的两个修改</span><br><span class="line"></span><br><span class="line">我们直接打开 readme.txt 文件看看</span><br><span class="line"></span><br><span class="line">	hello git</span><br><span class="line">	hello git 2.0</span><br><span class="line">	添加 hello.java 文件</span><br><span class="line">	&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">	在 master 分支上做的修改</span><br><span class="line">	&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">	在 newbranch 分支进行修改</span><br><span class="line">  	&gt;&gt;&gt;&gt;&gt;&gt;&gt; newbranch</span><br><span class="line"></span><br><span class="line">其中 &lt;&lt;&lt;,&#x3D;&#x3D;&#x3D;,&gt;&gt;&gt;是分割线。</span><br><span class="line">我们修改一下</span><br><span class="line"></span><br><span class="line">	hello git</span><br><span class="line">	hello git 2.0</span><br><span class="line">	添加 hello.java 文件</span><br><span class="line">	修复了冲突</span><br><span class="line"></span><br><span class="line">然后提交</span><br><span class="line">	git add readme.txt </span><br><span class="line">	git commit -m &quot;修复了冲突&quot;</span><br><span class="line">	</span><br><span class="line">	[master 9f1e5f5] 修复了冲突</span><br><span class="line"></span><br><span class="line">好了，解决。现在git已经将两个分支自动合并了。你可以使用 </span><br><span class="line">	</span><br><span class="line">	git log --graph</span><br><span class="line"></span><br><span class="line">查看分支图</span><br><span class="line"></span><br><span class="line">然后删除 newbranch 分支</span><br><span class="line"></span><br><span class="line">	git branch -d newbranch </span><br><span class="line">	Deleted branch newbranch (was b8ac4ad).</span><br><span class="line"></span><br><span class="line">## 合并的方式选择</span><br><span class="line"></span><br><span class="line">从上面我们知道，分支的合并有两种方式，一种是 快速合并，一种是解决冲突的合并。</span><br><span class="line"></span><br><span class="line">两种合并的区别是</span><br><span class="line"></span><br><span class="line">	快速合并要保证没有冲突，合并完删除分支后，会丢掉分支信息。</span><br><span class="line">	冲突合并会保留分支信息，Git会在merge时生成一个新的commit。</span><br><span class="line"></span><br><span class="line">可以使用&#96;&#96;&#96;--no-ff&#96;&#96;&#96;参数强制禁用快速合并</span><br></pre></td></tr></table></figure>
+<p>git merge –no-ff -m “禁用快速合并” newbranch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">因为需要重新生成一个 commit 所以需要添加&#96;&#96;&#96;-m&#96;&#96;&#96;参数。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Git tag</span><br><span class="line"></span><br><span class="line">有时我们需要定位到某个版本，但是目前我们只能通过那个长长的commit号来确定。</span><br><span class="line">为了更好的定位，我们可以给commit 打个tag。</span><br><span class="line"></span><br><span class="line">## 默认在最新的commit上打tag</span><br></pre></td></tr></table></figure>
+<p>git tag v1.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 对任意commit打tag</span><br><span class="line"></span><br><span class="line">找到commit号(还记得怎么看commitid号么？)</span><br></pre></td></tr></table></figure>
+<p>git tag v0.9 <commitid></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 查看tag</span><br><span class="line">需要注意的是，tag是按字母排序的额，不是按时间排序的</span><br></pre></td></tr></table></figure>
+<p>git tag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## 查看tag信息</span><br></pre></td></tr></table></figure>
+<p>git show <tagname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 删除tag</span><br></pre></td></tr></table></figure>
+<p>git tag -d <tagname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 操作远程仓库的tag</span><br><span class="line"></span><br><span class="line">因为tag默认是存储到本地的，所以需要手动将tag推送到远程仓库</span><br></pre></td></tr></table></figure>
+<p>git push origin <tagname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果tag比较多，可以一次将所有tag都推送到远程仓库</span><br></pre></td></tr></table></figure>
+<p>git push origin –tags</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果你已经将tag推送到远程仓库了，再想删除就有点麻烦了。</span><br><span class="line">首先需要删除本地的tag</span><br></pre></td></tr></table></figure>
+<p>git tag -d <tagname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">然后再删除远程仓库的tag</span><br></pre></td></tr></table></figure>
+<p>git push origin :refs/tags/<tagname></p>
+<p>```</p>
+<hr>
+<p>好了，有了这些基本上可以应付工作中的需要了。</p>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            版权声明：本博客所有文章除特别声明外，均采用 <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 4.0 </a>许可协议。转载请注明出处！
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://zdran.com/20180524.html">https://zdran.com/20180524.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '07532e6021e94ce04ea5',
+            clientSecret: '511fa8b9dbc91a4520694798eb668931598eb678',
+            repo: 'zdran.github.io',
+            owner: 'zdRan',
+            admin: ['zdRan'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/20180529.html" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/20180518.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="U+2647's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        cm.zdran@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: cm.zdran@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/11/">十一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/09/">九月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">八月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/05/">五月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">二月 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Debug/">Debug<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/DesignPattern/">DesignPattern<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Dubbo/">Dubbo<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Flutter/">Flutter<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/LeetCode/">LeetCode<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Notes/">Notes<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Python/">Python<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Redis/">Redis<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/SpringBoot/">SpringBoot<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">tab</i>
+                
+                标签云
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">57</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zdRan" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;U+2647's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+                <div class="footer-develop-div">Hosted by <a href="https://pages.coding.me" target="_blank" class="footer-develop-a">Coding Pages</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import highlight.js -->
+
+    
+        <script>lsloader.load("highlight_js","/js/highlight.pack.js?acYmXTaIUms2RHozguiBzg==", true)</script>
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            <!-- 加载 highlight 代码高亮-->
+            hljs.initHighlightingOnLoad();
+        
+    
+
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2017;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
