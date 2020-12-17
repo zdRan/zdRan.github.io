@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Tue Sep 11 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:18:35 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180911.html",
     "headline": "Spring Boot 学习笔记(十一) 整合 Redis",
     "datePublished": "Tue Sep 11 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:18:35 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,39 +522,95 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Spring Boot 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20180628.html" target="_blank" rel="noopener">Spring Boot 学习笔记(一) hello world</a></li>
-<li><a href="https://zdran.com/20180629.html" target="_blank" rel="noopener">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
-<li><a href="https://zdran.com/20180703.html" target="_blank" rel="noopener">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
-<li><a href="https://zdran.com/20180706.html" target="_blank" rel="noopener">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
-<li><a href="https://zdran.com/20180718.html" target="_blank" rel="noopener">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
-<li><a href="https://zdran.com/20180725.html" target="_blank" rel="noopener">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
-<li><a href="https://zdran.com/20180730.html" target="_blank" rel="noopener">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
-<li><a href="https://zdran.com/20180809.html" target="_blank" rel="noopener">Spring Boot 学习笔记(八) 整合 Filter</a></li>
-<li><a href="https://zdran.com/20180830.html" target="_blank" rel="noopener">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
-<li><a href="https://zdran.com/20180904.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
-<li><a href="https://zdran.com/20180911.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
-<li><a href="https://zdran.com/20181016.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
-<li><a href="https://zdran.com/20190418.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
-<li><a href="https://zdran.com/20190909.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Spring Boot 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180628.html">Spring Boot 学习笔记(一) hello world</a></li>
+<li><a href="https://zdran.com/20180629.html">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
+<li><a href="https://zdran.com/20180703.html">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
+<li><a href="https://zdran.com/20180706.html">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
+<li><a href="https://zdran.com/20180718.html">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
+<li><a href="https://zdran.com/20180725.html">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
+<li><a href="https://zdran.com/20180730.html">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
+<li><a href="https://zdran.com/20180809.html">Spring Boot 学习笔记(八) 整合 Filter</a></li>
+<li><a href="https://zdran.com/20180830.html">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
+<li><a href="https://zdran.com/20180904.html">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
+<li><a href="https://zdran.com/20180911.html">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
+<li><a href="https://zdran.com/20181016.html">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
+<li><a href="https://zdran.com/20190418.html">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
+<li><a href="https://zdran.com/20190909.html">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
 </ul>
 <hr>
-<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><h2 id="2-添加-Redis-配置"><a href="#2-添加-Redis-配置" class="headerlink" title="2. 添加 Redis 配置"></a>2. 添加 Redis 配置</h2><pre><code>spring:
+  redis:
+    cluster:
+      nodes: 127.0.0.1:9001,127.0.0.1:9002,127.0.0.1:9003
+    password: ******
+    timeout: 10000ms
+    database: 0
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 1
+        max-active: 8
+        max-wait: 6000ms</code></pre><p>这里我们使用了 jedis 连接池。</p>
+<h2 id="3-创建操作-Redis-的-Service"><a href="#3-创建操作-Redis-的-Service" class="headerlink" title="3. 创建操作 Redis 的 Service"></a>3. 创建操作 Redis 的 Service</h2><pre><code>@Service
+public class RedisServiceImpl implements RedisService &#123;
 
-<h2 id="2-添加-Redis-配置"><a href="#2-添加-Redis-配置" class="headerlink" title="2. 添加 Redis 配置"></a>2. 添加 Redis 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  redis:</span><br><span class="line">    cluster:</span><br><span class="line">      nodes: 127.0.0.1:9001,127.0.0.1:9002,127.0.0.1:9003</span><br><span class="line">    password: ******</span><br><span class="line">    timeout: 10000ms</span><br><span class="line">    database: 0</span><br><span class="line">    jedis:</span><br><span class="line">      pool:</span><br><span class="line">        max-idle: 8</span><br><span class="line">        min-idle: 1</span><br><span class="line">        max-active: 8</span><br><span class="line">        max-wait: 6000ms</span><br></pre></td></tr></table></figure>
-<p>这里我们使用了 jedis 连接池。</p>
-<h2 id="3-创建操作-Redis-的-Service"><a href="#3-创建操作-Redis-的-Service" class="headerlink" title="3. 创建操作 Redis 的 Service"></a>3. 创建操作 Redis 的 Service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class RedisServiceImpl implements RedisService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private StringRedisTemplate stringRedisTemplate;</span><br><span class="line">    private Logger logger &#x3D; LoggerFactory.getLogger(RedisServiceImpl.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void setStr(String key, String value) &#123;</span><br><span class="line">        logger.info(&quot;插入 Redis 数据。入参：key：&#123;&#125;，value：&#123;&#125;&quot;, key, value);</span><br><span class="line">        ValueOperations&lt;String, String&gt; operations &#x3D; stringRedisTemplate.opsForValue();</span><br><span class="line">        operations.set(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getStr(String key) &#123;</span><br><span class="line">        logger.info(&quot;获取 Redis 数据。入参：key：&#123;&#125;&quot;, key);</span><br><span class="line">        ValueOperations&lt;String, String&gt; operations &#x3D; stringRedisTemplate.opsForValue();</span><br><span class="line">        String value &#x3D; operations.get(key);</span><br><span class="line">        logger.info(&quot;获取 Redis 数据。出参：value：&#123;&#125;&quot;, value);</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void delStr(String key) &#123;</span><br><span class="line">        logger.info(&quot;删除 Redis 数据。入参：key：&#123;&#125;&quot;, key);</span><br><span class="line">        ValueOperations&lt;String, String&gt; operations &#x3D; stringRedisTemplate.opsForValue();</span><br><span class="line">        operations.getOperations().delete(key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>操作 Redis 的主要类是 <code>stringRedisTemplate</code>,这个类可以获取不同类型的 Redis操作对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stirng 类型：stringRedisTemplate.opsForValue()</span><br><span class="line">List 类型：stringRedisTemplate.opsForList()</span><br><span class="line">Set 类型：stringRedisTemplate.opsForSet()</span><br><span class="line">Hash 类型：stringRedisTemplate.opsForHash()</span><br></pre></td></tr></table></figure>
-<p>可以看到，opsForXXX() 不能删除 Redis 中的key，这个时候可以使用下面的方法，获取<code>RedisOperations</code> 对象。通过该对象进行一些 Redis 的操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opsForHash().getOperations().delete(key);</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-单元测试"><a href="#4-单元测试" class="headerlink" title="4. 单元测试"></a>4. 单元测试</h2><p>我们针对这个 Service 写个单元测试，测试一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest()</span><br><span class="line">public class RedisServiceImplTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private RedisService redisService;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void setStr() throws Exception &#123;</span><br><span class="line">        redisService.setStr(&quot;TEST&quot;,&quot;1234&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getStr() throws Exception &#123;</span><br><span class="line">        System.out.println(redisService.getStr(&quot;TEST&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void delStr() throws Exception &#123;</span><br><span class="line">        redisService.delStr(&quot;TEST&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    private Logger logger = LoggerFactory.getLogger(RedisServiceImpl.class);
 
 
+    @Override
+    public void setStr(String key, String value) &#123;
+        logger.info(&quot;插入 Redis 数据。入参：key：&#123;&#125;，value：&#123;&#125;&quot;, key, value);
+        ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+        operations.set(key, value);
+    &#125;
 
+    @Override
+    public String getStr(String key) &#123;
+        logger.info(&quot;获取 Redis 数据。入参：key：&#123;&#125;&quot;, key);
+        ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+        String value = operations.get(key);
+        logger.info(&quot;获取 Redis 数据。出参：value：&#123;&#125;&quot;, value);
+        return value;
+    &#125;
+
+    @Override
+    public void delStr(String key) &#123;
+        logger.info(&quot;删除 Redis 数据。入参：key：&#123;&#125;&quot;, key);
+        ValueOperations&lt;String, String&gt; operations = stringRedisTemplate.opsForValue();
+        operations.getOperations().delete(key);
+    &#125;</code></pre><p>操作 Redis 的主要类是 <code>stringRedisTemplate</code>,这个类可以获取不同类型的 Redis操作对象。</p>
+<pre><code>Stirng 类型：stringRedisTemplate.opsForValue()
+List 类型：stringRedisTemplate.opsForList()
+Set 类型：stringRedisTemplate.opsForSet()
+Hash 类型：stringRedisTemplate.opsForHash()</code></pre><p>可以看到，opsForXXX() 不能删除 Redis 中的key，这个时候可以使用下面的方法，获取<code>RedisOperations</code> 对象。通过该对象进行一些 Redis 的操作。</p>
+<pre><code>opsForHash().getOperations().delete(key);</code></pre><h2 id="4-单元测试"><a href="#4-单元测试" class="headerlink" title="4. 单元测试"></a>4. 单元测试</h2><p>我们针对这个 Service 写个单元测试，测试一下</p>
+<pre><code>@RunWith(SpringRunner.class)
+@SpringBootTest()
+public class RedisServiceImplTest &#123;
+    @Autowired
+    private RedisService redisService;
+
+    @Test
+    public void setStr() throws Exception &#123;
+        redisService.setStr(&quot;TEST&quot;,&quot;1234&quot;);
+    &#125;
+
+    @Test
+    public void getStr() throws Exception &#123;
+        System.out.println(redisService.getStr(&quot;TEST&quot;));
+    &#125;
+
+    @Test
+    public void delStr() throws Exception &#123;
+        redisService.delStr(&quot;TEST&quot;);
+    &#125;
+&#125;</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

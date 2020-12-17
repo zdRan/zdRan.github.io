@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Jun 29 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:22:36 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180629.html",
     "headline": "Spring Boot 学习笔记(二) 整合 log4j2",
     "datePublished": "Fri Jun 29 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:22:36 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,35 +522,119 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Spring Boot 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20180628.html" target="_blank" rel="noopener">Spring Boot 学习笔记(一) hello world</a></li>
-<li><a href="https://zdran.com/20180629.html" target="_blank" rel="noopener">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
-<li><a href="https://zdran.com/20180703.html" target="_blank" rel="noopener">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
-<li><a href="https://zdran.com/20180706.html" target="_blank" rel="noopener">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
-<li><a href="https://zdran.com/20180718.html" target="_blank" rel="noopener">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
-<li><a href="https://zdran.com/20180725.html" target="_blank" rel="noopener">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
-<li><a href="https://zdran.com/20180730.html" target="_blank" rel="noopener">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
-<li><a href="https://zdran.com/20180809.html" target="_blank" rel="noopener">Spring Boot 学习笔记(八) 整合 Filter</a></li>
-<li><a href="https://zdran.com/20180830.html" target="_blank" rel="noopener">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
-<li><a href="https://zdran.com/20180904.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
-<li><a href="https://zdran.com/20180911.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
-<li><a href="https://zdran.com/20181016.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
-<li><a href="https://zdran.com/20190418.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
-<li><a href="https://zdran.com/20190909.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Spring Boot 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180628.html">Spring Boot 学习笔记(一) hello world</a></li>
+<li><a href="https://zdran.com/20180629.html">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
+<li><a href="https://zdran.com/20180703.html">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
+<li><a href="https://zdran.com/20180706.html">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
+<li><a href="https://zdran.com/20180718.html">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
+<li><a href="https://zdran.com/20180725.html">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
+<li><a href="https://zdran.com/20180730.html">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
+<li><a href="https://zdran.com/20180809.html">Spring Boot 学习笔记(八) 整合 Filter</a></li>
+<li><a href="https://zdran.com/20180830.html">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
+<li><a href="https://zdran.com/20180904.html">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
+<li><a href="https://zdran.com/20180911.html">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
+<li><a href="https://zdran.com/20181016.html">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
+<li><a href="https://zdran.com/20190418.html">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
+<li><a href="https://zdran.com/20190909.html">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
 </ul>
 <hr>
 <h2 id="1-log4j2-简介"><a href="#1-log4j2-简介" class="headerlink" title="1. log4j2 简介"></a>1. log4j2 简介</h2><p>良好的日志输出能够在遇到问题的时候很快的定位到出现问题的地方。所以我们首先把log4j集成进去。</p>
 <p>我们使用的是log4j2，在使用方面与log4j基本上没什么区别，比较大的区别是<strong>log4j2不再支持properties配置文件，支持xml、json格式的文件</strong></p>
 <h2 id="2-添加log4j2-依赖"><a href="#2-添加log4j2-依赖" class="headerlink" title="2. 添加log4j2 依赖"></a>2. 添加log4j2 依赖</h2><p>在pom文件中添加依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 从parent项目中出去logging这个包，因为我们使用的是log4j2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 引入log4j2支持 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-log4j2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;!-- 从parent项目中出去logging这个包，因为我们使用的是log4j2 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;!-- 引入log4j2支持 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;
+&lt;/dependency&gt;
 
-<h2 id="3-添加-log4j2-的配置文件"><a href="#3-添加-log4j2-的配置文件" class="headerlink" title="3. 添加 log4j2 的配置文件"></a>3. 添加 log4j2 的配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">    status : 这个用于设置log4j2自身内部的信息输出,可以不设置,</span><br><span class="line">    当设置成trace时,会看到log4j2内部各种详细输出</span><br><span class="line">    monitorInterval : Log4j能够自动检测修改配置文件和重新配置本身, </span><br><span class="line">    设置间隔秒数。此处表示每隔600秒重读一次配置文件</span><br><span class="line">--&gt;</span><br><span class="line">&lt;Configuration status&#x3D;&quot;OFF&quot; monitorInterval&#x3D;&quot;600&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--日志级别：TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL--&gt;</span><br><span class="line">    &lt;!--如果设置为WARN，则低于WARN的信息都不会输出--&gt;</span><br><span class="line">    &lt;Properties&gt;</span><br><span class="line">        &lt;!-- 配置日志文件输出目录,此处为项目根目录下的logs文件夹 --&gt;</span><br><span class="line">        &lt;Property name&#x3D;&quot;LOG_HOME&quot;&gt;D:\sysLogs\learning&lt;&#x2F;Property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;FILE_NAME&quot;&gt;learningSpringBoot&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;&#x2F;Properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Appenders&gt;</span><br><span class="line">        &lt;!--这个输出控制台的配置--&gt;</span><br><span class="line">        &lt;Console name&#x3D;&quot;Console&quot; target&#x3D;&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--控制台只输出level及其以上级别的信息（onMatch），</span><br><span class="line">            其他的直接拒绝（onMismatch）--&gt;</span><br><span class="line">            &lt;ThresholdFilter level&#x3D;&quot;INFO&quot; onMatch&#x3D;&quot;ACCEPT&quot; onMismatch&#x3D;&quot;DENY&quot;&#x2F;&gt;</span><br><span class="line">            &lt;!--日志输出的格式--&gt;</span><br><span class="line">            &lt;!--%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n--&gt;</span><br><span class="line"></span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;|%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;|%5p|%5t|%4c:%L|%m%n&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;RollingRandomAccessFile name&#x3D;&quot;LEARNING&quot; fileName&#x3D;&quot;$&#123;LOG_HOME&#125;&#x2F;$&#123;FILE_NAME&#125;.log&quot;</span><br><span class="line">                                 filePattern&#x3D;&quot;$&#123;LOG_HOME&#125;&#x2F;backup&#x2F;$&#123;FILE_NAME&#125;_%d&#123;yyyy-MM-dd&#125;_%i.log&quot;&gt;</span><br><span class="line">            &lt;!--%d&#123;yyyy-MM-dd &#39;at&#39; HH:mm:ss z&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n--&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;|%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;|%5p|%5t|%4c:%L|%m%n&quot;&#x2F;&gt;</span><br><span class="line">            &lt;Policies&gt;</span><br><span class="line">                &lt;TimeBasedTriggeringPolicy interval&#x3D;&quot;1&quot;&#x2F;&gt;</span><br><span class="line">                &lt;SizeBasedTriggeringPolicy size&#x3D;&quot;20MB&quot;&#x2F;&gt;</span><br><span class="line">            &lt;&#x2F;Policies&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy max&#x3D;&quot;10&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingRandomAccessFile&gt;</span><br><span class="line">    &lt;&#x2F;Appenders&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--然后定义logger，只有定义了logger并引入的appender，appender才会生效--&gt;</span><br><span class="line">    &lt;Loggers&gt;</span><br><span class="line">        &lt;Logger name&#x3D;&quot;com.zdran.springboot&quot; level&#x3D;&quot;INFO&quot; additivity&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;LEARNING&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Logger&gt;</span><br><span class="line">        &lt;Logger name&#x3D;&quot;org.springframework&quot; level&#x3D;&quot;INFO&quot; additivity&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;LEARNING&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Logger&gt;</span><br><span class="line">        &lt;Logger name&#x3D;&quot;org.apache&quot; level&#x3D;&quot;INFO&quot; additivity&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;LEARNING&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Logger&gt;</span><br><span class="line">        &lt;Root level&#x3D;&quot;INFO&quot;&gt;</span><br><span class="line">            &lt;Appender-Ref ref&#x3D;&quot;Console&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Root&gt;</span><br><span class="line">    &lt;&#x2F;Loggers&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;Configuration&gt;</span><br></pre></td></tr></table></figure>
-<p>这么详细的注释就不需要再解释了吧。。。</p>
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
+    &lt;version&gt;1.7.24&lt;/version&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;</code></pre>
+<h2 id="3-添加-log4j2-的配置文件"><a href="#3-添加-log4j2-的配置文件" class="headerlink" title="3. 添加 log4j2 的配置文件"></a>3. 添加 log4j2 的配置文件</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!--
+    status : 这个用于设置log4j2自身内部的信息输出,可以不设置,
+    当设置成trace时,会看到log4j2内部各种详细输出
+    monitorInterval : Log4j能够自动检测修改配置文件和重新配置本身, 
+    设置间隔秒数。此处表示每隔600秒重读一次配置文件
+--&gt;
+&lt;Configuration status=&quot;OFF&quot; monitorInterval=&quot;600&quot;&gt;
+
+    &lt;!--日志级别：TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL--&gt;
+    &lt;!--如果设置为WARN，则低于WARN的信息都不会输出--&gt;
+    &lt;Properties&gt;
+        &lt;!-- 配置日志文件输出目录,此处为项目根目录下的logs文件夹 --&gt;
+        &lt;Property name=&quot;LOG_HOME&quot;&gt;D:\sysLogs\learning&lt;/Property&gt;
+        &lt;property name=&quot;FILE_NAME&quot;&gt;learningSpringBoot&lt;/property&gt;
+    &lt;/Properties&gt;
+
+    &lt;Appenders&gt;
+        &lt;!--这个输出控制台的配置--&gt;
+        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+            &lt;!--控制台只输出level及其以上级别的信息（onMatch），
+            其他的直接拒绝（onMismatch）--&gt;
+            &lt;ThresholdFilter level=&quot;INFO&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/&gt;
+            &lt;!--日志输出的格式--&gt;
+            &lt;!--%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n--&gt;
+
+            &lt;PatternLayout pattern=&quot;|%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;|%5p|%5t|%4c:%L|%m%n&quot;/&gt;
+        &lt;/Console&gt;
+
+        &lt;RollingRandomAccessFile name=&quot;LEARNING&quot; fileName=&quot;$&#123;LOG_HOME&#125;/$&#123;FILE_NAME&#125;.log&quot;
+                                 filePattern=&quot;$&#123;LOG_HOME&#125;/backup/$&#123;FILE_NAME&#125;_%d&#123;yyyy-MM-dd&#125;_%i.log&quot;&gt;
+            &lt;!--%d&#123;yyyy-MM-dd &#39;at&#39; HH:mm:ss z&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n--&gt;
+            &lt;PatternLayout pattern=&quot;|%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;|%5p|%5t|%4c:%L|%m%n&quot;/&gt;
+            &lt;Policies&gt;
+                &lt;TimeBasedTriggeringPolicy interval=&quot;1&quot;/&gt;
+                &lt;SizeBasedTriggeringPolicy size=&quot;20MB&quot;/&gt;
+            &lt;/Policies&gt;
+            &lt;DefaultRolloverStrategy max=&quot;10&quot;/&gt;
+        &lt;/RollingRandomAccessFile&gt;
+    &lt;/Appenders&gt;
+
+    &lt;!--然后定义logger，只有定义了logger并引入的appender，appender才会生效--&gt;
+    &lt;Loggers&gt;
+        &lt;Logger name=&quot;com.zdran.springboot&quot; level=&quot;INFO&quot; additivity=&quot;true&quot;&gt;
+            &lt;AppenderRef ref=&quot;LEARNING&quot;/&gt;
+        &lt;/Logger&gt;
+        &lt;Logger name=&quot;org.springframework&quot; level=&quot;INFO&quot; additivity=&quot;true&quot;&gt;
+            &lt;AppenderRef ref=&quot;LEARNING&quot;/&gt;
+        &lt;/Logger&gt;
+        &lt;Logger name=&quot;org.apache&quot; level=&quot;INFO&quot; additivity=&quot;true&quot;&gt;
+            &lt;AppenderRef ref=&quot;LEARNING&quot;/&gt;
+        &lt;/Logger&gt;
+        &lt;Root level=&quot;INFO&quot;&gt;
+            &lt;Appender-Ref ref=&quot;Console&quot;/&gt;
+        &lt;/Root&gt;
+    &lt;/Loggers&gt;
+
+&lt;/Configuration&gt;</code></pre><p>这么详细的注释就不需要再解释了吧。。。</p>
 <p>其中<code>&lt;Property name=&quot;LOG_HOME&quot;&gt;D:\sysLogs\learning&lt;/Property&gt;</code> 还有另外一种设置，我们可以在xml里配置一个占位符，然后可以在命令行启动的时候以参数额形式指定log的目录。可以像下面这样配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Property name&#x3D;&quot;LOG_HOME&quot;&gt;$&#123;sys:log4j.path&#125;&#x2F;learning&lt;&#x2F;Property&gt;</span><br><span class="line"></span><br><span class="line">启动命令 java -jar xxx.jar -log4j.path&#x3D;D:\sysLogs\learning</span><br></pre></td></tr></table></figure>
+<pre><code class="textile">&lt;Property name=&quot;LOG_HOME&quot;&gt;$&#123;sys:log4j.path&#125;/learning&lt;/Property&gt;
+
+启动命令 java -jar xxx.jar -log4j.path=D:\sysLogs\learning</code></pre>
 <p>如果你使用了这种配置在启动的时候会报一个</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR StatusLogger Cannot access RandomAccessFile java.io.IOException: 文件名、目录名或卷标语法不正确。</span><br><span class="line"> java.io.IOException: 文件名、目录名或卷标语法不正确。</span><br></pre></td></tr></table></figure>
-<p>这个错误是因为占位符不是有效的路径导致的，可以通过下面的方法配置：</p>
+<pre><code>ERROR StatusLogger Cannot access RandomAccessFile java.io.IOException: 文件名、目录名或卷标语法不正确。
+ java.io.IOException: 文件名、目录名或卷标语法不正确。</code></pre><p>这个错误是因为占位符不是有效的路径导致的，可以通过下面的方法配置：</p>
 <div align="center">
     ![Edit Configurations...](/images/2001.jpg)
 </div>

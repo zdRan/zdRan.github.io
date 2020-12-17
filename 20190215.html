@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Feb 15 2019 14:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:02:29 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20190215.html",
     "headline": "Flutter 学习笔记(二) Container 组件",
     "datePublished": "Fri Feb 15 2019 14:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:02:29 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,14 +522,13 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Flutter 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20180625.html" target="_blank" rel="noopener">Flutter 学习笔记(零) 搭建 Flutter 环境</a></li>
-<li><a href="https://zdran.com/20190214.html" target="_blank" rel="noopener">Flutter 学习笔记(一) Text 组件</a></li>
-<li><a href="https://zdran.com/20190215.html" target="_blank" rel="noopener">Flutter 学习笔记(二) Container 组件</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Flutter 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180625.html">Flutter 学习笔记(零) 搭建 Flutter 环境</a></li>
+<li><a href="https://zdran.com/20190214.html">Flutter 学习笔记(一) Text 组件</a></li>
+<li><a href="https://zdran.com/20190215.html">Flutter 学习笔记(二) Container 组件</a></li>
 </ul>
 <h2 id="1-Container-组件简介"><a href="#1-Container-组件简介" class="headerlink" title="1. Container 组件简介"></a>1. Container 组件简介</h2><pre><code>一个拥有绘制、定位、调整大小的 widget。是一个容器组件，内部可以包含其他的 widget</code></pre><h2 id="2-Container-属性"><a href="#2-Container-属性" class="headerlink" title="2. Container 属性"></a>2. Container 属性</h2><h3 id="2-1-alignment-属性"><a href="#2-1-alignment-属性" class="headerlink" title="2.1 alignment 属性"></a>2.1 alignment 属性</h3><pre><code>容器内的组件在容器内的对齐方式。可选值有：</code></pre><ul>
-<li><p>Alignment.topLeft、 Alignment.topCenter、 Alignment.topRight</p>
-<p>  顶部左对齐，居中，右对齐</p>
+<li><p>Alignment.topLeft、 Alignment.topCenter、 Alignment.topRight<br>  顶部左对齐，居中，右对齐</p>
 </li>
 <li><p>Alignment.centerLeft、 Alignment.center Alignment.centerRight</p>
 <p>  中部左对齐，居中，右对齐</p>
@@ -559,8 +558,77 @@
 <p> 可以设置起始角度,结束角度,中心点。</p>
 </li>
 </ul>
-<p><strong>PS: 角度的单位是弧度,不是度</strong><br><strong>PS: 这里有个小问题,设置的起始角度有可能不生效!!</strong><br><a href="https://github.com/flutter/flutter/issues/23648" target="_blank" rel="noopener">参考 GitHub 上的 issues</a></p>
-<h2 id="4-TextDemo-源码"><a href="#4-TextDemo-源码" class="headerlink" title="4 TextDemo 源码"></a>4 TextDemo 源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line">import &#39;ContainerDemo.dart&#39;;</span><br><span class="line">void main() &#x3D;&gt; runApp(ContainerDemo());</span><br><span class="line"></span><br><span class="line">class ContainerDemo extends StatelessWidget &#123;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    var boxConstraints &#x3D; BoxConstraints.expand(height: 311,width: 311);</span><br><span class="line">    var background &#x3D; Paint();</span><br><span class="line">    background.color &#x3D; Colors.green;</span><br><span class="line">    var edgeInset &#x3D;EdgeInsets.only(left: 110,right: 100,bottom: 100,top: 200);</span><br><span class="line">    var gradColorList &#x3D;List&lt;Color&gt;();</span><br><span class="line">    gradColorList.add(Colors.blueAccent);</span><br><span class="line">    gradColorList.add(Colors.orange);</span><br><span class="line">    gradColorList.add(Colors.white);</span><br><span class="line">    gradColorList.add(Colors.white);</span><br><span class="line"></span><br><span class="line">    var linear &#x3D;LinearGradient(</span><br><span class="line">        colors: gradColorList,</span><br><span class="line">        begin: Alignment.bottomRight</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    var radial &#x3D; RadialGradient(</span><br><span class="line">      colors: gradColorList,</span><br><span class="line">      radius: 2,</span><br><span class="line"></span><br><span class="line">    );</span><br><span class="line">    var sweep &#x3D; SweepGradient(</span><br><span class="line">      colors: gradColorList,</span><br><span class="line">      &#x2F;&#x2F;startAngle:,</span><br><span class="line">      endAngle:7,</span><br><span class="line">      center: Alignment.center</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    var decoraion &#x3D; BoxDecoration(</span><br><span class="line">      color: Colors.pinkAccent,</span><br><span class="line">      border: Border(</span><br><span class="line">        top: BorderSide(width: 50,color: Colors.lightGreen),</span><br><span class="line">        right: BorderSide(width: 20,color: Colors.pink),</span><br><span class="line">        left: BorderSide(width: 30,color: Colors.teal),</span><br><span class="line">        bottom:BorderSide(width: 30,color: Colors.lightGreen),</span><br><span class="line">      ),</span><br><span class="line">      gradient: sweep</span><br><span class="line">      );</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">      return MaterialApp(</span><br><span class="line">        title: &#39;Container Demo&#39;,</span><br><span class="line">        home: Scaffold(</span><br><span class="line">          body: Center(</span><br><span class="line">            child: Container(</span><br><span class="line">              child: Text(&#39;hello Container&#39;,style: TextStyle(</span><br><span class="line">                fontSize: 22,</span><br><span class="line">                background: background</span><br><span class="line">                )),</span><br><span class="line">              constraints:boxConstraints,</span><br><span class="line">              &#x2F;&#x2F;color: Colors.blueGrey,</span><br><span class="line">              &#x2F;&#x2F;在子节点下方绘制,子节点会调整位置</span><br><span class="line">              decoration: decoraion,</span><br><span class="line">              &#x2F;&#x2F;在子节点上方绘制,子节点不动,可能会被覆盖</span><br><span class="line">              &#x2F;&#x2F;foregroundDecoration :decoraion,</span><br><span class="line">              padding: edgeInset,</span><br><span class="line">              &#x2F;&#x2F;margin: edgeInset,</span><br><span class="line">              alignment: Alignment.bottomCenter,</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>PS: 角度的单位是弧度,不是度</strong><br><strong>PS: 这里有个小问题,设置的起始角度有可能不生效!!</strong><br><a target="_blank" rel="noopener" href="https://github.com/flutter/flutter/issues/23648">参考 GitHub 上的 issues</a></p>
+<h2 id="4-TextDemo-源码"><a href="#4-TextDemo-源码" class="headerlink" title="4 TextDemo 源码"></a>4 TextDemo 源码</h2><pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;ContainerDemo.dart&#39;;
+void main() =&gt; runApp(ContainerDemo());
+
+class ContainerDemo extends StatelessWidget &#123;
+  @override
+  Widget build(BuildContext context) &#123;
+    var boxConstraints = BoxConstraints.expand(height: 311,width: 311);
+    var background = Paint();
+    background.color = Colors.green;
+    var edgeInset =EdgeInsets.only(left: 110,right: 100,bottom: 100,top: 200);
+    var gradColorList =List&lt;Color&gt;();
+    gradColorList.add(Colors.blueAccent);
+    gradColorList.add(Colors.orange);
+    gradColorList.add(Colors.white);
+    gradColorList.add(Colors.white);
+
+    var linear =LinearGradient(
+        colors: gradColorList,
+        begin: Alignment.bottomRight
+    );
+
+    var radial = RadialGradient(
+      colors: gradColorList,
+      radius: 2,
+
+    );
+    var sweep = SweepGradient(
+      colors: gradColorList,
+      //startAngle:,
+      endAngle:7,
+      center: Alignment.center
+    );
+
+    var decoraion = BoxDecoration(
+      color: Colors.pinkAccent,
+      border: Border(
+        top: BorderSide(width: 50,color: Colors.lightGreen),
+        right: BorderSide(width: 20,color: Colors.pink),
+        left: BorderSide(width: 30,color: Colors.teal),
+        bottom:BorderSide(width: 30,color: Colors.lightGreen),
+      ),
+      gradient: sweep
+      );
+
+
+      return MaterialApp(
+        title: &#39;Container Demo&#39;,
+        home: Scaffold(
+          body: Center(
+            child: Container(
+              child: Text(&#39;hello Container&#39;,style: TextStyle(
+                fontSize: 22,
+                background: background
+                )),
+              constraints:boxConstraints,
+              //color: Colors.blueGrey,
+              //在子节点下方绘制,子节点会调整位置
+              decoration: decoraion,
+              //在子节点上方绘制,子节点不动,可能会被覆盖
+              //foregroundDecoration :decoraion,
+              padding: edgeInset,
+              //margin: edgeInset,
+              alignment: Alignment.bottomCenter,
+            ),
+          ),
+        ),
+      );
+  &#125;
+&#125;</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

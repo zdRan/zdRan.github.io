@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu Aug 09 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:20:06 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180809.html",
     "headline": "Spring Boot 学习笔记(八) 整合 Filter",
     "datePublished": "Thu Aug 09 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:20:06 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,37 +522,197 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Spring Boot 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20180628.html" target="_blank" rel="noopener">Spring Boot 学习笔记(一) hello world</a></li>
-<li><a href="https://zdran.com/20180629.html" target="_blank" rel="noopener">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
-<li><a href="https://zdran.com/20180703.html" target="_blank" rel="noopener">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
-<li><a href="https://zdran.com/20180706.html" target="_blank" rel="noopener">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
-<li><a href="https://zdran.com/20180718.html" target="_blank" rel="noopener">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
-<li><a href="https://zdran.com/20180725.html" target="_blank" rel="noopener">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
-<li><a href="https://zdran.com/20180730.html" target="_blank" rel="noopener">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
-<li><a href="https://zdran.com/20180809.html" target="_blank" rel="noopener">Spring Boot 学习笔记(八) 整合 Filter</a></li>
-<li><a href="https://zdran.com/20180830.html" target="_blank" rel="noopener">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
-<li><a href="https://zdran.com/20180904.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
-<li><a href="https://zdran.com/20180911.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
-<li><a href="https://zdran.com/20181016.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
-<li><a href="https://zdran.com/20190418.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
-<li><a href="https://zdran.com/20190909.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Spring Boot 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180628.html">Spring Boot 学习笔记(一) hello world</a></li>
+<li><a href="https://zdran.com/20180629.html">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
+<li><a href="https://zdran.com/20180703.html">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
+<li><a href="https://zdran.com/20180706.html">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
+<li><a href="https://zdran.com/20180718.html">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
+<li><a href="https://zdran.com/20180725.html">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
+<li><a href="https://zdran.com/20180730.html">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
+<li><a href="https://zdran.com/20180809.html">Spring Boot 学习笔记(八) 整合 Filter</a></li>
+<li><a href="https://zdran.com/20180830.html">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
+<li><a href="https://zdran.com/20180904.html">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
+<li><a href="https://zdran.com/20180911.html">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
+<li><a href="https://zdran.com/20181016.html">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
+<li><a href="https://zdran.com/20190418.html">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
+<li><a href="https://zdran.com/20190909.html">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
 </ul>
 <hr>
 <h1 id="Spring-Boot-学习笔记-八-整合-Filter"><a href="#Spring-Boot-学习笔记-八-整合-Filter" class="headerlink" title="Spring Boot 学习笔记(八) 整合 Filter"></a>Spring Boot 学习笔记(八) 整合 Filter</h1><h2 id="1-创建自定义的-Filter"><a href="#1-创建自定义的-Filter" class="headerlink" title="1. 创建自定义的 Filter"></a>1. 创建自定义的 Filter</h2><p>创建一个 <code>DemoFilter</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.zdran.springboot.filter;</span><br><span class="line"></span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import javax.servlet.*;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;8&#x2F;9</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class DemoFilter implements Filter&#123;</span><br><span class="line">    private Logger logger &#x3D; LoggerFactory.getLogger(DemoFilter.class);</span><br><span class="line">    @Override</span><br><span class="line">    public void init(FilterConfig filterConfig) throws ServletException &#123;</span><br><span class="line">        logger.info(&quot;初始化 DemoFilter &quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span><br><span class="line">            throws IOException, ServletException &#123;</span><br><span class="line">        logger.info(&quot;拦截到参数：&#123;&#125;&quot;, servletRequest.getParameterMap());</span><br><span class="line">        if (true) &#123;</span><br><span class="line">            filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(&quot;拦截到参数。请求被拦截&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">        logger.info(&quot;销毁 DemoFilter &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package com.zdran.springboot.filter;
 
-<p>核心的方法是 <code>doFilter</code>,可以在这个方法内对参数进行校验，通过<code>servletRequest</code>可以获取到请求中的参数。根据参数进行拦截。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filterChain.doFilter(servletRequest,servletResponse);</span><br></pre></td></tr></table></figure>
-<p>如果调用了这行代码说明不拦截这次请求，如果没有调用这行代码，这次请求请求将被拦截。</p>
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.*;
+import java.io.IOException;
+
+/**
+ * Create by ranzd on 2018/8/9
+ *
+ * @author cm.zdran@gmail.com
+ */
+public class DemoFilter implements Filter&#123;
+    private Logger logger = LoggerFactory.getLogger(DemoFilter.class);
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException &#123;
+        logger.info(&quot;初始化 DemoFilter &quot;);
+    &#125;
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException &#123;
+        logger.info(&quot;拦截到参数：&#123;&#125;&quot;, servletRequest.getParameterMap());
+        if (true) &#123;
+            filterChain.doFilter(servletRequest,servletResponse);
+        &#125;
+        logger.info(&quot;拦截到参数。请求被拦截&quot;);
+    &#125;
+
+    @Override
+    public void destroy() &#123;
+        logger.info(&quot;销毁 DemoFilter &quot;);
+    &#125;
+&#125;
+</code></pre><p>核心的方法是 <code>doFilter</code>,可以在这个方法内对参数进行校验，通过<code>servletRequest</code>可以获取到请求中的参数。根据参数进行拦截。</p>
+<pre><code>filterChain.doFilter(servletRequest,servletResponse);</code></pre><p>如果调用了这行代码说明不拦截这次请求，如果没有调用这行代码，这次请求请求将被拦截。</p>
 <h2 id="2-初始化-Filter"><a href="#2-初始化-Filter" class="headerlink" title="2. 初始化 Filter"></a>2. 初始化 Filter</h2><p>将这个Filter注入到容器中，创建 FilterConfig 类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class FilterConfig &#123;</span><br><span class="line">    private Logger logger &#x3D; LoggerFactory.getLogger(FilterConfig.class);</span><br><span class="line">    @Bean</span><br><span class="line">    public FilterRegistrationBean xssFilterRegistrationBean() &#123;</span><br><span class="line">        logger.info(&quot;初始化 DemoFilter 过滤器 Bean&quot;);</span><br><span class="line">        FilterRegistrationBean&lt;Filter&gt; initXssFilterBean &#x3D; new FilterRegistrationBean&lt;&gt;();</span><br><span class="line">        initXssFilterBean.setFilter(new DemoFilter());</span><br><span class="line">        initXssFilterBean.setOrder(1);</span><br><span class="line">        initXssFilterBean.setEnabled(true);</span><br><span class="line">        initXssFilterBean.addUrlPatterns(&quot;&#x2F;*&quot;);</span><br><span class="line">        initXssFilterBean.setDispatcherTypes(DispatcherType.REQUEST);</span><br><span class="line">        return initXssFilterBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>setOrder方法可以对这个 Filter 设置一个优先级，这个值越小，越先被执行。尽量不要与其他的 Filter 冲突</p>
+<pre><code>@Configuration
+public class FilterConfig &#123;
+    private Logger logger = LoggerFactory.getLogger(FilterConfig.class);
+    @Bean
+    public FilterRegistrationBean xssFilterRegistrationBean() &#123;
+        logger.info(&quot;初始化 DemoFilter 过滤器 Bean&quot;);
+        FilterRegistrationBean&lt;Filter&gt; initXssFilterBean = new FilterRegistrationBean&lt;&gt;();
+        initXssFilterBean.setFilter(new DemoFilter());
+        initXssFilterBean.setOrder(1);
+        initXssFilterBean.setEnabled(true);
+        initXssFilterBean.addUrlPatterns(&quot;/*&quot;);
+        initXssFilterBean.setDispatcherTypes(DispatcherType.REQUEST);
+        return initXssFilterBean;
+    &#125;
+&#125;</code></pre><p>setOrder方法可以对这个 Filter 设置一个优先级，这个值越小，越先被执行。尽量不要与其他的 Filter 冲突</p>
 <h2 id="3-HttpServletRequestWrapper-修改参数"><a href="#3-HttpServletRequestWrapper-修改参数" class="headerlink" title="3. HttpServletRequestWrapper 修改参数"></a>3. HttpServletRequestWrapper 修改参数</h2><p>有些时候我们可能需要对参数进行修改，比如XSS过滤，防SQL注入等。这个时候我们可以通过<code>HttpServletRequestWrapper</code> 来对参数进行修改。 创建 <code>DemoHttpServletRequestWrapper</code>。通过重写这个类的一些方法来对参数进行修改。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">package com.zdran.springboot.filter;</span><br><span class="line"></span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import javax.servlet.ReadListener;</span><br><span class="line">import javax.servlet.ServletInputStream;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletRequestWrapper;</span><br><span class="line">import javax.servlet.http.HttpSession;</span><br><span class="line">import java.io.*;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;8&#x2F;9</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class DemoHttpServletRequestWrapper extends HttpServletRequestWrapper &#123;</span><br><span class="line"></span><br><span class="line">    private Logger logger &#x3D; LoggerFactory.getLogger(DemoHttpServletRequestWrapper.class);</span><br><span class="line"></span><br><span class="line">    public DemoHttpServletRequestWrapper(HttpServletRequest request) &#123;</span><br><span class="line">        super(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getHeader(String name) &#123;</span><br><span class="line">        String value &#x3D; super.getHeader(name);</span><br><span class="line">        logger.info(&quot;获取 Header 中的参数：&#123;&#125;&quot;, value);</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getParameter(String name) &#123;</span><br><span class="line">        String value &#x3D; super.getParameter(name);</span><br><span class="line">        logger.info(&quot;获取 getParameter 中的参数：&#123;&#125;&quot;, value);</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Map&lt;String, String[]&gt; getParameterMap() &#123;</span><br><span class="line">        Map&lt;String, String[]&gt; map &#x3D; super.getParameterMap();</span><br><span class="line">        logger.info(&quot;获取 getParameterMap 中的参数：&#123;&#125;&quot;, map);</span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public HttpSession getSession() &#123;</span><br><span class="line">        HttpSession session &#x3D; super.getSession();</span><br><span class="line">        logger.info(&quot;获取 getCookies 中的cookie：&#123;&#125;&quot;, session);</span><br><span class="line">        return session;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object getAttribute(String name) &#123;</span><br><span class="line">        Object obj &#x3D; super.getAttribute(name);</span><br><span class="line">        logger.info(&quot;获取 getCookies 中的cookie：&#123;&#125;&quot;, obj);</span><br><span class="line"></span><br><span class="line">        return obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String[] getParameterValues(String name) &#123;</span><br><span class="line">        String[] value &#x3D; super.getParameterValues(name);</span><br><span class="line">        logger.info(&quot;获取 getParameter 中的参数：&#123;&#125;&quot;, value);</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public ServletInputStream getInputStream() throws IOException &#123;</span><br><span class="line">        BufferedReader br &#x3D; new BufferedReader(new InputStreamReader(super.getInputStream()));</span><br><span class="line">        StringBuilder resultBuilder &#x3D; new StringBuilder();</span><br><span class="line">        String line;</span><br><span class="line">        while ((line &#x3D; br.readLine()) !&#x3D; null) &#123;</span><br><span class="line">            resultBuilder.append(line);</span><br><span class="line">        &#125;</span><br><span class="line">        String result &#x3D; resultBuilder.toString();</span><br><span class="line">        logger.info(&quot;获取 getInputStream 中的参数：&#123;&#125;&quot;, result);</span><br><span class="line">        return new WrappedServletInputStream(new ByteArrayInputStream(result.getBytes()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 读取 RequestBody 中的参数时需要重新再次写入到流中，</span><br><span class="line">     * 否则在 Controller 中会读取不到参数。</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private class WrappedServletInputStream extends ServletInputStream &#123;</span><br><span class="line">        public void setStream(InputStream stream) &#123;</span><br><span class="line">            this.stream &#x3D; stream;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private InputStream stream;</span><br><span class="line"></span><br><span class="line">        public WrappedServletInputStream(InputStream stream) &#123;</span><br><span class="line">            this.stream &#x3D; stream;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int read() throws IOException &#123;</span><br><span class="line">            return stream.read();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean isFinished() &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean isReady() &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void setReadListener(ReadListener readListener) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>package com.zdran.springboot.filter;
 
-<p><strong>注意：</strong> 在读取 RequestBody中的参数的时候需要用 <code>getInputStream</code> 方法，而且读取结束后，必须再次向该流中写入，否则Controller将读取不到参数。</p>
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.ReadListener;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.util.Map;
+
+/**
+ * Create by ranzd on 2018/8/9
+ *
+ * @author cm.zdran@gmail.com
+ */
+public class DemoHttpServletRequestWrapper extends HttpServletRequestWrapper &#123;
+
+    private Logger logger = LoggerFactory.getLogger(DemoHttpServletRequestWrapper.class);
+
+    public DemoHttpServletRequestWrapper(HttpServletRequest request) &#123;
+        super(request);
+    &#125;
+
+    @Override
+    public String getHeader(String name) &#123;
+        String value = super.getHeader(name);
+        logger.info(&quot;获取 Header 中的参数：&#123;&#125;&quot;, value);
+        return value;
+    &#125;
+
+    @Override
+    public String getParameter(String name) &#123;
+        String value = super.getParameter(name);
+        logger.info(&quot;获取 getParameter 中的参数：&#123;&#125;&quot;, value);
+        return value;
+    &#125;
+
+    @Override
+    public Map&lt;String, String[]&gt; getParameterMap() &#123;
+        Map&lt;String, String[]&gt; map = super.getParameterMap();
+        logger.info(&quot;获取 getParameterMap 中的参数：&#123;&#125;&quot;, map);
+        return map;
+    &#125;
+
+    @Override
+    public HttpSession getSession() &#123;
+        HttpSession session = super.getSession();
+        logger.info(&quot;获取 getCookies 中的cookie：&#123;&#125;&quot;, session);
+        return session;
+    &#125;
+
+    @Override
+    public Object getAttribute(String name) &#123;
+        Object obj = super.getAttribute(name);
+        logger.info(&quot;获取 getCookies 中的cookie：&#123;&#125;&quot;, obj);
+
+        return obj;
+    &#125;
+
+    @Override
+    public String[] getParameterValues(String name) &#123;
+        String[] value = super.getParameterValues(name);
+        logger.info(&quot;获取 getParameter 中的参数：&#123;&#125;&quot;, value);
+        return value;
+    &#125;
+
+    @Override
+    public ServletInputStream getInputStream() throws IOException &#123;
+        BufferedReader br = new BufferedReader(new InputStreamReader(super.getInputStream()));
+        StringBuilder resultBuilder = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) &#123;
+            resultBuilder.append(line);
+        &#125;
+        String result = resultBuilder.toString();
+        logger.info(&quot;获取 getInputStream 中的参数：&#123;&#125;&quot;, result);
+        return new WrappedServletInputStream(new ByteArrayInputStream(result.getBytes()));
+    &#125;
+
+    /**
+     * 读取 RequestBody 中的参数时需要重新再次写入到流中，
+     * 否则在 Controller 中会读取不到参数。
+     */
+    private class WrappedServletInputStream extends ServletInputStream &#123;
+        public void setStream(InputStream stream) &#123;
+            this.stream = stream;
+        &#125;
+
+        private InputStream stream;
+
+        public WrappedServletInputStream(InputStream stream) &#123;
+            this.stream = stream;
+        &#125;
+
+        @Override
+        public int read() throws IOException &#123;
+            return stream.read();
+        &#125;
+
+        @Override
+        public boolean isFinished() &#123;
+            return true;
+        &#125;
+
+        @Override
+        public boolean isReady() &#123;
+            return true;
+        &#125;
+
+        @Override
+        public void setReadListener(ReadListener readListener) &#123;
+
+        &#125;
+    &#125;
+&#125;
+</code></pre><p><strong>注意：</strong> 在读取 RequestBody中的参数的时候需要用 <code>getInputStream</code> 方法，而且读取结束后，必须再次向该流中写入，否则Controller将读取不到参数。</p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">

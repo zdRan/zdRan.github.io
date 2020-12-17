@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Feb 22 2019 22:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 20:59:57 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20190222.html",
     "headline": "设计模式-工厂方法模式",
     "datePublished": "Fri Feb 22 2019 22:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 20:59:57 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -527,15 +527,67 @@
 <p>每一个供应商都是一个 具体的产品，抽象产品是 Mall 类，具体的产品是 JDMall、TBMall。</p>
 <p>工厂类是 MallFactory, 根据传过来的不同供应商的渠道产生具体的 Mall。</p>
 <h2 id="3-代码结构"><a href="#3-代码结构" class="headerlink" title="3. 代码结构"></a>3. 代码结构</h2><p>平台入口Controller代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class MallController &#123;</span><br><span class="line"></span><br><span class="line">    public Goods getGoodsInfo(String sku, String channel) &#123;</span><br><span class="line">        Mall mall &#x3D; MallFactory.getMall(channel);</span><br><span class="line">        if (mall &#x3D;&#x3D; null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        return mall.getGoodsInfo(sku);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Order submitOrder(List&lt;Goods&gt; goods) &#123;</span><br><span class="line">        Mall mall &#x3D; MallFactory.getMall(channel);</span><br><span class="line">        if (mall &#x3D;&#x3D; null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        return mall.submitOrder(goods);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;其他接口</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class MallController &#123;
 
-<p>工厂类 MallFactory 代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class MallFactory &#123;</span><br><span class="line"></span><br><span class="line">    public static Mall getMall(String name) &#123;</span><br><span class="line">        if (&quot;JD&quot;.equals(name)) &#123;</span><br><span class="line">            return new JDMall();</span><br><span class="line">        &#125;</span><br><span class="line">        if (&quot;TM&quot;.equals(name)) &#123;</span><br><span class="line">            return new TBMall();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public Goods getGoodsInfo(String sku, String channel) &#123;
+        Mall mall = MallFactory.getMall(channel);
+        if (mall == null) &#123;
+            return null;
+        &#125;
+        return mall.getGoodsInfo(sku);
+    &#125;
 
-<p>具体的产品 ，京东API 接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class JDMall implements Mall &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Goods getGoodsInfo(String sku) &#123;</span><br><span class="line">        &#x2F;&#x2F;获取对应供应商需要的参数</span><br><span class="line">        Map&lt;String, String&gt; extend &#x3D; new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        String result &#x3D; HttpClientUtil.getMethod(&quot;jd&#x2F;url&#x2F;getGoodsInfo&quot;, extend);</span><br><span class="line">        return this.getGoodsByResult(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Order submitOrder(List&lt;Goods&gt; goods) &#123;</span><br><span class="line">        &#x2F;&#x2F;获取对应供应商需要的参数</span><br><span class="line">        Map&lt;String, String&gt; extend &#x3D; new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        String result &#x3D; HttpClientUtil.getMethod(&quot;jd&#x2F;url&#x2F;submitOrder&quot;, extend);</span><br><span class="line">        return this.getOrderByResult(result);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;格式化返回值，适配本地模型</span><br><span class="line">    private Goods getGoodsByResult(String result) &#123;</span><br><span class="line">        return new Goods();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;格式化返回值，适配本地模型</span><br><span class="line">    private Order getOrderByResult(String result) &#123;</span><br><span class="line">        return new Order();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public Order submitOrder(List&lt;Goods&gt; goods) &#123;
+        Mall mall = MallFactory.getMall(channel);
+        if (mall == null) &#123;
+            return null;
+        &#125;
+        return mall.submitOrder(goods);
+    &#125;
 
-<h2 id="4-完整代码"><a href="#4-完整代码" class="headerlink" title="4. 完整代码"></a>4. 完整代码</h2><p><a href="https://github.com/zdRan/learning/tree/master/SimpleFactoryPattern" target="_blank" rel="noopener">完整代码在这里</a></p>
+    //其他接口
+&#125;
+</code></pre><p>工厂类 MallFactory 代码：</p>
+<pre><code>public class MallFactory &#123;
+
+    public static Mall getMall(String name) &#123;
+        if (&quot;JD&quot;.equals(name)) &#123;
+            return new JDMall();
+        &#125;
+        if (&quot;TM&quot;.equals(name)) &#123;
+            return new TBMall();
+        &#125;
+        return null;
+    &#125;
+&#125;</code></pre><p>具体的产品 ，京东API 接口：</p>
+<pre><code>public class JDMall implements Mall &#123;
+    @Override
+    public Goods getGoodsInfo(String sku) &#123;
+        //获取对应供应商需要的参数
+        Map&lt;String, String&gt; extend = new HashMap&lt;&gt;();
+
+        String result = HttpClientUtil.getMethod(&quot;jd/url/getGoodsInfo&quot;, extend);
+        return this.getGoodsByResult(result);
+    &#125;
+
+    @Override
+    public Order submitOrder(List&lt;Goods&gt; goods) &#123;
+        //获取对应供应商需要的参数
+        Map&lt;String, String&gt; extend = new HashMap&lt;&gt;();
+
+        String result = HttpClientUtil.getMethod(&quot;jd/url/submitOrder&quot;, extend);
+        return this.getOrderByResult(result);
+    &#125;
+    //格式化返回值，适配本地模型
+    private Goods getGoodsByResult(String result) &#123;
+        return new Goods();
+    &#125;
+    //格式化返回值，适配本地模型
+    private Order getOrderByResult(String result) &#123;
+        return new Order();
+    &#125;
+&#125;
+</code></pre><h2 id="4-完整代码"><a href="#4-完整代码" class="headerlink" title="4. 完整代码"></a>4. 完整代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning/tree/master/SimpleFactoryPattern">完整代码在这里</a></p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">

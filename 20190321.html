@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu Mar 21 2019 09:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 20:59:24 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20190321.html",
     "headline": "37. Sudoku Solver",
     "datePublished": "Thu Mar 21 2019 09:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 20:59:24 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,26 +522,66 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/leetcode" target="_blank" rel="noopener">刷题仓库地址</a></li>
-<li><a href="https://zdran.com/20180327.html" target="_blank" rel="noopener">4. Median of Two Sorted Arrays</a></li>
-<li><a href="https://zdran.com/20180328.html" target="_blank" rel="noopener">10. Regular Expression Matching</a></li>
-<li><a href="https://zdran.com/20180329.html" target="_blank" rel="noopener">23. Merge k Sorted Lists</a></li>
-<li><a href="https://zdran.com/20180330.html" target="_blank" rel="noopener">25. Reverse Nodes in k-Group</a></li>
-<li><a href="https://zdran.com/20180331.html" target="_blank" rel="noopener">30. Substring with Concatenation of All Words</a></li>
-<li><a href="https://zdran.com/20180401.html" target="_blank" rel="noopener">32. Longest Valid Parentheses</a></li>
-<li><a href="https://zdran.com/20190321.html" target="_blank" rel="noopener">37. Sudoku Solver</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/leetcode">刷题仓库地址</a></li>
+<li><a href="https://zdran.com/20180327.html">4. Median of Two Sorted Arrays</a></li>
+<li><a href="https://zdran.com/20180328.html">10. Regular Expression Matching</a></li>
+<li><a href="https://zdran.com/20180329.html">23. Merge k Sorted Lists</a></li>
+<li><a href="https://zdran.com/20180330.html">25. Reverse Nodes in k-Group</a></li>
+<li><a href="https://zdran.com/20180331.html">30. Substring with Concatenation of All Words</a></li>
+<li><a href="https://zdran.com/20180401.html">32. Longest Valid Parentheses</a></li>
+<li><a href="https://zdran.com/20190321.html">37. Sudoku Solver</a></li>
 </ul>
 <hr>
 <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
 <p>Empty cells are indicated by the character ‘.’.</p>
 <p>You may assume that there will be only one unique solution.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><pre><code class="$xslt"></code></pre>
 <h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>编写一个程序，通过填充空单元格来解决数独谜题。 空单元格由字符’。’表示。 </p>
 <p>数独只有一个解</p>
 <h2 id="Ideas"><a href="#Ideas" class="headerlink" title="Ideas"></a>Ideas</h2><p>使用3个二维数组，分别记录 每一行、每一列、每个小九宫格里已经出现的数字。下标代表数字，值代表是否出现过</p>
 <p>然后使用 DSF。对每个需要填充的单元格进行递归。递归时根据之前统计的3个二维数组来判断应该填哪个数字</p>
-<h2 id="Accept-Code"><a href="#Accept-Code" class="headerlink" title="Accept Code"></a>Accept Code</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static boolean filling(char[][] board, int[][] row, int[][] col, int[][] square) &#123;</span><br><span class="line">    for (int i &#x3D; 0; i &lt; 9; i++) &#123;</span><br><span class="line">        for (int j &#x3D; 0; j &lt; 9; j++) &#123;</span><br><span class="line">            if (board[i][j] &#x3D;&#x3D; &#39;.&#39;) &#123;</span><br><span class="line">                for (int k &#x3D; 0; k &lt; 9; k++) &#123;</span><br><span class="line">                    int sIndex &#x3D; i &#x2F; 3 * 3 + j &#x2F; 3;</span><br><span class="line">                    if (row[i][k] &#x3D;&#x3D; 0 &amp;&amp; col[j][k] &#x3D;&#x3D; 0 &amp;&amp; square[sIndex][k] &#x3D;&#x3D; 0) &#123;</span><br><span class="line">                        board[i][j] &#x3D; ((k + 1) + &quot;&quot;).charAt(0);</span><br><span class="line">                        row[i][k] &#x3D; col[j][k] &#x3D; square[sIndex][k] &#x3D; 1;</span><br><span class="line">                        if (filling(board, row, col, square)) &#123;</span><br><span class="line">                            return true;</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            board[i][j] &#x3D; &#39;.&#39;;</span><br><span class="line">                            row[i][k] &#x3D; col[j][k] &#x3D; square[sIndex][k] &#x3D; 0;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void solveSudoku(char[][] board) &#123;</span><br><span class="line">    int[][] row &#x3D; new int[9][9];</span><br><span class="line">    int[][] col &#x3D; new int[9][9];</span><br><span class="line">    int[][] square &#x3D; new int[9][9];</span><br><span class="line">    &#x2F;&#x2F;init array</span><br><span class="line">    for (int i &#x3D; 0; i &lt; 9; i++) &#123;</span><br><span class="line">        for (int j &#x3D; 0; j &lt; 9; j++) &#123;</span><br><span class="line">            if (board[i][j] !&#x3D; &#39;.&#39;) &#123;</span><br><span class="line">                int num &#x3D; board[i][j] - &#39;0&#39; - 1;</span><br><span class="line">                &#x2F;&#x2F;根据 i、j 计算属于第几个九宫格</span><br><span class="line">                int sIndex &#x3D; i &#x2F; 3 * 3 + j &#x2F; 3;</span><br><span class="line">                row[i][num] &#x3D; col[j][num] &#x3D; square[sIndex][num] &#x3D; 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    filling(board, row, col, square);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Accept-Code"><a href="#Accept-Code" class="headerlink" title="Accept Code"></a>Accept Code</h2><pre><code>
+    public static boolean filling(char[][] board, int[][] row, int[][] col, int[][] square) &#123;
+        for (int i = 0; i &lt; 9; i++) &#123;
+            for (int j = 0; j &lt; 9; j++) &#123;
+                if (board[i][j] == &#39;.&#39;) &#123;
+                    for (int k = 0; k &lt; 9; k++) &#123;
+                        int sIndex = i / 3 * 3 + j / 3;
+                        if (row[i][k] == 0 &amp;&amp; col[j][k] == 0 &amp;&amp; square[sIndex][k] == 0) &#123;
+                            board[i][j] = ((k + 1) + &quot;&quot;).charAt(0);
+                            row[i][k] = col[j][k] = square[sIndex][k] = 1;
+                            if (filling(board, row, col, square)) &#123;
+                                return true;
+                            &#125; else &#123;
+                                board[i][j] = &#39;.&#39;;
+                                row[i][k] = col[j][k] = square[sIndex][k] = 0;
+                            &#125;
+                        &#125;
+                    &#125;
+                    return false;
+                &#125;
+            &#125;
+        &#125;
+        return true;
+    &#125;
 
+    public static void solveSudoku(char[][] board) &#123;
+        int[][] row = new int[9][9];
+        int[][] col = new int[9][9];
+        int[][] square = new int[9][9];
+        //init array
+        for (int i = 0; i &lt; 9; i++) &#123;
+            for (int j = 0; j &lt; 9; j++) &#123;
+                if (board[i][j] != &#39;.&#39;) &#123;
+                    int num = board[i][j] - &#39;0&#39; - 1;
+                    //根据 i、j 计算属于第几个九宫格
+                    int sIndex = i / 3 * 3 + j / 3;
+                    row[i][num] = col[j][num] = square[sIndex][num] = 1;
+                &#125;
+            &#125;
+        &#125;
+        filling(board, row, col, square);
+    &#125;</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

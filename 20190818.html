@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sun Aug 18 2019 12:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Mon Nov 30 2020 21:21:42 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20190818.html",
     "headline": "设计模式-单例模式（Singleton Pattern）",
     "datePublished": "Sun Aug 18 2019 12:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Mon Nov 30 2020 21:21:42 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -523,22 +523,81 @@
     
         <p><strong>注意：阅读本文时，强烈建议先阅读下 OneMall 项目的概要设计</strong></p>
 <ul>
-<li><a href="https://github.com/zdRan/OneMall" target="_blank" rel="noopener">设计模式-OneMall 项目概要设计</a></li>
-<li><a href="https://zdran.com/20190509.html" target="_blank" rel="noopener">设计模式-六大设计原则</a></li>
-<li><a href="https://zdran.com/20190818.html" target="_blank" rel="noopener">设计模式-单例模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/OneMall">设计模式-OneMall 项目概要设计</a></li>
+<li><a href="https://zdran.com/20190509.html">设计模式-六大设计原则</a></li>
+<li><a href="https://zdran.com/20190818.html">设计模式-单例模式</a></li>
 </ul>
 <h2 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h2><p>由于我们需要对接各大商城的 API，所以我们需要在 <strong>Supplier</strong> 模块实现各大商城的 API client，提供一个 client 供其他模块来调用。每个商城的 API client 只需要一个就可以了。这个 client 就可以使用<strong>单例模式</strong>。</p>
 <h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2. 实现"></a>2. 实现</h2><p>代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class JdApiSingleton &#123;</span><br><span class="line">    private static final JdApiSingleton self &#x3D; new JdApiSingleton();</span><br><span class="line"></span><br><span class="line">    private JdApiSingleton() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static JdApiSingleton getJdApi() &#123;</span><br><span class="line">        return self;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 获取商品信息</span><br><span class="line">     *</span><br><span class="line">     * @param url   地址</span><br><span class="line">     * @param param 参数</span><br><span class="line">     * @return 商品实体</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static GoodsDTO getGoodsInfo(String url, Map&lt;String, Object&gt; param) &#123;</span><br><span class="line">        String result &#x3D; HttpClientUtil.get(url, param);</span><br><span class="line">        return JSONObject.parseObject(result, GoodsDTO.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 提交订单</span><br><span class="line">     *</span><br><span class="line">     * @param url   地址</span><br><span class="line">     * @param param 参数</span><br><span class="line">     * @return 订单信息</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static OrderDTO submitOrder(String url, Map&lt;String, Object&gt; param) &#123;</span><br><span class="line">        String result &#x3D; HttpClientUtil.post(url, param);</span><br><span class="line">        return JSONObject.parseObject(result, OrderDTO.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class JdApiSingleton &#123;
+    private static final JdApiSingleton self = new JdApiSingleton();
 
-<p><strong>单例模式</strong>比较简单，这里使用了”饿汉式”的设计，私有化构造方法，确保应用中只有一个实例，然后还有提供了其他各种 API，用于实现业务逻辑。</p>
+    private JdApiSingleton() &#123;
+    &#125;
+
+    public static JdApiSingleton getJdApi() &#123;
+        return self;
+    &#125;
+
+    /**
+     * 获取商品信息
+     *
+     * @param url   地址
+     * @param param 参数
+     * @return 商品实体
+     */
+    public static GoodsDTO getGoodsInfo(String url, Map&lt;String, Object&gt; param) &#123;
+        String result = HttpClientUtil.get(url, param);
+        return JSONObject.parseObject(result, GoodsDTO.class);
+    &#125;
+
+    /**
+     * 提交订单
+     *
+     * @param url   地址
+     * @param param 参数
+     * @return 订单信息
+     */
+    public static OrderDTO submitOrder(String url, Map&lt;String, Object&gt; param) &#123;
+        String result = HttpClientUtil.post(url, param);
+        return JSONObject.parseObject(result, OrderDTO.class);
+    &#125;
+&#125;</code></pre><p><strong>单例模式</strong>比较简单，这里使用了”饿汉式”的设计，私有化构造方法，确保应用中只有一个实例，然后还有提供了其他各种 API，用于实现业务逻辑。</p>
 <h2 id="3-类图"><a href="#3-类图" class="headerlink" title="3. 类图"></a>3. 类图</h2><p><img src="/images/3_1_%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.png" alt="单例模式"></p>
 <p>单例模式的类图比较简单，只需要一个 Singleton 就可以实现单例模式。单例模式不仅仅只有一种实现方式，上面这种“饿汉式”式最简单的实现。有兴趣的可以说搜一下其他的实现方式，由于本文讨论的是设计模式，这里不再详细讨论别的实现方式。</p>
 <h2 id="4-扩展"><a href="#4-扩展" class="headerlink" title="4. 扩展"></a>4. 扩展</h2><p>在内存中产生一个实例很简单，但是，在有些情况下我们可能需要固定数量的实例，用来提高应用的性能。比如在多线程的情况下，我们可能需要为每个线程分配一个实例。这个时候我们就可以在内存中生成固定数量的实例，数量与线程池的大小保持一致。</p>
 <p>代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class JdApiSingletonPool &#123;</span><br><span class="line">    &#x2F;&#x2F;实例最大个数</span><br><span class="line">    private static final int MAX_NUM &#x3D; 4;</span><br><span class="line">    private static final List&lt;JdApiSingletonPool&gt; pool &#x3D; new ArrayList&lt;&gt;(MAX_NUM);</span><br><span class="line"></span><br><span class="line">    private JdApiSingletonPool() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;初始化单例池</span><br><span class="line">    static &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; MAX_NUM; i++) &#123;</span><br><span class="line">            pool.add(new JdApiSingletonPool());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 获取实例</span><br><span class="line">     *</span><br><span class="line">     * @param index 下标</span><br><span class="line">     * @return 如果下标越界返回 null</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static JdApiSingletonPool getJdApiSingleton(int index) &#123;</span><br><span class="line">        if (index &lt; 0 || index &gt;&#x3D; MAX_NUM) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        return pool.get(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; other api ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class JdApiSingletonPool &#123;
+    //实例最大个数
+    private static final int MAX_NUM = 4;
+    private static final List&lt;JdApiSingletonPool&gt; pool = new ArrayList&lt;&gt;(MAX_NUM);
 
-<p>我们通过初始化一个单例的集合来存储所有的单例。这样就能够保证内存中有固定数量的单例实例。</p>
+    private JdApiSingletonPool() &#123;
+
+    &#125;
+
+    //初始化单例池
+    static &#123;
+        for (int i = 0; i &lt; MAX_NUM; i++) &#123;
+            pool.add(new JdApiSingletonPool());
+        &#125;
+    &#125;
+
+    /**
+     * 获取实例
+     *
+     * @param index 下标
+     * @return 如果下标越界返回 null
+     */
+    public static JdApiSingletonPool getJdApiSingleton(int index) &#123;
+        if (index &lt; 0 || index &gt;= MAX_NUM) &#123;
+            return null;
+        &#125;
+        return pool.get(index);
+    &#125;
+
+    // other api ...
+&#125;</code></pre><p>我们通过初始化一个单例的集合来存储所有的单例。这样就能够保证内存中有固定数量的单例实例。</p>
 <h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p><strong>单例模式(Singleton Pattern)：</strong> 确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。</p>
 <p>这个定义有 3 个含义：</p>
 <ol>

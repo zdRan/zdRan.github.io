@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Mon Nov 12 2018 14:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:15:17 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20181112.html",
     "headline": "Spring Boot 上传文件路径错误解决",
     "datePublished": "Mon Nov 12 2018 14:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:15:17 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,9 +522,9 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>正常运行一个多月的项目今天上传文件的时候突然出了个下面的异常：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.web.multipart.MultipartException: Could not parse </span><br><span class="line">multipart servlet request; nested exception is java.io.IOException: The </span><br><span class="line">temporary upload location [&#x2F;tmp&#x2F;xxxx&#x2F;work&#x2F;Tomcat&#x2F;localhost&#x2F;ROOT] is not valid</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>检查发现服务器上的 <code>/tmp</code>文件夹确实是空的，网上查了一下原因：说是 tmp目录会被系统自动清理。所以才导致找不到路径的问题。</p>
+<pre><code>org.springframework.web.multipart.MultipartException: Could not parse 
+multipart servlet request; nested exception is java.io.IOException: The 
+temporary upload location [/tmp/xxxx/work/Tomcat/localhost/ROOT] is not valid</code></pre><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>检查发现服务器上的 <code>/tmp</code>文件夹确实是空的，网上查了一下原因：说是 tmp目录会被系统自动清理。所以才导致找不到路径的问题。</p>
 <h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><p>解决方法有三种：</p>
 <ol>
 <li>重启应用</li>
@@ -534,13 +534,23 @@
 <li>修改启动器：</li>
 </ol>
 <p>在启动类里注入一个Bean：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line"></span><br><span class="line">MultipartConfig() &#123;</span><br><span class="line"></span><br><span class="line">	MultipartConfigFactory factory &#x3D;new MultipartConfigFactory(); </span><br><span class="line"></span><br><span class="line">	factory.setLocation(&quot;&#x2F;xxx&#x2F;xxx&quot;); </span><br><span class="line"></span><br><span class="line">	return factory.createMultipartConfig();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>@Bean
 
-<ol start="3">
+MultipartConfig() &#123;
+
+    MultipartConfigFactory factory =new MultipartConfigFactory(); 
+
+    factory.setLocation(&quot;/xxx/xxx&quot;); 
+
+    return factory.createMultipartConfig();
+
+&#125;</code></pre><ol start="3">
 <li>修改配置文件：</li>
 </ol>
 <p>也可以修改配置文件。添加下面的配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  tomcat:</span><br><span class="line">	basedir: &#x2F;xxx&#x2F;xxx</span><br></pre></td></tr></table></figure>
+<pre><code>server:
+  tomcat:
+    basedir: /xxx/xxx</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

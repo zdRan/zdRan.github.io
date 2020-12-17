@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Tue Jul 03 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:22:15 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180703.html",
     "headline": "Spring Boot 学习笔记(三) 整合 MyBatis + Druid",
     "datePublished": "Tue Jul 03 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:22:15 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,21 +522,21 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Spring Boot 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20180628.html" target="_blank" rel="noopener">Spring Boot 学习笔记(一) hello world</a></li>
-<li><a href="https://zdran.com/20180629.html" target="_blank" rel="noopener">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
-<li><a href="https://zdran.com/20180703.html" target="_blank" rel="noopener">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
-<li><a href="https://zdran.com/20180706.html" target="_blank" rel="noopener">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
-<li><a href="https://zdran.com/20180718.html" target="_blank" rel="noopener">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
-<li><a href="https://zdran.com/20180725.html" target="_blank" rel="noopener">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
-<li><a href="https://zdran.com/20180730.html" target="_blank" rel="noopener">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
-<li><a href="https://zdran.com/20180809.html" target="_blank" rel="noopener">Spring Boot 学习笔记(八) 整合 Filter</a></li>
-<li><a href="https://zdran.com/20180830.html" target="_blank" rel="noopener">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
-<li><a href="https://zdran.com/20180904.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
-<li><a href="https://zdran.com/20180911.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
-<li><a href="https://zdran.com/20181016.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
-<li><a href="https://zdran.com/20190418.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
-<li><a href="https://zdran.com/20190909.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Spring Boot 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180628.html">Spring Boot 学习笔记(一) hello world</a></li>
+<li><a href="https://zdran.com/20180629.html">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
+<li><a href="https://zdran.com/20180703.html">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
+<li><a href="https://zdran.com/20180706.html">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
+<li><a href="https://zdran.com/20180718.html">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
+<li><a href="https://zdran.com/20180725.html">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
+<li><a href="https://zdran.com/20180730.html">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
+<li><a href="https://zdran.com/20180809.html">Spring Boot 学习笔记(八) 整合 Filter</a></li>
+<li><a href="https://zdran.com/20180830.html">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
+<li><a href="https://zdran.com/20180904.html">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
+<li><a href="https://zdran.com/20180911.html">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
+<li><a href="https://zdran.com/20181016.html">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
+<li><a href="https://zdran.com/20190418.html">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
+<li><a href="https://zdran.com/20190909.html">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
 </ul>
 <hr>
 <h2 id="0-环境说明"><a href="#0-环境说明" class="headerlink" title="0. 环境说明"></a>0. 环境说明</h2><ul>
@@ -544,24 +544,81 @@
 <li>MySQL 5.7.17</li>
 <li>驱动:mysql-connector-java-5.1.2.jar</li>
 </ul>
-<h2 id="1-MyBatis-Generator"><a href="#1-MyBatis-Generator" class="headerlink" title="1. MyBatis Generator"></a>1. MyBatis Generator</h2><p><a href="https://github.com/mybatis/generator" target="_blank" rel="noopener">MyBatis Generator</a>是一款在使用mybatis框架时，自动生成model，dao和mapper的工具，很大程度上减少了业务开发人员的手动编码时间。</p>
+<h2 id="1-MyBatis-Generator"><a href="#1-MyBatis-Generator" class="headerlink" title="1. MyBatis Generator"></a>1. MyBatis Generator</h2><p><a target="_blank" rel="noopener" href="https://github.com/mybatis/generator">MyBatis Generator</a>是一款在使用mybatis框架时，自动生成model，dao和mapper的工具，很大程度上减少了业务开发人员的手动编码时间。</p>
 <p>我们将使用这个工具自动化的构建 MVC 框架中 M 层所需要的东西。</p>
 <h2 id="2-创建本地数据库"><a href="#2-创建本地数据库" class="headerlink" title="2. 创建本地数据库"></a>2. 创建本地数据库</h2><p>在本地的数据库中创建一张表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 创建数据库</span><br><span class="line">CREATE DATABASE LEARNING CHARACTER SET utf8;</span><br><span class="line"></span><br><span class="line">USE LEARNING;</span><br><span class="line"></span><br><span class="line"># 创建表结构</span><br><span class="line">CREATE TABLE ACCOUNT_INFO(</span><br><span class="line">	ACCOUNT_ID INTEGER PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">	NAME VARCHAR(50),</span><br><span class="line">	PWD VARCHAR(50),</span><br><span class="line">	BALANCE INTEGER</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 插入一条数据</span><br><span class="line">INSERT INTO ACCOUNT_INFO VALUES(NULL,&#39;root&#39;,&#39;root&#39;,100);</span><br></pre></td></tr></table></figure>
-<h2 id="3-使用MyBatis-Generator"><a href="#3-使用MyBatis-Generator" class="headerlink" title="3. 使用MyBatis Generator"></a>3. 使用MyBatis Generator</h2><p>下载地址：</p>
+<pre><code># 创建数据库
+CREATE DATABASE LEARNING CHARACTER SET utf8;
+
+USE LEARNING;
+
+# 创建表结构
+CREATE TABLE ACCOUNT_INFO(
+    ACCOUNT_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    NAME VARCHAR(50),
+    PWD VARCHAR(50),
+    BALANCE INTEGER
+);
+
+# 插入一条数据
+INSERT INTO ACCOUNT_INFO VALUES(NULL,&#39;root&#39;,&#39;root&#39;,100);</code></pre><h2 id="3-使用MyBatis-Generator"><a href="#3-使用MyBatis-Generator" class="headerlink" title="3. 使用MyBatis Generator"></a>3. 使用MyBatis Generator</h2><p>下载地址：</p>
 <ul>
-<li><a href="https://github.com/mybatis/generator/releases" target="_blank" rel="noopener">mybatis-generator-core-1.3.6.zip</a></li>
-<li><a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="noopener">mysql-connector-java-5.1.2.jar</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mybatis/generator/releases">mybatis-generator-core-1.3.6.zip</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/connector/j/">mysql-connector-java-5.1.2.jar</a></li>
 </ul>
 <p><strong>如果你是Windows用户,下载mysql-connector的时候可以选择 Platform Independent 版本</strong></p>
 <p>将下载好的MySQL驱动jar包放到generator的lib目录下，</p>
 <p>确保<code>mybatis-generator-core-1.3.6.jar</code>和<code>mysql-connector-java-5.1.2.jar</code>在同一个目录下。</p>
 <p>准备一个 configuration.xml 的配置文件，内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">  PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD MyBatis Generator Configuration 1.0&#x2F;&#x2F;EN&quot;</span><br><span class="line">  &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line"> 	&lt;!-- 配置驱动jar包路径.用了相对路径 --&gt;</span><br><span class="line">	&lt;classPathEntry location&#x3D;&quot;mysql-connector-java-5.1.2.jar&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">	&lt;context id&#x3D;&quot;DB2Tables&quot; targetRuntime&#x3D;&quot;MyBatis3&quot;&gt;</span><br><span class="line">    	&lt;!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 --&gt;</span><br><span class="line">		&lt;commentGenerator&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;suppressDate&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;suppressAllComments&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;commentGenerator&gt;</span><br><span class="line">     	&lt;!-- 数据库连接 --&gt;</span><br><span class="line">		&lt;jdbcConnection driverClass&#x3D;&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">			connectionURL&#x3D;&quot;jdbc:mysql:&#x2F;&#x2F;localhost&#x2F;LEARNING&quot; userId&#x3D;&quot;root&quot;</span><br><span class="line">			password&#x3D;&quot;********&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;remarks&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">		&lt;javaTypeResolver&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;forceBigDecimals&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;javaTypeResolver&gt;</span><br><span class="line">    	&lt;!-- 数据表对应的model 层  --&gt;</span><br><span class="line">		&lt;javaModelGenerator targetPackage&#x3D;&quot;com.zdran.springboot.dao&quot;</span><br><span class="line">			targetProject&#x3D;&quot;D:\bxwzh&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;javaModelGenerator&gt;</span><br><span class="line">    	&lt;!-- sql mapper 隐射配置文件 --&gt;</span><br><span class="line">		&lt;sqlMapGenerator targetPackage&#x3D;&quot;com.zdran.springboot.mapping&quot;</span><br><span class="line">			targetProject&#x3D;&quot;D:\bxwzh&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;sqlMapGenerator&gt;</span><br><span class="line">    	&lt;!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 --&gt;</span><br><span class="line">		&lt;javaClientGenerator type&#x3D;&quot;XMLMAPPER&quot;</span><br><span class="line">			targetPackage&#x3D;&quot;com.zdran.springboot.mapper&quot; targetProject&#x3D;&quot;D:\bxwzh&quot;&gt;</span><br><span class="line">			&lt;property name&#x3D;&quot;enableSubPackages&quot; value&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;javaClientGenerator&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 要对哪些数据表进行生成操作，必须要有一个. --&gt;</span><br><span class="line">	&lt;table tableName&#x3D;&quot;ACCOUNT_INFO&quot; domainObjectName&#x3D;&quot;AccountInfo&quot;&gt;&lt;&#x2F;table&gt;</span><br><span class="line">	&lt;&#x2F;context&gt;</span><br><span class="line">&lt;&#x2F;generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：数据库的密码需要换成你自己的。targetProject=”D:\bxwzh，这个目录尽量是空文件夹</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+  PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+  &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
+
+&lt;generatorConfiguration&gt;
+     &lt;!-- 配置驱动jar包路径.用了相对路径 --&gt;
+    &lt;classPathEntry location=&quot;mysql-connector-java-5.1.2.jar&quot; /&gt;
+
+    &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;
+        &lt;!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 --&gt;
+        &lt;commentGenerator&gt;
+            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;
+            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;
+        &lt;/commentGenerator&gt;
+         &lt;!-- 数据库连接 --&gt;
+        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;
+            connectionURL=&quot;jdbc:mysql://localhost/LEARNING&quot; userId=&quot;root&quot;
+            password=&quot;********&quot;&gt;
+            &lt;property name=&quot;remarks&quot; value=&quot;true&quot; /&gt;
+        &lt;/jdbcConnection&gt;
+
+        &lt;javaTypeResolver&gt;
+            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
+        &lt;/javaTypeResolver&gt;
+        &lt;!-- 数据表对应的model 层  --&gt;
+        &lt;javaModelGenerator targetPackage=&quot;com.zdran.springboot.dao&quot;
+            targetProject=&quot;D:\bxwzh&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+        &lt;/javaModelGenerator&gt;
+        &lt;!-- sql mapper 隐射配置文件 --&gt;
+        &lt;sqlMapGenerator targetPackage=&quot;com.zdran.springboot.mapping&quot;
+            targetProject=&quot;D:\bxwzh&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+        &lt;/sqlMapGenerator&gt;
+        &lt;!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 --&gt;
+        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
+            targetPackage=&quot;com.zdran.springboot.mapper&quot; targetProject=&quot;D:\bxwzh&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+        &lt;/javaClientGenerator&gt;
+
+    &lt;!-- 要对哪些数据表进行生成操作，必须要有一个. --&gt;
+    &lt;table tableName=&quot;ACCOUNT_INFO&quot; domainObjectName=&quot;AccountInfo&quot;&gt;&lt;/table&gt;
+    &lt;/context&gt;
+&lt;/generatorConfiguration&gt;</code></pre><p><strong>注意：数据库的密码需要换成你自己的。targetProject=”D:\bxwzh，这个目录尽量是空文件夹</strong></p>
 <p>在 generator 的lib目录下执行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -jar mybatis-generator-core-1.3.6.jar -configfile configuration.xml  -overwrite</span><br><span class="line"></span><br><span class="line">出现：MyBatis Generator finished successfully. 就说明成功了。</span><br></pre></td></tr></table></figure>
-<p>我们直接将com目录拷贝到项目目录下面去</p>
+<pre><code>java -jar mybatis-generator-core-1.3.6.jar -configfile configuration.xml  -overwrite
+
+出现：MyBatis Generator finished successfully. 就说明成功了。</code></pre><p>我们直接将com目录拷贝到项目目录下面去</p>
 <p>在resources 新建 mybaits 目录，然后将 mapping 文件夹移动到 mybaits 下</p>
 <p>现在我们的项目结构是下面这样的：</p>
 <div align="center">
@@ -569,93 +626,241 @@
 </div>
 
 <p>添加 mybaits依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--springBoot和mybatis继承--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.2&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;!-- 移除 logging --&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-logging&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;exclusion&gt;</span><br><span class="line">    &lt;&#x2F;exclusions&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!-- mysql 驱动--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.1.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;!--springBoot和mybatis继承--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.3.2&lt;/version&gt;
+    &lt;!-- 移除 logging --&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;!-- mysql 驱动--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><h2 id="4-添加MyBatis的配置"><a href="#4-添加MyBatis的配置" class="headerlink" title="4. 添加MyBatis的配置"></a>4. 添加MyBatis的配置</h2><p>在配置文件里添加下面的配置：</p>
+<pre><code>mybatis:
+  mapperLocations: classpath:mybatis/mapping/*.xml
+  typeAliasesPackage: com.zdran.springboot.dao
 
-<h2 id="4-添加MyBatis的配置"><a href="#4-添加MyBatis的配置" class="headerlink" title="4. 添加MyBatis的配置"></a>4. 添加MyBatis的配置</h2><p>在配置文件里添加下面的配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapperLocations: classpath:mybatis&#x2F;mapping&#x2F;*.xml</span><br><span class="line">  typeAliasesPackage: com.zdran.springboot.dao</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">    datasource:</span><br><span class="line">        name: test</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;LEARNING</span><br><span class="line">        username: root</span><br><span class="line">        password: ********</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure>
-<h2 id="5-测试一下"><a href="#5-测试一下" class="headerlink" title="5. 测试一下"></a>5. 测试一下</h2><p>在 SpringbootApplication 类上面添加包的扫描路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 启动程序</span><br><span class="line"> * Create by zdRan on 2018&#x2F;6&#x2F;28</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@MapperScan(basePackages &#x3D; &quot;com.zdran.springboot.mapper&quot;)</span><br><span class="line">public class SpringbootApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringbootApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下面我们实现一个根据姓名查询账号信息的接口。创建对应的controller、service等</p>
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://localhost:3306/LEARNING
+        username: root
+        password: ********
+        driver-class-name: com.mysql.jdbc.Driver</code></pre><h2 id="5-测试一下"><a href="#5-测试一下" class="headerlink" title="5. 测试一下"></a>5. 测试一下</h2><p>在 SpringbootApplication 类上面添加包的扫描路径</p>
+<pre><code>
+/**
+ * 启动程序
+ * Create by zdRan on 2018/6/28
+ *
+ * @author cm.zdran@gmail.com
+ */
+@SpringBootApplication
+@MapperScan(basePackages = &quot;com.zdran.springboot.mapper&quot;)
+public class SpringbootApplication &#123;
+
+    public static void main(String[] args) &#123;
+        SpringApplication.run(SpringbootApplication.class, args);
+    &#125;
+&#125;
+</code></pre><p>下面我们实现一个根据姓名查询账号信息的接口。创建对应的controller、service等</p>
 <p>Service 层的实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;7&#x2F;2</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Service</span><br><span class="line">public class AccountServiceImpl implements AccountService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    AccountInfoMapper accountInfoMapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public AccountInfo queryByName(String name) &#123;</span><br><span class="line">        AccountInfoExample example &#x3D; new AccountInfoExample();</span><br><span class="line">        example.createCriteria().andNameEqualTo(name);</span><br><span class="line">        List&lt;AccountInfo&gt; accountInfoList &#x3D; accountInfoMapper.selectByExample(example);</span><br><span class="line">        if (accountInfoList !&#x3D; null &amp;&amp; accountInfoList.size() !&#x3D; 0) &#123;</span><br><span class="line">            return accountInfoList.get(0);</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>/**
+ * Create by ranzd on 2018/7/2
+ *
+ * @author cm.zdran@gmail.com
+ */
+@Service
+public class AccountServiceImpl implements AccountService &#123;
+    @Autowired
+    AccountInfoMapper accountInfoMapper;
 
-<p>Controller层的实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;7&#x2F;3</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;&#x2F;account&quot;)</span><br><span class="line">public class AccountController &#123;</span><br><span class="line">    private Logger logger &#x3D; LoggerFactory.getLogger(AccountController.class);</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    AccountService accountService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;get&#x2F;&#123;name&#125;&quot;)</span><br><span class="line">    public AccountInfo getAccountByName(@PathVariable String name) &#123;</span><br><span class="line">        logger.info(&quot;根据姓名获取账号信息。入参：name：&#123;&#125;&quot;, name);</span><br><span class="line">        AccountInfo accountInfo &#x3D; accountService.queryByName(name);</span><br><span class="line">        if (accountInfo &#x3D;&#x3D; null) &#123;</span><br><span class="line">            logger.info(&quot;根据姓名获取账号信息。获取失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(&quot;根据姓名获取账号信息。出参：accountInfo：&#123;&#125;&quot;, accountInfo.toString());</span><br><span class="line">        return accountInfo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行一下，访问 <code>http://localhost:9090/learning/account/get/root</code></p>
+    @Override
+    public AccountInfo queryByName(String name) &#123;
+        AccountInfoExample example = new AccountInfoExample();
+        example.createCriteria().andNameEqualTo(name);
+        List&lt;AccountInfo&gt; accountInfoList = accountInfoMapper.selectByExample(example);
+        if (accountInfoList != null &amp;&amp; accountInfoList.size() != 0) &#123;
+            return accountInfoList.get(0);
+        &#125;
+        return null;
+    &#125;
+&#125;</code></pre><p>Controller层的实现：</p>
+<pre><code>/**
+ * Create by ranzd on 2018/7/3
+ *
+ * @author cm.zdran@gmail.com
+ */
+@RestController
+@RequestMapping(&quot;/account&quot;)
+public class AccountController &#123;
+    private Logger logger = LoggerFactory.getLogger(AccountController.class);
+
+    @Autowired
+    AccountService accountService;
+
+    @GetMapping(&quot;/get/&#123;name&#125;&quot;)
+    public AccountInfo getAccountByName(@PathVariable String name) &#123;
+        logger.info(&quot;根据姓名获取账号信息。入参：name：&#123;&#125;&quot;, name);
+        AccountInfo accountInfo = accountService.queryByName(name);
+        if (accountInfo == null) &#123;
+            logger.info(&quot;根据姓名获取账号信息。获取失败&quot;);
+        &#125;
+        logger.info(&quot;根据姓名获取账号信息。出参：accountInfo：&#123;&#125;&quot;, accountInfo.toString());
+        return accountInfo;
+    &#125;
+&#125;</code></pre><p>运行一下，访问 <code>http://localhost:9090/learning/account/get/root</code></p>
 <p><strong>url最后的 root 用户名</strong></p>
 <h2 id="5-集成-druid"><a href="#5-集成-druid" class="headerlink" title="5. 集成 druid"></a>5. 集成 druid</h2><p>上面的配置方法是最简单的配置方法。还有一种常常用于生产环境的配置方法。</p>
 <p>添加 druid 依赖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><p>添加druid配置</p>
+<pre><code>
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/LEARNING
+        username: root
+        password: ********
+        driver-class-name: com.mysql.jdbc.Driver
+        initialSize: 5
+        minIdle: 5
+        maxActive: 10
+        maxWait: 10000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        testOnBorrow: false
+        testOnReturn: false
+        testWhileIdle: true
+        keepAlive: true
+        removeAbandoned: true
+        removeAbandonedTimeout: 80
+        logAbandoned: true
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,slf4j,wall</code></pre><p>添加依赖，方便使用 ConfigurationProperties 注解，来读取yml里的配置信息</p>
+<pre><code>&lt;!-- 为了方便使用@ConfigurationProperties注解 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;
+    &lt;optional&gt;true&lt;/optional&gt;
+&lt;/dependency&gt;</code></pre><p>创建 druid 配置文件读取类</p>
+<pre><code>/**
+ * Create by ranzd on 2018/7/3
+ *
+ * @author cm.zdran@gmail.com
+ */
+@Configuration
+@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+public class DruidDataSourceProperties &#123;
 
-<p>添加druid配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">spring:</span><br><span class="line">    datasource:</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;LEARNING</span><br><span class="line">        username: root</span><br><span class="line">        password: ********</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">        initialSize: 5</span><br><span class="line">        minIdle: 5</span><br><span class="line">        maxActive: 10</span><br><span class="line">        maxWait: 10000</span><br><span class="line">        timeBetweenEvictionRunsMillis: 60000</span><br><span class="line">        minEvictableIdleTimeMillis: 300000</span><br><span class="line">        testOnBorrow: false</span><br><span class="line">        testOnReturn: false</span><br><span class="line">        testWhileIdle: true</span><br><span class="line">        keepAlive: true</span><br><span class="line">        removeAbandoned: true</span><br><span class="line">        removeAbandonedTimeout: 80</span><br><span class="line">        logAbandoned: true</span><br><span class="line">        poolPreparedStatements: true</span><br><span class="line">        maxPoolPreparedStatementPerConnectionSize: 20</span><br><span class="line">        filters: stat,slf4j,wall</span><br></pre></td></tr></table></figure>
+    private String driverClassName;
+    private String url;
+    private String username;
+    private String password;
 
-<p>添加依赖，方便使用 ConfigurationProperties 注解，来读取yml里的配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 为了方便使用@ConfigurationProperties注解 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-configuration-processor&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;&#x2F;optional&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>创建 druid 配置文件读取类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Create by ranzd on 2018&#x2F;7&#x2F;3</span><br><span class="line"> *</span><br><span class="line"> * @author cm.zdran@gmail.com</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Configuration</span><br><span class="line">@ConfigurationProperties(prefix &#x3D; &quot;spring.datasource&quot;)</span><br><span class="line">public class DruidDataSourceProperties &#123;</span><br><span class="line"></span><br><span class="line">    private String driverClassName;</span><br><span class="line">    private String url;</span><br><span class="line">    private String username;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    private int initialSize;</span><br><span class="line">    private int minIdle;</span><br><span class="line">    private int maxActive;</span><br><span class="line">    private long maxWait;</span><br><span class="line">    private long timeBetweenEvictionRunsMillis;</span><br><span class="line">    private long minEvictableIdleTimeMillis;</span><br><span class="line">    private boolean testOnBorrow;</span><br><span class="line">    private boolean testOnReturn;</span><br><span class="line">    private boolean testWhileIdle;</span><br><span class="line">    private boolean keepAlive;</span><br><span class="line">    private boolean removeAbandoned;</span><br><span class="line">    private int removeAbandonedTimeout;</span><br><span class="line">    private boolean logAbandoned;</span><br><span class="line">    private boolean poolPreparedStatements;</span><br><span class="line">    private int maxPoolPreparedStatementPerConnectionSize;</span><br><span class="line">    private String filters;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;省略了所有属性的 get 、set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>上面的代码省略了所有属性的 get 、set方法，你的本地代码一定要有get、set方法</strong></p>
+    private int initialSize;
+    private int minIdle;
+    private int maxActive;
+    private long maxWait;
+    private long timeBetweenEvictionRunsMillis;
+    private long minEvictableIdleTimeMillis;
+    private boolean testOnBorrow;
+    private boolean testOnReturn;
+    private boolean testWhileIdle;
+    private boolean keepAlive;
+    private boolean removeAbandoned;
+    private int removeAbandonedTimeout;
+    private boolean logAbandoned;
+    private boolean poolPreparedStatements;
+    private int maxPoolPreparedStatementPerConnectionSize;
+    private String filters;
+
+    //省略了所有属性的 get 、set方法
+&#125;
+</code></pre><p><strong>上面的代码省略了所有属性的 get 、set方法，你的本地代码一定要有get、set方法</strong></p>
 <p>删除 yml 里的 mybaits 配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapperLocations: classpath:mybatis&#x2F;mapping&#x2F;*.xml</span><br><span class="line">  typeAliasesPackage: com.zdran.springboot.dao</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">删除 SpringbootApplication 类上面的 MapperScan 注解</span><br></pre></td></tr></table></figure>
-<p>@MapperScan(basePackages = “com.zdran.springboot.mapper”)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">创建 mybaits 的配置类：</span><br></pre></td></tr></table></figure>
-<p>/**</p>
-<ul>
-<li><p>Create by ranzd on 2018/7/3</p>
-</li>
-<li></li>
-<li><p>@author <a href="mailto:cm.zdran@gmail.com">cm.zdran@gmail.com</a></p>
-</li>
-<li><p>/<br>@Configuration<br>@EnableTransactionManagement<br>@MapperScan(</p>
-<pre><code>basePackages = &quot;com.zdran.springboot.mapper&quot;, 
-sqlSessionFactoryRef = &quot;learningSqlSessionFactory&quot;)</code></pre><p>public class MyBatisConfig {<br>  private Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);</p>
-<p>  @Autowired<br>  DruidDataSourceProperties druidDataSourceProperties;</p>
-<p>  @Bean(name = “learningSqlSessionFactory”)<br>  @Primary<br>  public SqlSessionFactory learningSqlSessionFactory() throws Exception {</p>
-<pre><code>final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-sessionFactory.setDataSource(getDruidDataSource());
-sessionFactory.setTypeAliasesPackage(&quot;com.zdran.springboot.dao&quot;);
-sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-        .getResources(&quot;classpath:/mybatis/mapping/*.xml&quot;));
-return sessionFactory.getObject();</code></pre><p>  }</p>
-<p>  @Bean(name = “learningDataSource”)<br>  public DataSource getDruidDataSource() {</p>
-<pre><code>DruidDataSource druidDataSource = new DruidDataSource();
-druidDataSource.setDriverClassName(druidDataSourceProperties.getDriverClassName());
-druidDataSource.setUrl(druidDataSourceProperties.getUrl());
-druidDataSource.setUsername(druidDataSourceProperties.getUsername());
-druidDataSource.setPassword(druidDataSourceProperties.getPassword());
-druidDataSource.setInitialSize(druidDataSourceProperties.getInitialSize());
-druidDataSource.setMinIdle(druidDataSourceProperties.getMinIdle());
-druidDataSource.setMaxActive(druidDataSourceProperties.getMaxActive());
-druidDataSource.setMaxWait(druidDataSourceProperties.getMaxWait());
-druidDataSource.setTimeBetweenEvictionRunsMillis(
-    druidDataSourceProperties.getTimeBetweenEvictionRunsMillis());
-druidDataSource.setMinEvictableIdleTimeMillis(
-    druidDataSourceProperties.getMinEvictableIdleTimeMillis());
-druidDataSource.setTestOnBorrow(druidDataSourceProperties.isTestOnBorrow());
-druidDataSource.setTestOnReturn(druidDataSourceProperties.isTestOnReturn());
-druidDataSource.setTestWhileIdle(druidDataSourceProperties.isTestWhileIdle());
-druidDataSource.setKeepAlive(druidDataSourceProperties.isKeepAlive());
-druidDataSource.setRemoveAbandoned(druidDataSourceProperties.isRemoveAbandoned());
-druidDataSource.setRemoveAbandonedTimeout(
-    druidDataSourceProperties.getRemoveAbandonedTimeout());
-druidDataSource.setLogAbandoned(druidDataSourceProperties.isLogAbandoned());
+<pre><code>mybatis:
+  mapperLocations: classpath:mybatis/mapping/*.xml
+  typeAliasesPackage: com.zdran.springboot.dao
+</code></pre><p>删除 SpringbootApplication 类上面的 MapperScan 注解</p>
+<pre><code>@MapperScan(basePackages = &quot;com.zdran.springboot.mapper&quot;)</code></pre><p>创建 mybaits 的配置类：</p>
+<pre><code>/**
+ * Create by ranzd on 2018/7/3
+ *
+ * @author cm.zdran@gmail.com
+ */
+@Configuration
+@EnableTransactionManagement
+@MapperScan(
+        basePackages = &quot;com.zdran.springboot.mapper&quot;, 
+        sqlSessionFactoryRef = &quot;learningSqlSessionFactory&quot;)
+public class MyBatisConfig &#123;
+    private Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
 
-druidDataSource.setPoolPreparedStatements(
-    druidDataSourceProperties.isPoolPreparedStatements());
-druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(
-    druidDataSourceProperties.getMaxPoolPreparedStatementPerConnectionSize());
-try {
-    druidDataSource.setFilters(druidDataSourceProperties.getFilters());
-    druidDataSource.init();
-} catch (SQLException e) {
-    logger.error(&quot;数据源初始化失败&quot;, e);
-}
-return druidDataSource;</code></pre><p>  }<br>}</p>
-</li>
-</ul>
-<pre><code>OK!重新启动测试一下刚才的接口。
+    @Autowired
+    DruidDataSourceProperties druidDataSourceProperties;
 
-</code></pre>
+    @Bean(name = &quot;learningSqlSessionFactory&quot;)
+    @Primary
+    public SqlSessionFactory learningSqlSessionFactory() throws Exception &#123;
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(getDruidDataSource());
+        sessionFactory.setTypeAliasesPackage(&quot;com.zdran.springboot.dao&quot;);
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+                .getResources(&quot;classpath:/mybatis/mapping/*.xml&quot;));
+        return sessionFactory.getObject();
+    &#125;
+
+    @Bean(name = &quot;learningDataSource&quot;)
+    public DataSource getDruidDataSource() &#123;
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setDriverClassName(druidDataSourceProperties.getDriverClassName());
+        druidDataSource.setUrl(druidDataSourceProperties.getUrl());
+        druidDataSource.setUsername(druidDataSourceProperties.getUsername());
+        druidDataSource.setPassword(druidDataSourceProperties.getPassword());
+        druidDataSource.setInitialSize(druidDataSourceProperties.getInitialSize());
+        druidDataSource.setMinIdle(druidDataSourceProperties.getMinIdle());
+        druidDataSource.setMaxActive(druidDataSourceProperties.getMaxActive());
+        druidDataSource.setMaxWait(druidDataSourceProperties.getMaxWait());
+        druidDataSource.setTimeBetweenEvictionRunsMillis(
+            druidDataSourceProperties.getTimeBetweenEvictionRunsMillis());
+        druidDataSource.setMinEvictableIdleTimeMillis(
+            druidDataSourceProperties.getMinEvictableIdleTimeMillis());
+        druidDataSource.setTestOnBorrow(druidDataSourceProperties.isTestOnBorrow());
+        druidDataSource.setTestOnReturn(druidDataSourceProperties.isTestOnReturn());
+        druidDataSource.setTestWhileIdle(druidDataSourceProperties.isTestWhileIdle());
+        druidDataSource.setKeepAlive(druidDataSourceProperties.isKeepAlive());
+        druidDataSource.setRemoveAbandoned(druidDataSourceProperties.isRemoveAbandoned());
+        druidDataSource.setRemoveAbandonedTimeout(
+            druidDataSourceProperties.getRemoveAbandonedTimeout());
+        druidDataSource.setLogAbandoned(druidDataSourceProperties.isLogAbandoned());
+
+        druidDataSource.setPoolPreparedStatements(
+            druidDataSourceProperties.isPoolPreparedStatements());
+        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(
+            druidDataSourceProperties.getMaxPoolPreparedStatementPerConnectionSize());
+        try &#123;
+            druidDataSource.setFilters(druidDataSourceProperties.getFilters());
+            druidDataSource.init();
+        &#125; catch (SQLException e) &#123;
+            logger.error(&quot;数据源初始化失败&quot;, e);
+        &#125;
+        return druidDataSource;
+    &#125;
+&#125;
+</code></pre><p>OK!重新启动测试一下刚才的接口。</p>
+
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

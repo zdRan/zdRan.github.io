@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Tue Sep 04 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:19:10 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180904.html",
     "headline": "Spring Boot 学习笔记(十) Redis集群搭建",
     "datePublished": "Tue Sep 04 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:19:10 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,21 +522,21 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Spring Boot 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20180628.html" target="_blank" rel="noopener">Spring Boot 学习笔记(一) hello world</a></li>
-<li><a href="https://zdran.com/20180629.html" target="_blank" rel="noopener">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
-<li><a href="https://zdran.com/20180703.html" target="_blank" rel="noopener">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
-<li><a href="https://zdran.com/20180706.html" target="_blank" rel="noopener">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
-<li><a href="https://zdran.com/20180718.html" target="_blank" rel="noopener">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
-<li><a href="https://zdran.com/20180725.html" target="_blank" rel="noopener">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
-<li><a href="https://zdran.com/20180730.html" target="_blank" rel="noopener">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
-<li><a href="https://zdran.com/20180809.html" target="_blank" rel="noopener">Spring Boot 学习笔记(八) 整合 Filter</a></li>
-<li><a href="https://zdran.com/20180830.html" target="_blank" rel="noopener">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
-<li><a href="https://zdran.com/20180904.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
-<li><a href="https://zdran.com/20180911.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
-<li><a href="https://zdran.com/20181016.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
-<li><a href="https://zdran.com/20190418.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
-<li><a href="https://zdran.com/20190909.html" target="_blank" rel="noopener">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Spring Boot 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20180628.html">Spring Boot 学习笔记(一) hello world</a></li>
+<li><a href="https://zdran.com/20180629.html">Spring Boot 学习笔记(二) 整合 log4j2</a></li>
+<li><a href="https://zdran.com/20180703.html">Spring Boot 学习笔记(三) 整合 MyBatis + Druid</a></li>
+<li><a href="https://zdran.com/20180706.html">Spring Boot 学习笔记(四) 整合 Druid 监控</a></li>
+<li><a href="https://zdran.com/20180718.html">Spring Boot 学习笔记(五) 整合 静态资源</a></li>
+<li><a href="https://zdran.com/20180725.html">Spring Boot 学习笔记(六) 整合 RESTful 参数传递</a></li>
+<li><a href="https://zdran.com/20180730.html">Spring Boot 学习笔记(七) 整合 Swagger2</a></li>
+<li><a href="https://zdran.com/20180809.html">Spring Boot 学习笔记(八) 整合 Filter</a></li>
+<li><a href="https://zdran.com/20180830.html">Spring Boot 学习笔记(九) 整合 多环境配置</a></li>
+<li><a href="https://zdran.com/20180904.html">Spring Boot 学习笔记(十) Redis集群搭建</a></li>
+<li><a href="https://zdran.com/20180911.html">Spring Boot 学习笔记(十一) 整合 Redis</a></li>
+<li><a href="https://zdran.com/20181016.html">Spring Boot 学习笔记(十二) 整合 定时任务</a></li>
+<li><a href="https://zdran.com/20190418.html">Spring Boot 学习笔记(十三) 整合 AOP</a></li>
+<li><a href="https://zdran.com/20190909.html">Spring Boot 学习笔记(十四) 整合 Guava</a></li>
 </ul>
 <hr>
 <h2 id="0-环境说明"><a href="#0-环境说明" class="headerlink" title="0. 环境说明"></a>0. 环境说明</h2><ul>
@@ -544,74 +544,128 @@
 <li>redis 4.0.11</li>
 </ul>
 <h2 id="1-Redis-源码安装"><a href="#1-Redis-源码安装" class="headerlink" title="1.Redis 源码安装"></a>1.Redis 源码安装</h2><p>创建一个redis源码目录,并转到该目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkidr redis</span><br><span class="line">cd redis</span><br></pre></td></tr></table></figure>
-<p>下载源码并编译。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-4.0.11.tar.gz</span><br><span class="line">tar xzf redis-4.0.11.tar.gz</span><br><span class="line">cd redis-4.0.11</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>PS:如果出现下面的结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">make[2]: Entering directory &#96;&#x2F;root&#x2F;redis&#x2F;redis-4.0.11&#x2F;deps&#x2F;hiredis&#39;</span><br><span class="line">gcc -std&#x3D;c99 -pedantic -c -O3 -fPIC  -Wall -W -Wstrict-prototypes -Wwrite-strings -g -ggdb  net.c</span><br><span class="line">make[2]: gcc: Command not found</span><br><span class="line">make[2]: *** [net.o] Error 127</span><br><span class="line">make[2]: Leaving directory &#96;&#x2F;root&#x2F;redis&#x2F;redis-4.0.11&#x2F;deps&#x2F;hiredis&#39;</span><br><span class="line">make[1]: *** [hiredis] Error 2</span><br><span class="line">make[1]: Leaving directory &#96;&#x2F;root&#x2F;redis&#x2F;redis-4.0.11&#x2F;deps&#39;</span><br><span class="line">make: [persist-settings] Error 2 (ignored)</span><br></pre></td></tr></table></figure>
-<p>说明没有安装 gcc 编译器。需要安装一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc</span><br></pre></td></tr></table></figure>
-<p><strong>安装gcc后需要重新解压一份新的Redis。再执行 make</strong></p>
+<pre><code>mkidr redis
+cd redis
+</code></pre><p>下载源码并编译。</p>
+<pre><code>wget http://download.redis.io/releases/redis-4.0.11.tar.gz
+tar xzf redis-4.0.11.tar.gz
+cd redis-4.0.11
+make</code></pre><p>PS:如果出现下面的结果：</p>
+<pre><code>make[2]: Entering directory `/root/redis/redis-4.0.11/deps/hiredis&#39;
+gcc -std=c99 -pedantic -c -O3 -fPIC  -Wall -W -Wstrict-prototypes -Wwrite-strings -g -ggdb  net.c
+make[2]: gcc: Command not found
+make[2]: *** [net.o] Error 127
+make[2]: Leaving directory `/root/redis/redis-4.0.11/deps/hiredis&#39;
+make[1]: *** [hiredis] Error 2
+make[1]: Leaving directory `/root/redis/redis-4.0.11/deps&#39;
+make: [persist-settings] Error 2 (ignored)
+</code></pre><p>说明没有安装 gcc 编译器。需要安装一下。</p>
+<pre><code>yum install gcc</code></pre><p><strong>安装gcc后需要重新解压一份新的Redis。再执行 make</strong></p>
 <p>编译成功的话会显示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hint: It&#39;s a good idea to run &#39;make test&#39; ;)</span><br><span class="line"></span><br><span class="line">make[1]: Leaving directory &#96;&#x2F;root&#x2F;redis&#x2F;redis-4.0.11&#x2F;src&#39;</span><br></pre></td></tr></table></figure>
+<pre><code>Hint: It&#39;s a good idea to run &#39;make test&#39; ;)
 
-<p>至此，我们已经获取到了Redis的安装包。src目录下就是一个完整可用的Redis了。</p>
+make[1]: Leaving directory `/root/redis/redis-4.0.11/src&#39;
+</code></pre><p>至此，我们已经获取到了Redis的安装包。src目录下就是一个完整可用的Redis了。</p>
 <h2 id="2-Redis单机部署"><a href="#2-Redis单机部署" class="headerlink" title="2. Redis单机部署"></a>2. Redis单机部署</h2><p>现在开始搭建一个单机的redis集群。主备模式（三主三从）。</p>
 <p>以端口号为名称创建6个文件夹:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir redis-cluster</span><br><span class="line">cd redis-cluster</span><br><span class="line">mkdir -p 9001&#x2F;data 9002&#x2F;data 9003&#x2F;data 9004&#x2F;data 9005&#x2F;data 9006&#x2F;data</span><br></pre></td></tr></table></figure>
-<p>把我们之前编译好的redis拷贝一份到 9001 中，并修改 <code>redis.config</code> 文件中的配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 9001</span><br><span class="line">vim redis.config</span><br></pre></td></tr></table></figure>
-<p>主要修改下面几个配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">port 9001（每个节点的端口号）</span><br><span class="line">daemonize yes（开启守护线程）</span><br><span class="line">bind 192.168.119.131（绑定当前机器 IP,需要注释掉，否则外网无法访问）</span><br><span class="line">dir .&#x2F;data（数据文件存放位置）</span><br><span class="line">pidfile &#x2F;var&#x2F;run&#x2F;redis_9001.pid（pid 9001和port要对应）</span><br><span class="line">cluster-enabled yes（默认是注释掉的，需要开启启动集群模式）</span><br><span class="line">cluster-config-file nodes9001.conf（默认是注释掉的，9001和port要对应）</span><br><span class="line">cluster-node-timeout 15000（默认是注释掉的，超时时间）</span><br><span class="line">appendonly yes （redis数据持久化）</span><br></pre></td></tr></table></figure>
-<p>然后把 9001 下的 redis 依次拷贝到其他5个端口的文件夹下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cp -r .&#x2F;* .&#x2F;..&#x2F;9001&#x2F;</span><br><span class="line">cp -r .&#x2F;* .&#x2F;..&#x2F;9002&#x2F;</span><br><span class="line">cp -r .&#x2F;* .&#x2F;..&#x2F;9003&#x2F;</span><br><span class="line">cp -r .&#x2F;* .&#x2F;..&#x2F;9004&#x2F;</span><br><span class="line">cp -r .&#x2F;* .&#x2F;..&#x2F;9005&#x2F;</span><br><span class="line">cp -r .&#x2F;* .&#x2F;..&#x2F;9006&#x2F;</span><br></pre></td></tr></table></figure>
+<pre><code>mkdir redis-cluster
+cd redis-cluster
+mkdir -p 9001/data 9002/data 9003/data 9004/data 9005/data 9006/data</code></pre><p>把我们之前编译好的redis拷贝一份到 9001 中，并修改 <code>redis.config</code> 文件中的配置信息</p>
+<pre><code>cd 9001
+vim redis.config</code></pre><p>主要修改下面几个配置：</p>
+<pre><code>port 9001（每个节点的端口号）
+daemonize yes（开启守护线程）
+bind 192.168.119.131（绑定当前机器 IP,需要注释掉，否则外网无法访问）
+dir ./data（数据文件存放位置）
+pidfile /var/run/redis_9001.pid（pid 9001和port要对应）
+cluster-enabled yes（默认是注释掉的，需要开启启动集群模式）
+cluster-config-file nodes9001.conf（默认是注释掉的，9001和port要对应）
+cluster-node-timeout 15000（默认是注释掉的，超时时间）
+appendonly yes （redis数据持久化）</code></pre><p>然后把 9001 下的 redis 依次拷贝到其他5个端口的文件夹下。</p>
+<pre><code>cp -r ./* ./../9001/
+cp -r ./* ./../9002/
+cp -r ./* ./../9003/
+cp -r ./* ./../9004/
+cp -r ./* ./../9005/
+cp -r ./* ./../9006/</code></pre><p>依次修改每个端口下的<code>redis.config</code>,把端口改成与文件夹一致。到这一步，我们相当于在本地主机上部署了6个Redis，依次启动每个端口的redis</p>
+<pre><code>cd 9001
+./src/redis-server redis.conf 
 
-<p>依次修改每个端口下的<code>redis.config</code>,把端口改成与文件夹一致。到这一步，我们相当于在本地主机上部署了6个Redis，依次启动每个端口的redis</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd 9001</span><br><span class="line">.&#x2F;src&#x2F;redis-server redis.conf </span><br><span class="line"></span><br><span class="line">... ...(启动其他端口的redis)</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-安装Redis集群所需的工具"><a href="#3-安装Redis集群所需的工具" class="headerlink" title="3. 安装Redis集群所需的工具"></a>3. 安装Redis集群所需的工具</h2><p>由于 Redis 集群需要使用 ruby 命令，所以我们需要安装 ruby 和相关接口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install ruby</span><br><span class="line">yum install rubygems</span><br><span class="line">gem install redis</span><br></pre></td></tr></table></figure>
-<p>在执行 <code>gem install redis</code>的时候出现了下面的错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR:  Error installing redis:</span><br><span class="line">    redis requires Ruby version &gt;&#x3D; 2.2.2.</span><br></pre></td></tr></table></figure>
-<p>意思是我们的 Ruby版本太低了，要升级一下Ruby。</p>
+... ...(启动其他端口的redis)
+</code></pre><h2 id="3-安装Redis集群所需的工具"><a href="#3-安装Redis集群所需的工具" class="headerlink" title="3. 安装Redis集群所需的工具"></a>3. 安装Redis集群所需的工具</h2><p>由于 Redis 集群需要使用 ruby 命令，所以我们需要安装 ruby 和相关接口。</p>
+<pre><code>yum install ruby
+yum install rubygems
+gem install redis </code></pre><p>在执行 <code>gem install redis</code>的时候出现了下面的错误</p>
+<pre><code>ERROR:  Error installing redis:
+    redis requires Ruby version &gt;= 2.2.2.
+</code></pre><p>意思是我们的 Ruby版本太低了，要升级一下Ruby。</p>
 <p>执行一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L get.rvm.io | bash -s stable</span><br></pre></td></tr></table></figure>
-<p>会获取到一个密钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3</span><br></pre></td></tr></table></figure>
-<p>让这个密钥生效一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gpg --keyserver hkp:&#x2F;&#x2F;keys.gnupg.net --recv-keys xxx（上一步得到的key）</span><br><span class="line"></span><br><span class="line">curl -sSL https:&#x2F;&#x2F;get.rvm.io | bash -s stable</span><br></pre></td></tr></table></figure>
-<p>source环境，让rvm可用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile.d&#x2F;rvm.sh</span><br><span class="line">source &#x2F;usr&#x2F;local&#x2F;rvm&#x2F;scripts&#x2F;rvm</span><br></pre></td></tr></table></figure>
-<p>安装 Ruby 2.3.0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.3.0</span><br></pre></td></tr></table></figure>
-<p>安装Redis接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install redis</span><br></pre></td></tr></table></figure>
-<p>构建Redis集群</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cd 9001</span><br><span class="line"></span><br><span class="line">[root@localhost 9006]# .&#x2F;src&#x2F;redis-trib.rb create --replicas 1 127.0.0.1:9001 127.0.0.1:9002 127.0.0.1:9003 127.0.0.1:9004 127.0.0.1:9005 127.0.0.1:9006</span><br><span class="line">&gt;&gt;&gt; Creating cluster</span><br><span class="line">&gt;&gt;&gt; Performing hash slots allocation on 6 nodes...</span><br><span class="line">Using 3 masters:</span><br><span class="line">127.0.0.1:9001</span><br><span class="line">127.0.0.1:9002</span><br><span class="line">127.0.0.1:9003</span><br><span class="line">Adding replica 127.0.0.1:9005 to 127.0.0.1:9001</span><br><span class="line">Adding replica 127.0.0.1:9006 to 127.0.0.1:9002</span><br><span class="line">Adding replica 127.0.0.1:9004 to 127.0.0.1:9003</span><br><span class="line"></span><br><span class="line">... ...(省略部分显示结果)</span><br><span class="line"></span><br><span class="line">[OK] All nodes agree about slots configuration.</span><br><span class="line">&gt;&gt;&gt; Check for open slots...</span><br><span class="line">&gt;&gt;&gt; Check slots coverage...</span><br><span class="line">[OK] All 16384 slots covered.</span><br></pre></td></tr></table></figure>
-<p>这个时候我们的集群已经搭建好了。找一台redis连接上看一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;src&#x2F;redis-cli -c -p 9001</span><br><span class="line">127.0.0.1:9001&gt; cluster info</span><br><span class="line">127.0.0.1:9001&gt; cluster nodes</span><br></pre></td></tr></table></figure>
+<pre><code> curl -L get.rvm.io | bash -s stable</code></pre><p>会获取到一个密钥：</p>
+<pre><code>    gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+</code></pre><p>让这个密钥生效一下</p>
+<pre><code> gpg --keyserver hkp://keys.gnupg.net --recv-keys xxx（上一步得到的key）
 
-<h2 id="4-外网访问"><a href="#4-外网访问" class="headerlink" title="4. 外网访问"></a>4. 外网访问</h2><p>现在集群是搭建好了，在服务器上测试一下是可以的，如果你要在别的机器上连接发现会发现一直连接失败。这是因为我们的redis集群没有设置密码，而且是保护模式。现在我们对这个集群设置一个密码。</p>
+ curl -sSL https://get.rvm.io | bash -s stable
+</code></pre><p>source环境，让rvm可用：</p>
+<pre><code>source /etc/profile.d/rvm.sh
+source /usr/local/rvm/scripts/rvm</code></pre><p>安装 Ruby 2.3.0</p>
+<pre><code>rvm install 2.3.0</code></pre><p>安装Redis接口</p>
+<pre><code> gem install redis </code></pre><p>构建Redis集群</p>
+<pre><code>cd 9001
+
+[root@localhost 9006]# ./src/redis-trib.rb create --replicas 1 127.0.0.1:9001 127.0.0.1:9002 127.0.0.1:9003 127.0.0.1:9004 127.0.0.1:9005 127.0.0.1:9006
+&gt;&gt;&gt; Creating cluster
+&gt;&gt;&gt; Performing hash slots allocation on 6 nodes...
+Using 3 masters:
+127.0.0.1:9001
+127.0.0.1:9002
+127.0.0.1:9003
+Adding replica 127.0.0.1:9005 to 127.0.0.1:9001
+Adding replica 127.0.0.1:9006 to 127.0.0.1:9002
+Adding replica 127.0.0.1:9004 to 127.0.0.1:9003
+
+... ...(省略部分显示结果)
+
+[OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+[OK] All 16384 slots covered.
+</code></pre><p>这个时候我们的集群已经搭建好了。找一台redis连接上看一下</p>
+<pre><code>./src/redis-cli -c -p 9001
+127.0.0.1:9001&gt; cluster info
+127.0.0.1:9001&gt; cluster nodes</code></pre><h2 id="4-外网访问"><a href="#4-外网访问" class="headerlink" title="4. 外网访问"></a>4. 外网访问</h2><p>现在集群是搭建好了，在服务器上测试一下是可以的，如果你要在别的机器上连接发现会发现一直连接失败。这是因为我们的redis集群没有设置密码，而且是保护模式。现在我们对这个集群设置一个密码。</p>
 <p>集群的密码需要单独对每个机器设置，这里以 9001 为例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd 9001</span><br><span class="line">src&#x2F;redis-cli -c -p 9001 shutdown</span><br><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure>
-<p>修改 requirepass 选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requirepass ******</span><br></pre></td></tr></table></figure>
-<p>重启 redis</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src&#x2F;redis-server redis.conf</span><br></pre></td></tr></table></figure>
-<p>依次修改完其他的端口，外网就能通过密码访问了。</p>
+<pre><code>cd 9001
+src/redis-cli -c -p 9001 shutdown
+vim redis.conf</code></pre><p>修改 requirepass 选项</p>
+<pre><code>requirepass ****** </code></pre><p>重启 redis</p>
+<pre><code>src/redis-server redis.conf</code></pre><p>依次修改完其他的端口，外网就能通过密码访问了。</p>
 <p>PS:如果还是不能访问，请检查一下端口是否开放。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linux 下的开放端口命令。下面的命令会开放 8080端口</span><br><span class="line">&#x2F;sbin&#x2F;iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</span><br></pre></td></tr></table></figure>
-<h2 id="5-redis-trib-无法连接"><a href="#5-redis-trib-无法连接" class="headerlink" title="5. redis-trib 无法连接"></a>5. redis-trib 无法连接</h2><p>这个时候如果你在服务器上会发现 <code>redis-trib.sh</code>这个脚本好像没办法连接连接上redis了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd 9001</span><br><span class="line">.&#x2F;src&#x2F;redis-trib.rb check 127.0.0.1:9001</span><br><span class="line">[ERR] Sorry, can&#39;t connect to node 127.0.0.1:9001</span><br></pre></td></tr></table></figure>
-
-<p>这个是因为我们的Redis集群配置信息没有更新密码配置，需要手动修改。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;rvm&#x2F;gems&#x2F;ruby-2.3.0&#x2F;gems&#x2F;redis-4.0.2&#x2F;lib&#x2F;redis</span><br><span class="line">vim client.rb</span><br></pre></td></tr></table></figure>
-<p>PS: 如果找不到 <code>client.rb</code> 可以用<code>find / -name &#39;client.rb&#39;命令</code>查找一下<br>修改 passord 配置:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DEFAULTS &#x3D; &#123;</span><br><span class="line">  :url &#x3D;&gt; lambda &#123; ENV[&quot;REDIS_URL&quot;] &#125;,</span><br><span class="line">  :scheme &#x3D;&gt; &quot;redis&quot;,</span><br><span class="line">  :host &#x3D;&gt; &quot;127.0.0.1&quot;,</span><br><span class="line">  :port &#x3D;&gt; 6379,</span><br><span class="line">  :path &#x3D;&gt; nil,</span><br><span class="line">  :timeout &#x3D;&gt; 5.0,</span><br><span class="line">  :password &#x3D;&gt; &quot;******&quot;,</span><br><span class="line">  :db &#x3D;&gt; 0,</span><br><span class="line">  :driver &#x3D;&gt; nil,</span><br><span class="line">  :id &#x3D;&gt; nil,</span><br><span class="line">  :tcp_keepalive &#x3D;&gt; 0,</span><br><span class="line">  :reconnect_attempts &#x3D;&gt; 1,</span><br><span class="line">  :inherit_socket &#x3D;&gt; false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再试一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;redis-trib.rb check 127.0.0.1:9001</span><br></pre></td></tr></table></figure>
-<p>应该能看到 redis集群的一些信息了</p>
+<pre><code>linux 下的开放端口命令。下面的命令会开放 8080端口
+/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</code></pre><h2 id="5-redis-trib-无法连接"><a href="#5-redis-trib-无法连接" class="headerlink" title="5. redis-trib 无法连接"></a>5. redis-trib 无法连接</h2><p>这个时候如果你在服务器上会发现 <code>redis-trib.sh</code>这个脚本好像没办法连接连接上redis了</p>
+<pre><code>cd 9001
+./src/redis-trib.rb check 127.0.0.1:9001
+[ERR] Sorry, can&#39;t connect to node 127.0.0.1:9001
+</code></pre><p>这个是因为我们的Redis集群配置信息没有更新密码配置，需要手动修改。</p>
+<pre><code>cd /usr/local/rvm/gems/ruby-2.3.0/gems/redis-4.0.2/lib/redis
+vim client.rb</code></pre><p>PS: 如果找不到 <code>client.rb</code> 可以用<code>find / -name &#39;client.rb&#39;命令</code>查找一下<br>修改 passord 配置:</p>
+<pre><code>    DEFAULTS = &#123;
+      :url =&gt; lambda &#123; ENV[&quot;REDIS_URL&quot;] &#125;,
+      :scheme =&gt; &quot;redis&quot;,
+      :host =&gt; &quot;127.0.0.1&quot;,
+      :port =&gt; 6379,
+      :path =&gt; nil,
+      :timeout =&gt; 5.0,
+      :password =&gt; &quot;******&quot;,
+      :db =&gt; 0,
+      :driver =&gt; nil,
+      :id =&gt; nil,
+      :tcp_keepalive =&gt; 0,
+      :reconnect_attempts =&gt; 1,
+      :inherit_socket =&gt; false
+    &#125;
+</code></pre><p>再试一下：</p>
+<pre><code>./redis-trib.rb check 127.0.0.1:9001</code></pre><p>应该能看到 redis集群的一些信息了</p>
 <h2 id="6-IDEA-的-Iedis-插件无法连接"><a href="#6-IDEA-的-Iedis-插件无法连接" class="headerlink" title="6. IDEA 的 Iedis 插件无法连接"></a>6. IDEA 的 Iedis 插件无法连接</h2><p>最后，遇到了一个问题，我用IDEA 的 Iedis 连接别的redis集群能正常连接，但是连接刚刚搭建的集群就是连接不上。不知道为什么，一直没有解决。</p>
 <p>不过 用 Redis Desktop Manager 是可以连接上的。</p>
 <p>PS:为了安装一个redis 我已经重装了10多次系统了。。。</p>

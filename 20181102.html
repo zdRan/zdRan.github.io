@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Nov 02 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Thu Dec 17 2020 21:16:45 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20181102.html",
     "headline": "Dubbo 学习笔记(零) 自己实现一个 RPC 框架",
     "datePublished": "Fri Nov 02 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Thu Dec 17 2020 21:16:45 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,11 +522,11 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/learning" target="_blank" rel="noopener">Dubbo 学习笔记 源码地址</a></li>
-<li><a href="https://zdran.com/20181102.html" target="_blank" rel="noopener">Dubbo 学习笔记(零) 自己实现一个 RPC 框架</a></li>
-<li><a href="https://zdran.com/20181113.html" target="_blank" rel="noopener">Dubbo 学习笔记(一) Hello,Dubbo</a></li>
-<li><a href="https://zdran.com/20181216.html" target="_blank" rel="noopener">Dubbo 学习笔记(二) Spring Boot 整合 Dubbo</a></li>
-<li><a href="https://zdran.com/20190212.html" target="_blank" rel="noopener">Dubbo 学习笔记(三) Spring Boot 整合 Dubbo(官方版)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/learning">Dubbo 学习笔记 源码地址</a></li>
+<li><a href="https://zdran.com/20181102.html">Dubbo 学习笔记(零) 自己实现一个 RPC 框架</a></li>
+<li><a href="https://zdran.com/20181113.html">Dubbo 学习笔记(一) Hello,Dubbo</a></li>
+<li><a href="https://zdran.com/20181216.html">Dubbo 学习笔记(二) Spring Boot 整合 Dubbo</a></li>
+<li><a href="https://zdran.com/20190212.html">Dubbo 学习笔记(三) Spring Boot 整合 Dubbo(官方版)</a></li>
 </ul>
 <hr>
 <h2 id="0-什么是-RPC-框架"><a href="#0-什么是-RPC-框架" class="headerlink" title="0. 什么是 RPC 框架"></a>0. 什么是 RPC 框架</h2><p>RPC(Remote Procedure Call) 是一种进程间的通信方式。允许像调用本地服务一样调用远程服务。</p>
@@ -539,40 +539,166 @@
 <p>客户端收到数据后，将结果反序列化，得到接口的执行结果。</p>
 <p>下面实现了一个最简单、最基础的 RPC 框架</p>
 <h2 id="2-定义服务"><a href="#2-定义服务" class="headerlink" title="2. 定义服务"></a>2. 定义服务</h2><p>我们先定义一个服务端的 Service，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public interface MyService &#123;</span><br><span class="line">    String sayHello(String name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">实现类：</span><br><span class="line"></span><br><span class="line">public class MyServiceImpl implements MyService &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String sayHello(String name) &#123;</span><br><span class="line">        return &quot;hello,&quot; + name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public interface MyService &#123;
+    String sayHello(String name);
+&#125;
 
-<p>这个接口就是我们服务端提供的服务。</p>
+实现类：
+
+public class MyServiceImpl implements MyService &#123;
+    @Override
+    public String sayHello(String name) &#123;
+        return &quot;hello,&quot; + name;
+    &#125;
+&#125;</code></pre><p>这个接口就是我们服务端提供的服务。</p>
 <h2 id="3-RPC-框架的服务端实现"><a href="#3-RPC-框架的服务端实现" class="headerlink" title="3. RPC 框架的服务端实现"></a>3. RPC 框架的服务端实现</h2><p>先在服务端实现 Socket 持续监听客户端发来的数据，收到数据后让 ProducerAgent 去处理。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class RpcProducer &#123;</span><br><span class="line">    private static Executor executor &#x3D; Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());</span><br><span class="line"></span><br><span class="line">    public static void produce(String host, int port) throws Exception &#123;</span><br><span class="line">        ServerSocket serverSocket &#x3D; new ServerSocket();</span><br><span class="line">        serverSocket.bind(new InetSocketAddress(host, port));</span><br><span class="line">        try &#123;</span><br><span class="line">            while (true) &#123;</span><br><span class="line">                executor.execute(new ProducerAgent(serverSocket.accept()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            serverSocket.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class RpcProducer &#123;
+    private static Executor executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-<p>ProducerAgent 的实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class ProducerAgent implements Runnable &#123;</span><br><span class="line">    Socket client &#x3D; null;</span><br><span class="line"></span><br><span class="line">    public ProducerAgent(Socket accept) &#123;</span><br><span class="line">        client &#x3D; accept;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        ObjectInputStream inputStream &#x3D; null;</span><br><span class="line">        ObjectOutputStream outputStream &#x3D; null;</span><br><span class="line">        try &#123;</span><br><span class="line"></span><br><span class="line">            inputStream &#x3D; new ObjectInputStream(client.getInputStream());</span><br><span class="line"></span><br><span class="line">            String interfaceName &#x3D; inputStream.readUTF();</span><br><span class="line">            Class&lt;?&gt; service &#x3D; Class.forName(interfaceName);</span><br><span class="line">            String methodName &#x3D; inputStream.readUTF();</span><br><span class="line">            Class&lt;?&gt;[] paramTypes &#x3D; (Class&lt;?&gt;[]) inputStream.readObject();</span><br><span class="line">            Object[] args &#x3D; (Object[]) inputStream.readObject();</span><br><span class="line"></span><br><span class="line">            Method method &#x3D; service.getMethod(methodName, paramTypes);</span><br><span class="line">            Object result &#x3D; method.invoke(service.newInstance(), args);</span><br><span class="line">            outputStream &#x3D; new ObjectOutputStream(client.getOutputStream());</span><br><span class="line">            outputStream.writeObject(result);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            &#x2F;&#x2F;省略部分代码</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public static void produce(String host, int port) throws Exception &#123;
+        ServerSocket serverSocket = new ServerSocket();
+        serverSocket.bind(new InetSocketAddress(host, port));
+        try &#123;
+            while (true) &#123;
+                executor.execute(new ProducerAgent(serverSocket.accept()));
+            &#125;
+        &#125; finally &#123;
+            serverSocket.close();
+        &#125;
+    &#125;
+&#125;</code></pre><p>ProducerAgent 的实现：</p>
+<pre><code>public class ProducerAgent implements Runnable &#123;
+    Socket client = null;
 
-<p>我们依次读取接口的名称、方法名称、参数类型、参数。然后通过反射的机制执行方法，最后将结果序列化后写入到客户端。</p>
-<h2 id="4-RPC-框架的客户端实现"><a href="#4-RPC-框架的客户端实现" class="headerlink" title="4. RPC 框架的客户端实现"></a>4. RPC 框架的客户端实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class LocalAgent&lt;T&gt; &#123;</span><br><span class="line">    public T importer(final Class&lt;?&gt; serviceClass, final InetSocketAddress addr) &#123;</span><br><span class="line">        return (T) Proxy.newProxyInstance(serviceClass.getClassLoader(),</span><br><span class="line">                new Class&lt;?&gt;[]&#123;serviceClass.getInterfaces()[0]&#125;,</span><br><span class="line">                new InvocationHandler() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">                        ObjectOutputStream outputStream &#x3D; null;</span><br><span class="line">                        ObjectInputStream inputStream &#x3D; null;</span><br><span class="line">                        Socket socket &#x3D; null;</span><br><span class="line">                        try &#123;</span><br><span class="line">                            socket &#x3D; new Socket();</span><br><span class="line">                            socket.connect(addr);</span><br><span class="line">                            outputStream &#x3D; new ObjectOutputStream(socket.getOutputStream());</span><br><span class="line"></span><br><span class="line">                            outputStream.writeUTF(serviceClass.getName());</span><br><span class="line">                            outputStream.writeUTF(method.getName());</span><br><span class="line">                            outputStream.writeObject(method.getParameterTypes());</span><br><span class="line">                            outputStream.writeObject(args);</span><br><span class="line"></span><br><span class="line">                            inputStream &#x3D; new ObjectInputStream(socket.getInputStream());</span><br><span class="line">                            return inputStream.readObject();</span><br><span class="line">                        &#125; finally &#123;</span><br><span class="line">                            &#x2F;&#x2F;省略部分代码</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public ProducerAgent(Socket accept) &#123;
+        client = accept;
+    &#125;
 
-<p>客户端做的事情是与服务端建立 Socket 通信，然后依次写入 接口名、方法名、参数类型、参数。注意：<strong>写入顺序一定要与服务端的读取顺序一致</strong>。</p>
+    @Override
+    public void run() &#123;
+        ObjectInputStream inputStream = null;
+        ObjectOutputStream outputStream = null;
+        try &#123;
+
+            inputStream = new ObjectInputStream(client.getInputStream());
+
+            String interfaceName = inputStream.readUTF();
+            Class&lt;?&gt; service = Class.forName(interfaceName);
+            String methodName = inputStream.readUTF();
+            Class&lt;?&gt;[] paramTypes = (Class&lt;?&gt;[]) inputStream.readObject();
+            Object[] args = (Object[]) inputStream.readObject();
+
+            Method method = service.getMethod(methodName, paramTypes);
+            Object result = method.invoke(service.newInstance(), args);
+            outputStream = new ObjectOutputStream(client.getOutputStream());
+            outputStream.writeObject(result);
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;finally &#123;
+            //省略部分代码
+        &#125;
+    &#125;
+&#125;
+</code></pre><p>我们依次读取接口的名称、方法名称、参数类型、参数。然后通过反射的机制执行方法，最后将结果序列化后写入到客户端。</p>
+<h2 id="4-RPC-框架的客户端实现"><a href="#4-RPC-框架的客户端实现" class="headerlink" title="4. RPC 框架的客户端实现"></a>4. RPC 框架的客户端实现</h2><pre><code>public class LocalAgent&lt;T&gt; &#123;
+    public T importer(final Class&lt;?&gt; serviceClass, final InetSocketAddress addr) &#123;
+        return (T) Proxy.newProxyInstance(serviceClass.getClassLoader(),
+                new Class&lt;?&gt;[]&#123;serviceClass.getInterfaces()[0]&#125;,
+                new InvocationHandler() &#123;
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+                        ObjectOutputStream outputStream = null;
+                        ObjectInputStream inputStream = null;
+                        Socket socket = null;
+                        try &#123;
+                            socket = new Socket();
+                            socket.connect(addr);
+                            outputStream = new ObjectOutputStream(socket.getOutputStream());
+
+                            outputStream.writeUTF(serviceClass.getName());
+                            outputStream.writeUTF(method.getName());
+                            outputStream.writeObject(method.getParameterTypes());
+                            outputStream.writeObject(args);
+
+                            inputStream = new ObjectInputStream(socket.getInputStream());
+                            return inputStream.readObject();
+                        &#125; finally &#123;
+                            //省略部分代码
+                        &#125;
+                    &#125;
+                &#125;);
+    &#125;
+&#125;
+</code></pre><p>客户端做的事情是与服务端建立 Socket 通信，然后依次写入 接口名、方法名、参数类型、参数。注意：<strong>写入顺序一定要与服务端的读取顺序一致</strong>。</p>
 <p>然后接收服务端的执行结果，反序列化为实际类型。</p>
 <h2 id="5-使用-RPC-框架"><a href="#5-使用-RPC-框架" class="headerlink" title="5. 使用 RPC 框架"></a>5. 使用 RPC 框架</h2><p>RPC 框架的客户端和服务端的基本功能已经实现，下面我们使用刚刚实现的 RPC 框架 来调用一下 <code>MyService.sayHello(String name)</code> 这个接口</p>
 <p>首先我们使用一个线程来启动服务端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private static void startProduct() &#123;</span><br><span class="line">    &#x2F;&#x2F;通过一个线程启动服务端</span><br><span class="line">    String host &#x3D; &quot;localhost&quot;;</span><br><span class="line">    int port &#x3D; 8878;</span><br><span class="line"></span><br><span class="line">    new Thread(new Runnable() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                System.out.println(&quot;服务端启动........&quot;);</span><br><span class="line">                RpcProducer.produce(host, port);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>    private static void startProduct() &#123;
+        //通过一个线程启动服务端
+        String host = &quot;localhost&quot;;
+        int port = 8878;
 
-<p>下面我们使用 刚刚实现的 RPC 框架来调用服务端的接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static void client() &#123;</span><br><span class="line">    LocalAgent&lt;MyService&gt; serviceLocalAgent &#x3D; new LocalAgent&lt;&gt;();</span><br><span class="line">    MyService myService &#x3D; serviceLocalAgent.importer(MyServiceImpl.class,</span><br><span class="line">            new InetSocketAddress(&quot;localhost&quot;,8878));</span><br><span class="line"></span><br><span class="line">    System.out.println(myService.sayHello(&quot;RPC&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        new Thread(new Runnable() &#123;
+            @Override
+            public void run() &#123;
+                try &#123;
+                    System.out.println(&quot;服务端启动........&quot;);
+                    RpcProducer.produce(host, port);
+                &#125; catch (Exception e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+        &#125;).start();
+    &#125;</code></pre><p>下面我们使用 刚刚实现的 RPC 框架来调用服务端的接口</p>
+<pre><code>    private static void client() &#123;
+        LocalAgent&lt;MyService&gt; serviceLocalAgent = new LocalAgent&lt;&gt;();
+        MyService myService = serviceLocalAgent.importer(MyServiceImpl.class,
+                new InetSocketAddress(&quot;localhost&quot;,8878));
 
-<p>在客户端，我们传了一个服务端实现类的类型、一个服务端的地址，然后就可以调用服务端的接口了。注意：<strong>我们并没有在客户端创建 接口的具体实现对象</strong>，而仅仅是把需要调用的 Class 通过 Socket 发送给了服务端。</p>
+        System.out.println(myService.sayHello(&quot;RPC&quot;));
+    &#125;
+</code></pre><p>在客户端，我们传了一个服务端实现类的类型、一个服务端的地址，然后就可以调用服务端的接口了。注意：<strong>我们并没有在客户端创建 接口的具体实现对象</strong>，而仅仅是把需要调用的 Class 通过 Socket 发送给了服务端。</p>
 <h2 id="6-添加注册中心"><a href="#6-添加注册中心" class="headerlink" title="6. 添加注册中心"></a>6. 添加注册中心</h2><p>考虑一下上面的代码，我们服务端的地址是写死在客户端和服务端的代码里的，如果服务比较多，而且每个服务的地址都不一样，直接写死是很难维护的，所以我们需要一个注册中心来管理每个服务的地址。</p>
 <p>下面是一个最简单的注册中心：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class RegistrationCenter &#123;</span><br><span class="line"></span><br><span class="line">    private Map&lt;String, InetSocketAddress&gt; serviceMap &#x3D; new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public void register(String serviceName, String host, int port) &#123;</span><br><span class="line">        serviceMap.put(serviceName, new InetSocketAddress(host, port));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public InetSocketAddress getService(String serviceName) &#123;</span><br><span class="line">        return serviceMap.get(serviceName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>public class RegistrationCenter &#123;
 
-<p>注册中心维护服务名称与服务地址的映射。</p>
+    private Map&lt;String, InetSocketAddress&gt; serviceMap = new HashMap&lt;&gt;();
+
+    public void register(String serviceName, String host, int port) &#123;
+        serviceMap.put(serviceName, new InetSocketAddress(host, port));
+    &#125;
+
+    public InetSocketAddress getService(String serviceName) &#123;
+        return serviceMap.get(serviceName);
+    &#125;
+&#125;</code></pre><p>注册中心维护服务名称与服务地址的映射。</p>
 <p>我们修改一下服务端的启动代码，当服务启动之后，向注册中心注册服务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private static void startProduct(RegistrationCenter center) &#123;</span><br><span class="line">    &#x2F;&#x2F;通过一个线程启动服务端</span><br><span class="line">    String host &#x3D; &quot;localhost&quot;;</span><br><span class="line">    int port &#x3D; 8878;</span><br><span class="line"></span><br><span class="line">    new Thread(new Runnable() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                System.out.println(&quot;服务端启动........&quot;);</span><br><span class="line">                RpcProducer.produce(host, port);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">    &#x2F;&#x2F;向注册中心注册服务</span><br><span class="line">    center.register(&quot;MyService.sayHello&quot;, host, port);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>    private static void startProduct(RegistrationCenter center) &#123;
+        //通过一个线程启动服务端
+        String host = &quot;localhost&quot;;
+        int port = 8878;
 
-<p>修改一下客户端的调用方式,调用服务时，根据服务名从注册中心获取服务地址。：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static void client(RegistrationCenter center) &#123;</span><br><span class="line">    LocalAgent&lt;MyService&gt; serviceLocalAgent &#x3D; new LocalAgent&lt;&gt;();</span><br><span class="line">    MyService myService &#x3D; serviceLocalAgent.importer(MyServiceImpl.class,</span><br><span class="line">            center.getService(&quot;MyService.sayHello&quot;));</span><br><span class="line"></span><br><span class="line">    System.out.println(myService.sayHello(&quot;RPC&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        new Thread(new Runnable() &#123;
+            @Override
+            public void run() &#123;
+                try &#123;
+                    System.out.println(&quot;服务端启动........&quot;);
+                    RpcProducer.produce(host, port);
+                &#125; catch (Exception e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+        &#125;).start();
+        //向注册中心注册服务
+        center.register(&quot;MyService.sayHello&quot;, host, port);
+    &#125;</code></pre><p>修改一下客户端的调用方式,调用服务时，根据服务名从注册中心获取服务地址。：</p>
+<pre><code>    private static void client(RegistrationCenter center) &#123;
+        LocalAgent&lt;MyService&gt; serviceLocalAgent = new LocalAgent&lt;&gt;();
+        MyService myService = serviceLocalAgent.importer(MyServiceImpl.class,
+                center.getService(&quot;MyService.sayHello&quot;));
 
-<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>这就是 RPC 框架的基本原理，通过 Socket 建立通信，通过序列化与反序列实现数据传输，使用反射执行具体的服务。</p>
+        System.out.println(myService.sayHello(&quot;RPC&quot;));
+    &#125;</code></pre><h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>这就是 RPC 框架的基本原理，通过 Socket 建立通信，通过序列化与反序列实现数据传输，使用反射执行具体的服务。</p>
 <p>假设你对 RPC 还是没有什么概念，也没关系，但是你需要记住下面三个概念：</p>
 <ol>
 <li><p>生产者：或者说是服务端，更具体点就是上面的<code>ProducerAgent</code>类，</p>
