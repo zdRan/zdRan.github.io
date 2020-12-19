@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri May 04 2018 13:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Sat Dec 19 2020 11:47:02 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180504.html",
     "headline": "Spring Boot 2.0 实现优雅停机",
     "datePublished": "Fri May 04 2018 13:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Sat Dec 19 2020 11:47:02 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -521,22 +521,147 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="前期踩的坑-Spring-Boot-1-x"><a href="#前期踩的坑-Spring-Boot-1-x" class="headerlink" title="前期踩的坑 (Spring Boot 1.x)"></a>前期踩的坑 (Spring Boot 1.x)</h2><h3 id="1-添加mavne依赖"><a href="#1-添加mavne依赖" class="headerlink" title="1. 添加mavne依赖"></a>1. 添加mavne依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- springboot监控 --&gt;  </span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-actuator&lt;&#x2F;artifactId&gt;  </span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-启用shutdown"><a href="#2-启用shutdown" class="headerlink" title="2. 启用shutdown"></a>2. 启用shutdown</h3><p>在配置文件里添加下面的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#启用shutdown endpoint的HTTP访问</span><br><span class="line">endpoints.shutdown.enabled&#x3D;true</span><br><span class="line">#不需要验证 </span><br><span class="line">endpoints.shutdown.sensitive&#x3D;false</span><br></pre></td></tr></table></figure>
-<p>启动的时候可以看到下面的日志，就说明成功了<br><img src="/images/%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97.png" alt="启动日志"></p>
+        <h2 id="前期踩的坑-Spring-Boot-1-x"><a href="#前期踩的坑-Spring-Boot-1-x" class="headerlink" title="前期踩的坑 (Spring Boot 1.x)"></a>前期踩的坑 (Spring Boot 1.x)</h2><h3 id="1-添加mavne依赖"><a href="#1-添加mavne依赖" class="headerlink" title="1. 添加mavne依赖"></a>1. 添加mavne依赖</h3><pre><code>&lt;!-- springboot监控 --&gt;  
+&lt;dependency&gt;  
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;  
+&lt;/dependency&gt;  </code></pre><h3 id="2-启用shutdown"><a href="#2-启用shutdown" class="headerlink" title="2. 启用shutdown"></a>2. 启用shutdown</h3><p>在配置文件里添加下面的配置</p>
+<pre><code>#启用shutdown endpoint的HTTP访问
+endpoints.shutdown.enabled=true
+#不需要验证 
+endpoints.shutdown.sensitive=false</code></pre><p>启动的时候可以看到下面的日志，就说明成功了<br><img src="/images/%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97.png" alt="启动日志"></p>
 <h3 id="3-优雅停机"><a href="#3-优雅停机" class="headerlink" title="3. 优雅停机"></a>3. 优雅停机</h3><p>发送POST请求 <code>http://localhost:8080/shutdown</code><br>如果响应码是404 可以尝试POST <code>http://localhost:8080/actuator/shutdown</code></p>
 <h2 id="Spring-Boot-2-0"><a href="#Spring-Boot-2-0" class="headerlink" title="Spring Boot 2.0"></a>Spring Boot 2.0</h2><p>如果你使用的spring boot版本是2.x的就会发现，这些POST请求都会出现404的结果。</p>
 <p>下面是Spring Boot 2.0 优雅停机的实现方式。</p>
-<h3 id="1-修改Application启动类"><a href="#1-修改Application启动类" class="headerlink" title="1.修改Application启动类"></a>1.修改Application启动类</h3><h4 id="tomcat容器"><a href="#tomcat容器" class="headerlink" title="tomcat容器"></a>tomcat容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class ShutdownApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(ShutdownApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 用于接受 shutdown 事件</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Bean</span><br><span class="line">    public GracefulShutdown gracefulShutdown() &#123;</span><br><span class="line">        return new GracefulShutdown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 配置tomcat</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Bean</span><br><span class="line">    public ServletWebServerFactory servletContainer() &#123;</span><br><span class="line">        TomcatServletWebServerFactory tomcat &#x3D; new TomcatServletWebServerFactory();</span><br><span class="line">        tomcat.addConnectorCustomizers(gracefulShutdown());</span><br><span class="line">        return tomcat;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 优雅关闭 Spring Boot。容器必须是 tomcat</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private class GracefulShutdown implements TomcatConnectorCustomizer, ApplicationListener&lt;ContextClosedEvent&gt; &#123;</span><br><span class="line">        private final Logger log &#x3D; LoggerFactory.getLogger(GracefulShutdown.class);</span><br><span class="line">        private volatile Connector connector;</span><br><span class="line">        private final int waitTime &#x3D; 10;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void customize(Connector connector) &#123;</span><br><span class="line">            this.connector &#x3D; connector;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onApplicationEvent(ContextClosedEvent contextClosedEvent) &#123;</span><br><span class="line">            this.connector.pause();</span><br><span class="line">            Executor executor &#x3D; this.connector.getProtocolHandler().getExecutor();</span><br><span class="line">            if (executor instanceof ThreadPoolExecutor) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    ThreadPoolExecutor threadPoolExecutor &#x3D; (ThreadPoolExecutor) executor;</span><br><span class="line">                    threadPoolExecutor.shutdown();</span><br><span class="line">                    if (!threadPoolExecutor.awaitTermination(waitTime, TimeUnit.SECONDS)) &#123;</span><br><span class="line">                        log.warn(&quot;Tomcat 进程在&quot; + waitTime + &quot; 秒内无法结束，尝试强制结束&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; catch (InterruptedException ex) &#123;</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-修改Application启动类"><a href="#1-修改Application启动类" class="headerlink" title="1.修改Application启动类"></a>1.修改Application启动类</h3><h4 id="tomcat容器"><a href="#tomcat容器" class="headerlink" title="tomcat容器"></a>tomcat容器</h4><pre><code>@SpringBootApplication
+public class ShutdownApplication &#123;
 
-<h4 id="Undertow容器-没有使用过，不保证可用"><a href="#Undertow容器-没有使用过，不保证可用" class="headerlink" title="Undertow容器 (没有使用过，不保证可用)"></a>Undertow容器 (没有使用过，不保证可用)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class Application &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 优雅关闭 Spring Boot</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Component</span><br><span class="line">    public class GracefulShutdown implements ApplicationListener&lt;ContextClosedEvent&gt; &#123;</span><br><span class="line"></span><br><span class="line">        @Autowired</span><br><span class="line">        private GracefulShutdownWrapper gracefulShutdownWrapper;</span><br><span class="line"></span><br><span class="line">        @Autowired</span><br><span class="line">        private ServletWebServerApplicationContext context;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onApplicationEvent(ContextClosedEvent contextClosedEvent)&#123;</span><br><span class="line">            gracefulShutdownWrapper.getGracefulShutdownHandler().shutdown();</span><br><span class="line">            try &#123;</span><br><span class="line">                UndertowServletWebServer webServer &#x3D; (UndertowServletWebServer)context.getWebServer();</span><br><span class="line">                Field field &#x3D; webServer.getClass().getDeclaredField(&quot;undertow&quot;);</span><br><span class="line">                field.setAccessible(true);</span><br><span class="line">                Undertow undertow &#x3D; (Undertow) field.get(webServer);</span><br><span class="line">                List&lt;Undertow.ListenerInfo&gt; listenerInfo &#x3D; undertow.getListenerInfo();</span><br><span class="line">                Undertow.ListenerInfo listener &#x3D; listenerInfo.get(0);</span><br><span class="line">                ConnectorStatistics connectorStatistics &#x3D; listener.getConnectorStatistics();</span><br><span class="line">                while (connectorStatistics.getActiveConnections() &gt; 0)&#123;&#125;</span><br><span class="line">            &#125;catch (Exception e)&#123;</span><br><span class="line">                &#x2F;&#x2F; Application Shutdown</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @Component</span><br><span class="line">	public class GracefulShutdownWrapper implements HandlerWrapper&#123;</span><br><span class="line"></span><br><span class="line">	    private GracefulShutdownHandler gracefulShutdownHandler;</span><br><span class="line"></span><br><span class="line">	    @Override</span><br><span class="line">	    public HttpHandler wrap(HttpHandler handler) &#123;</span><br><span class="line">	        if(gracefulShutdownHandler &#x3D;&#x3D; null) &#123;</span><br><span class="line">	            this.gracefulShutdownHandler &#x3D; new GracefulShutdownHandler(handler);</span><br><span class="line">	        &#125;</span><br><span class="line">	        return gracefulShutdownHandler;</span><br><span class="line">	    &#125;</span><br><span class="line"></span><br><span class="line">	    public GracefulShutdownHandler getGracefulShutdownHandler() &#123;</span><br><span class="line">	        return gracefulShutdownHandler;</span><br><span class="line">	    &#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	@Component</span><br><span class="line">	@AllArgsConstructor</span><br><span class="line">	public class UndertowExtraConfiguration &#123;</span><br><span class="line"></span><br><span class="line">	    private final GracefulShutdownWrapper gracefulShutdownWrapper;</span><br><span class="line"></span><br><span class="line">	    @Bean</span><br><span class="line">	    public UndertowServletWebServerFactory servletWebServerFactory() &#123;</span><br><span class="line">	        UndertowServletWebServerFactory factory &#x3D; new UndertowServletWebServerFactory();</span><br><span class="line">	        factory.addDeploymentInfoCustomizers(deploymentInfo -&gt; deploymentInfo.addOuterHandlerChainWrapper(gracefulShutdownWrapper));</span><br><span class="line">	        factory.addBuilderCustomizers(builder -&gt; builder.setServerOption(UndertowOptions.ENABLE_STATISTICS, true));</span><br><span class="line">	        return factory;</span><br><span class="line">	    &#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public static void main(String[] args) &#123;
+        SpringApplication.run(ShutdownApplication.class, args);
+    &#125;
 
-<h3 id="2-使用-kill-命令杀死进程"><a href="#2-使用-kill-命令杀死进程" class="headerlink" title="2. 使用 kill 命令杀死进程"></a>2. 使用 kill 命令杀死进程</h3><p>使用下面的命令杀死进程。该命令是向 某个进程发送终止信号。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -15 [PID]</span><br></pre></td></tr></table></figure>
+    /**
+     * 用于接受 shutdown 事件
+     */
+    @Bean
+    public GracefulShutdown gracefulShutdown() &#123;
+        return new GracefulShutdown();
+    &#125;
 
-<p><a href="http://www.spring4all.com/article/1022" target="_blank" rel="noopener">参考链接</a></p>
+    /**
+     * 配置tomcat
+     *
+     * @return
+     */
+    @Bean
+    public ServletWebServerFactory servletContainer() &#123;
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+        tomcat.addConnectorCustomizers(gracefulShutdown());
+        return tomcat;
+    &#125;
+
+    /**
+     * 优雅关闭 Spring Boot。容器必须是 tomcat
+     */
+    private class GracefulShutdown implements TomcatConnectorCustomizer, ApplicationListener&lt;ContextClosedEvent&gt; &#123;
+        private final Logger log = LoggerFactory.getLogger(GracefulShutdown.class);
+        private volatile Connector connector;
+        private final int waitTime = 10;
+
+        @Override
+        public void customize(Connector connector) &#123;
+            this.connector = connector;
+        &#125;
+
+        @Override
+        public void onApplicationEvent(ContextClosedEvent contextClosedEvent) &#123;
+            this.connector.pause();
+            Executor executor = this.connector.getProtocolHandler().getExecutor();
+            if (executor instanceof ThreadPoolExecutor) &#123;
+                try &#123;
+                    ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
+                    threadPoolExecutor.shutdown();
+                    if (!threadPoolExecutor.awaitTermination(waitTime, TimeUnit.SECONDS)) &#123;
+                        log.warn(&quot;Tomcat 进程在&quot; + waitTime + &quot; 秒内无法结束，尝试强制结束&quot;);
+                    &#125;
+                &#125; catch (InterruptedException ex) &#123;
+                    Thread.currentThread().interrupt();
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre><h4 id="Undertow容器-没有使用过，不保证可用"><a href="#Undertow容器-没有使用过，不保证可用" class="headerlink" title="Undertow容器 (没有使用过，不保证可用)"></a>Undertow容器 (没有使用过，不保证可用)</h4><pre><code>@SpringBootApplication
+public class Application &#123;
+
+    public static void main(String[] args) &#123;
+        SpringApplication.run(Application.class, args);
+    &#125;
+
+    /**
+     * 优雅关闭 Spring Boot
+     */
+    @Component
+    public class GracefulShutdown implements ApplicationListener&lt;ContextClosedEvent&gt; &#123;
+
+        @Autowired
+        private GracefulShutdownWrapper gracefulShutdownWrapper;
+
+        @Autowired
+        private ServletWebServerApplicationContext context;
+
+        @Override
+        public void onApplicationEvent(ContextClosedEvent contextClosedEvent)&#123;
+            gracefulShutdownWrapper.getGracefulShutdownHandler().shutdown();
+            try &#123;
+                UndertowServletWebServer webServer = (UndertowServletWebServer)context.getWebServer();
+                Field field = webServer.getClass().getDeclaredField(&quot;undertow&quot;);
+                field.setAccessible(true);
+                Undertow undertow = (Undertow) field.get(webServer);
+                List&lt;Undertow.ListenerInfo&gt; listenerInfo = undertow.getListenerInfo();
+                Undertow.ListenerInfo listener = listenerInfo.get(0);
+                ConnectorStatistics connectorStatistics = listener.getConnectorStatistics();
+                while (connectorStatistics.getActiveConnections() &gt; 0)&#123;&#125;
+            &#125;catch (Exception e)&#123;
+                // Application Shutdown
+            &#125;
+        &#125;
+    &#125;
+    @Component
+    public class GracefulShutdownWrapper implements HandlerWrapper&#123;
+
+        private GracefulShutdownHandler gracefulShutdownHandler;
+
+        @Override
+        public HttpHandler wrap(HttpHandler handler) &#123;
+            if(gracefulShutdownHandler == null) &#123;
+                this.gracefulShutdownHandler = new GracefulShutdownHandler(handler);
+            &#125;
+            return gracefulShutdownHandler;
+        &#125;
+
+        public GracefulShutdownHandler getGracefulShutdownHandler() &#123;
+            return gracefulShutdownHandler;
+        &#125;
+
+    &#125;
+    @Component
+    @AllArgsConstructor
+    public class UndertowExtraConfiguration &#123;
+
+        private final GracefulShutdownWrapper gracefulShutdownWrapper;
+
+        @Bean
+        public UndertowServletWebServerFactory servletWebServerFactory() &#123;
+            UndertowServletWebServerFactory factory = new UndertowServletWebServerFactory();
+            factory.addDeploymentInfoCustomizers(deploymentInfo -&gt; deploymentInfo.addOuterHandlerChainWrapper(gracefulShutdownWrapper));
+            factory.addBuilderCustomizers(builder -&gt; builder.setServerOption(UndertowOptions.ENABLE_STATISTICS, true));
+            return factory;
+        &#125;
+
+    &#125;
+&#125;</code></pre><h3 id="2-使用-kill-命令杀死进程"><a href="#2-使用-kill-命令杀死进程" class="headerlink" title="2. 使用 kill 命令杀死进程"></a>2. 使用 kill 命令杀死进程</h3><p>使用下面的命令杀死进程。该命令是向 某个进程发送终止信号。</p>
+<pre><code>kill -15 [PID]</code></pre><p><a target="_blank" rel="noopener" href="http://www.spring4all.com/article/1022">参考链接</a></p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">

@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri May 18 2018 14:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Sat Dec 19 2020 11:45:27 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180518.html",
     "headline": "连接Redis异常：JedisMovedDataException",
     "datePublished": "Fri May 18 2018 14:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Sat Dec 19 2020 11:45:27 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,10 +522,17 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>java API连接redis<br>出现下面的异常信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis.clients.jedis.exceptions.JedisMovedDataException: MOVED 1539 127.0.0.1:6379</span><br></pre></td></tr></table></figure>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>将连接对象从 Jedis 换成 JedisCluster。就可以了。</p>
+<pre><code>redis.clients.jedis.exceptions.JedisMovedDataException: MOVED 1539 127.0.0.1:6379</code></pre><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>将连接对象从 Jedis 换成 JedisCluster。就可以了。</p>
 <h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>MOVED表示使用的是Redis群集。而 Jedis 不是集群模式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;import redis.clients.jedis.HostAndPort;</span><br><span class="line">&#x2F;&#x2F;import redis.clients.jedis.JedisCluster;</span><br><span class="line"></span><br><span class="line">HostAndPort hostAndPort &#x3D; new HostAndPort(host, port);</span><br><span class="line">Set&lt;HostAndPort&gt; hostAndPortSet &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">hostAndPortSet.add(hostAndPort);</span><br><span class="line">JedisCluster jedis &#x3D; new JedisCluster(hostAndPortSet);</span><br><span class="line">jedis.setnx(key, value);</span><br></pre></td></tr></table></figure>
+<pre><code>//import redis.clients.jedis.HostAndPort;
+//import redis.clients.jedis.JedisCluster;
+
+HostAndPort hostAndPort = new HostAndPort(host, port);
+Set&lt;HostAndPort&gt; hostAndPortSet = new HashSet&lt;&gt;();
+hostAndPortSet.add(hostAndPort);
+JedisCluster jedis = new JedisCluster(hostAndPortSet);
+jedis.setnx(key, value);
+</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu May 17 2018 14:17:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Sat Dec 19 2020 11:45:45 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180517.html",
     "headline": "Feign 的简单使用及传参方式",
     "datePublished": "Thu May 17 2018 14:17:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Sat Dec 19 2020 11:45:45 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,12 +522,131 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="0-Feign-简介"><a href="#0-Feign-简介" class="headerlink" title="0. Feign 简介"></a>0. Feign 简介</h2><p>Feign 是简化Java HTTP客户端开发的工具。它使用注解的方式将HTTP的URL封装成接口，每个URL对应一个接口，大大简化了HTTP客户端的开发。</p>
-<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.github.openfeign&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;feign-core&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.github.openfeign&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;feign-jackson&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.github.openfeign&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;feign-httpclient&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.httpcomponents&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;httpclient&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-定义API"><a href="#2-定义API" class="headerlink" title="2. 定义API"></a>2. 定义API</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import feign.Headers;</span><br><span class="line">import feign.Param;</span><br><span class="line">import feign.RequestLine;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Create by zdran@gmail.com on 2018&#x2F;3&#x2F;20</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">&#x2F;&#x2F;Headers 注解：配置请求头信息</span><br><span class="line">@Headers(&#123;&quot;Accept: application&#x2F;json&quot;, &quot;Content-Type: application&#x2F;json&quot;&#125;)</span><br><span class="line">public interface UserApi &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * RequestLine 注解：请求的方法与url，这里需要注意的是url写的是与Controller里的地址，不是完整的url地址。</span><br><span class="line">     * GET 请求方法，遵循RESTful风格</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @RequestLine(&quot;GET &#x2F;user&#x2F;all&quot;)</span><br><span class="line">    List&lt;User&gt; getAllUser();</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * restful方式传参</span><br><span class="line">     * @param name</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @RequestLine(&quot;GET &#x2F;user&#x2F;&#123;name&#125;&quot;)</span><br><span class="line">    User getByName(@Param(&quot;name&quot;) String name);</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * url方式传参数</span><br><span class="line">     * @param id</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @RequestLine(&quot;GET &#x2F;user&#x2F;id?id&#x3D;&#123;id&#125;&quot;)</span><br><span class="line">    User getById(@Param(&quot;id&quot;) String id);</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * post 传参，传复杂类型</span><br><span class="line">     * @param user</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @RequestLine(&quot;POST &#x2F;user&#x2F;add&quot;)</span><br><span class="line">    void addUser(User user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h2><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;io.github.openfeign&lt;/groupId&gt;
+    &lt;artifactId&gt;feign-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.github.openfeign&lt;/groupId&gt;
+    &lt;artifactId&gt;feign-jackson&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.github.openfeign&lt;/groupId&gt;
+    &lt;artifactId&gt;feign-httpclient&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
+    &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><h2 id="2-定义API"><a href="#2-定义API" class="headerlink" title="2. 定义API"></a>2. 定义API</h2><pre><code>
+import feign.Headers;
+import feign.Param;
+import feign.RequestLine;
 
-<h2 id="3-定义实现API的controller"><a href="#3-定义实现API的controller" class="headerlink" title="3. 定义实现API的controller"></a>3. 定义实现API的controller</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line">import javax.validation.Valid;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Create by zdran@gmail.com on 2018&#x2F;3&#x2F;20</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestController</span><br><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;user&quot;, produces &#x3D; &quot;application&#x2F;json&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(value &#x3D; &quot;&#x2F;all&quot;)</span><br><span class="line">    List&lt;User&gt; getAll()&#123;</span><br><span class="line">        List&lt;User&gt; users &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        User user &#x3D; new User();</span><br><span class="line">        user.setName(&quot;获取所有用户&quot;);</span><br><span class="line">        users.add(user);</span><br><span class="line">        return users;</span><br><span class="line">    &#125;</span><br><span class="line">    @GetMapping(value &#x3D; &quot;&#x2F;&#123;name&#125;&quot;)</span><br><span class="line">    User getByName(@PathVariable String name)&#123;</span><br><span class="line">        User user &#x3D; new User();</span><br><span class="line">        user.setName(&quot;获取用户：&quot;+name);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">    @GetMapping(value &#x3D; &quot;&#x2F;id&quot;)</span><br><span class="line">    User getById(String id)&#123;</span><br><span class="line">        User user &#x3D; new User();</span><br><span class="line">        user.setName(&quot;获取用户：&quot;+id);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">    @PostMapping(value &#x3D; &quot;&#x2F;add&quot;)</span><br><span class="line">    void addUser(@RequestBody User user)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import feign.Feign;</span><br><span class="line">import feign.httpclient.ApacheHttpClient;</span><br><span class="line">import feign.jackson.JacksonDecoder;</span><br><span class="line">import feign.jackson.JacksonEncoder;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Create by zdran@gmail.com on 2018&#x2F;3&#x2F;20</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Controller</span><br><span class="line">public class ClientController &#123;</span><br><span class="line">    private static final String apiBaseUrl &#x3D; &quot;http:&#x2F;&#x2F;localhost:8080&#x2F;feign&quot;;</span><br><span class="line">    UserApi userApi &#x3D; Feign.builder()</span><br><span class="line">            .client(new ApacheHttpClient())</span><br><span class="line">            .encoder(new JacksonEncoder())</span><br><span class="line">            .decoder(new JacksonDecoder())</span><br><span class="line">            .target(UserApi.class, apiBaseUrl);</span><br><span class="line"></span><br><span class="line">    @GetMapping(value &#x3D; &quot;&#x2F;client&#x2F;user&#x2F;&#123;name&#125;&quot;)</span><br><span class="line">    public User getUserInfo(@PathVariable String name)&#123;</span><br><span class="line">        return userApi.getByName(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+import java.util.List;
 
+/**
+ * Create by zdran@gmail.com on 2018/3/20
+ *
+ */
+//Headers 注解：配置请求头信息
+@Headers(&#123;&quot;Accept: application/json&quot;, &quot;Content-Type: application/json&quot;&#125;)
+public interface UserApi &#123;
+    /**
+     * RequestLine 注解：请求的方法与url，这里需要注意的是url写的是与Controller里的地址，不是完整的url地址。
+     * GET 请求方法，遵循RESTful风格
+     * @return
+     */
+    @RequestLine(&quot;GET /user/all&quot;)
+    List&lt;User&gt; getAllUser();
+
+    /**
+     * restful方式传参
+     * @param name
+     * @return
+     */
+    @RequestLine(&quot;GET /user/&#123;name&#125;&quot;)
+    User getByName(@Param(&quot;name&quot;) String name);
+
+    /**
+     * url方式传参数
+     * @param id
+     * @return
+     */
+    @RequestLine(&quot;GET /user/id?id=&#123;id&#125;&quot;)
+    User getById(@Param(&quot;id&quot;) String id);
+
+    /**
+     * post 传参，传复杂类型
+     * @param user
+     */
+    @RequestLine(&quot;POST /user/add&quot;)
+    void addUser(User user);
+&#125;</code></pre><h2 id="3-定义实现API的controller"><a href="#3-定义实现API的controller" class="headerlink" title="3. 定义实现API的controller"></a>3. 定义实现API的controller</h2><pre><code>import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Create by zdran@gmail.com on 2018/3/20
+ *
+ */
+@RestController
+@RequestMapping(value = &quot;/user&quot;, produces = &quot;application/json&quot;)
+public class UserController &#123;
+
+    @GetMapping(value = &quot;/all&quot;)
+    List&lt;User&gt; getAll()&#123;
+        List&lt;User&gt; users = new ArrayList&lt;&gt;();
+        User user = new User();
+        user.setName(&quot;获取所有用户&quot;);
+        users.add(user);
+        return users;
+    &#125;
+    @GetMapping(value = &quot;/&#123;name&#125;&quot;)
+    User getByName(@PathVariable String name)&#123;
+        User user = new User();
+        user.setName(&quot;获取用户：&quot;+name);
+        return user;
+    &#125;
+    @GetMapping(value = &quot;/id&quot;)
+    User getById(String id)&#123;
+        User user = new User();
+        user.setName(&quot;获取用户：&quot;+id);
+        return user;
+    &#125;
+    @PostMapping(value = &quot;/add&quot;)
+    void addUser(@RequestBody User user)&#123;
+
+    &#125;
+&#125;</code></pre><h2 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h2><pre><code>import feign.Feign;
+import feign.httpclient.ApacheHttpClient;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+/**
+ * Create by zdran@gmail.com on 2018/3/20
+ *
+ */
+@Controller
+public class ClientController &#123;
+    private static final String apiBaseUrl = &quot;http://localhost:8080/feign&quot;;
+    UserApi userApi = Feign.builder()
+            .client(new ApacheHttpClient())
+            .encoder(new JacksonEncoder())
+            .decoder(new JacksonDecoder())
+            .target(UserApi.class, apiBaseUrl);
+
+    @GetMapping(value = &quot;/client/user/&#123;name&#125;&quot;)
+    public User getUserInfo(@PathVariable String name)&#123;
+        return userApi.getByName(name);
+    &#125;
+
+&#125;</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

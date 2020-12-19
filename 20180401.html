@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sun Apr 01 2018 09:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Sat Dec 19 2020 11:47:52 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180401.html",
     "headline": "32. Longest Valid Parentheses",
     "datePublished": "Sun Apr 01 2018 09:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Sat Dec 19 2020 11:47:52 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,27 +522,47 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/leetcode" target="_blank" rel="noopener">刷题仓库地址</a></li>
-<li><a href="https://zdran.com/20180327.html" target="_blank" rel="noopener">4. Median of Two Sorted Arrays</a></li>
-<li><a href="https://zdran.com/20180328.html" target="_blank" rel="noopener">10. Regular Expression Matching</a></li>
-<li><a href="https://zdran.com/20180329.html" target="_blank" rel="noopener">23. Merge k Sorted Lists</a></li>
-<li><a href="https://zdran.com/20180330.html" target="_blank" rel="noopener">25. Reverse Nodes in k-Group</a></li>
-<li><a href="https://zdran.com/20180331.html" target="_blank" rel="noopener">30. Substring with Concatenation of All Words</a></li>
-<li><a href="https://zdran.com/20180401.html" target="_blank" rel="noopener">32. Longest Valid Parentheses</a></li>
-<li><a href="https://zdran.com/20190321.html" target="_blank" rel="noopener">37. Sudoku Solver</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/leetcode">刷题仓库地址</a></li>
+<li><a href="https://zdran.com/20180327.html">4. Median of Two Sorted Arrays</a></li>
+<li><a href="https://zdran.com/20180328.html">10. Regular Expression Matching</a></li>
+<li><a href="https://zdran.com/20180329.html">23. Merge k Sorted Lists</a></li>
+<li><a href="https://zdran.com/20180330.html">25. Reverse Nodes in k-Group</a></li>
+<li><a href="https://zdran.com/20180331.html">30. Substring with Concatenation of All Words</a></li>
+<li><a href="https://zdran.com/20180401.html">32. Longest Valid Parentheses</a></li>
+<li><a href="https://zdran.com/20190321.html">37. Sudoku Solver</a></li>
 </ul>
 <hr>
 <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a string containing just the characters ‘(‘ and ‘)’, find the length of the longest valid (well-formed) parentheses substring.</p>
 <p>For “(()”, the longest valid parentheses substring is “()”, which has length = 2.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Another example is &quot;)()())&quot;, </span><br><span class="line">where the longest valid parentheses substring is &quot;()()&quot;, </span><br><span class="line">which has length &#x3D; 4.</span><br></pre></td></tr></table></figure>
-<h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>给定一个只包含字符’（’和’）’的字符串，找出最长有效（格式良好）的括号中的字符串的长度。 </p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><pre><code>Another example is &quot;)()())&quot;, 
+where the longest valid parentheses substring is &quot;()()&quot;, 
+which has length = 4.
+</code></pre><h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>给定一个只包含字符’（’和’）’的字符串，找出最长有效（格式良好）的括号中的字符串的长度。 </p>
 <p>对于“（（）”，最长的有效括号是“（）”，长度= 2。</p>
 <h2 id="Ideas"><a href="#Ideas" class="headerlink" title="Ideas"></a>Ideas</h2><p>采用栈，判断栈顶元素与当前元素是否匹配，匹配成功则弹出，不成功则压入栈，入栈的是索引值，不是字符。</p>
 <p>遇到 ‘(‘ 入栈索引值</p>
 <p>遇到 ‘)’ 先出栈，</p>
 <p>如果栈为空，直接入栈</p>
 <p>如果栈不空，用当前索引减去栈顶索引，即得新的有效格式的长度。</p>
-<h2 id="Accept-Code"><a href="#Accept-Code" class="headerlink" title="Accept Code"></a>Accept Code</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static int longestValidParentheses(String s) &#123;</span><br><span class="line">    int ans &#x3D; 0;</span><br><span class="line">    Stack&lt;Integer&gt; stack &#x3D; new Stack&lt;&gt;();</span><br><span class="line">    stack.push(-1);</span><br><span class="line">    for (int i &#x3D; 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">        char c &#x3D; s.charAt(i);</span><br><span class="line">        if (c &#x3D;&#x3D; &#39;(&#39;) &#123;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            stack.pop();</span><br><span class="line">            if (stack.empty()) &#123;</span><br><span class="line">                stack.push(i);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                ans &#x3D; i - stack.peek() &gt; ans ? i - stack.peek() : ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Accept-Code"><a href="#Accept-Code" class="headerlink" title="Accept Code"></a>Accept Code</h2><pre><code>public static int longestValidParentheses(String s) &#123;
+    int ans = 0;
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    stack.push(-1);
+    for (int i = 0; i &lt; s.length(); i++) &#123;
+        char c = s.charAt(i);
+        if (c == &#39;(&#39;) &#123;
+            stack.push(i);
+        &#125; else &#123;
+            stack.pop();
+            if (stack.empty()) &#123;
+                stack.push(i);
+            &#125; else &#123;
+                ans = i - stack.peek() &gt; ans ? i - stack.peek() : ans;
+            &#125;
+        &#125;
+    &#125;
+    return ans;
+&#125;</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

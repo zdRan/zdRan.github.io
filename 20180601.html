@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Jun 01 2018 10:51:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Sat Dec 19 2020 11:44:03 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180601.html",
     "headline": "Android 音乐播放器-带seekBar滑动",
     "datePublished": "Fri Jun 01 2018 10:51:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Sat Dec 19 2020 11:44:03 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -521,9 +521,133 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="XML布局文件"><a href="#XML布局文件" class="headerlink" title="XML布局文件"></a>XML布局文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;</span><br><span class="line">    android:orientation&#x3D;&quot;vertical&quot;</span><br><span class="line">    android:layout_width&#x3D;&quot;fill_parent&quot;</span><br><span class="line">    android:layout_height&#x3D;&quot;fill_parent&quot;</span><br><span class="line">    &gt;</span><br><span class="line">&lt;Button android:id&#x3D;&quot;@+id&#x2F;play&quot;</span><br><span class="line">	android:layout_width&#x3D;&quot;fill_parent&quot;</span><br><span class="line">	android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">	android:text&#x3D;&quot;播放&quot;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line">&lt;Button android:id&#x3D;&quot;@+id&#x2F;pause&quot;</span><br><span class="line">	android:layout_width&#x3D;&quot;fill_parent&quot;</span><br><span class="line">	android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">	android:text&#x3D;&quot;暂停&quot;</span><br><span class="line">&#x2F;&gt;</span><br><span class="line">&lt;SeekBar android:id&#x3D;&quot;@+id&#x2F;sb&quot;</span><br><span class="line">	android:layout_width&#x3D;&quot;fill_parent&quot;</span><br><span class="line">	android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">	android:max&#x3D;&quot;100&quot; </span><br><span class="line">&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+        <h2 id="XML布局文件"><a href="#XML布局文件" class="headerlink" title="XML布局文件"></a>XML布局文件</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:orientation=&quot;vertical&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;fill_parent&quot;
+    &gt;
+&lt;Button android:id=&quot;@+id/play&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;播放&quot;
+/&gt;
+&lt;Button android:id=&quot;@+id/pause&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;暂停&quot;
+/&gt;
+&lt;SeekBar android:id=&quot;@+id/sb&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:max=&quot;100&quot; 
+/&gt;
+&lt;/LinearLayout&gt;</code></pre><h2 id="JAVA代码"><a href="#JAVA代码" class="headerlink" title="JAVA代码"></a>JAVA代码</h2><pre><code>package com.pocketdigi;
 
-<h2 id="JAVA代码"><a href="#JAVA代码" class="headerlink" title="JAVA代码"></a>JAVA代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">package com.pocketdigi;</span><br><span class="line"> </span><br><span class="line">import android.app.Activity;</span><br><span class="line">import android.media.MediaPlayer;</span><br><span class="line">import android.net.Uri;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.os.Handler;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.View.OnClickListener;</span><br><span class="line">import android.widget.Button;</span><br><span class="line">import android.widget.SeekBar;</span><br><span class="line">import android.widget.SeekBar.OnSeekBarChangeListener;</span><br><span class="line"> </span><br><span class="line">public class main extends Activity &#123;</span><br><span class="line">    &#x2F;** Called when the activity is first created. *&#x2F;</span><br><span class="line">	Button play,pause;</span><br><span class="line">	MediaPlayer mp;</span><br><span class="line">	SeekBar sb;</span><br><span class="line">	Handler handler&#x3D;new Handler();</span><br><span class="line">	int Duration;</span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        play&#x3D;(Button)findViewById(R.id.play);</span><br><span class="line">        pause&#x3D;(Button)findViewById(R.id.pause);</span><br><span class="line">        sb&#x3D;(SeekBar)findViewById(R.id.sb);</span><br><span class="line">        &#x2F;&#x2F;找到相应View</span><br><span class="line">        mp &#x3D;MediaPlayer.create(this,Uri.parse(&quot;&#x2F;sdcard&#x2F;徐若瑄-爱笑的眼睛.mp3&quot;));</span><br><span class="line">        &#x2F;&#x2F;后面的参数必须是URI形式的，所以要把相应路径转换成URI</span><br><span class="line">        play.setOnClickListener(playlis);</span><br><span class="line">        pause.setOnClickListener(pauselis);</span><br><span class="line">        sb.setOnSeekBarChangeListener(sbLis);   </span><br><span class="line">        &#x2F;&#x2F;监听器</span><br><span class="line">        Duration&#x3D;mp.getDuration();</span><br><span class="line">        &#x2F;&#x2F;音乐文件持续时间</span><br><span class="line">        sb.setMax(Duration);</span><br><span class="line">        &#x2F;&#x2F;设置SeekBar最大值为音乐文件持续时间</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    private OnClickListener playlis&#x3D;new OnClickListener()&#123;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void onClick(View v) &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			handler.post(start);</span><br><span class="line">			&#x2F;&#x2F;调用handler播放</span><br><span class="line"> </span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">    &#125;;</span><br><span class="line">    Runnable start&#x3D;new Runnable()&#123;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			mp.start();</span><br><span class="line">			handler.post(updatesb);</span><br><span class="line">			&#x2F;&#x2F;用一个handler更新SeekBar</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">    &#125;;</span><br><span class="line">    Runnable updatesb &#x3D;new Runnable()&#123;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			sb.setProgress(mp.getCurrentPosition());</span><br><span class="line">			handler.postDelayed(updatesb, 1000);</span><br><span class="line">			&#x2F;&#x2F;每秒钟更新一次</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">    &#125;;</span><br><span class="line">    private OnClickListener pauselis&#x3D;new OnClickListener()&#123;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void onClick(View v) &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			mp.pause();		</span><br><span class="line">			&#x2F;&#x2F;暂停</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">    &#125;;</span><br><span class="line">    private OnSeekBarChangeListener sbLis&#x3D;new OnSeekBarChangeListener()&#123;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void onProgressChanged(SeekBar seekBar, int progress,</span><br><span class="line">				boolean fromUser) &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void onStartTrackingTouch(SeekBar seekBar) &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line"> </span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		@Override</span><br><span class="line">		public void onStopTrackingTouch(SeekBar seekBar) &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			mp.seekTo(sb.getProgress());</span><br><span class="line">			&#x2F;&#x2F;SeekBar确定位置后，跳到指定位置</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+import android.app.Activity;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+
+public class main extends Activity &#123;
+    /** Called when the activity is first created. */
+    Button play,pause;
+    MediaPlayer mp;
+    SeekBar sb;
+    Handler handler=new Handler();
+    int Duration;
+    @Override
+    public void onCreate(Bundle savedInstanceState) &#123;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        play=(Button)findViewById(R.id.play);
+        pause=(Button)findViewById(R.id.pause);
+        sb=(SeekBar)findViewById(R.id.sb);
+        //找到相应View
+        mp =MediaPlayer.create(this,Uri.parse(&quot;/sdcard/徐若瑄-爱笑的眼睛.mp3&quot;));
+        //后面的参数必须是URI形式的，所以要把相应路径转换成URI
+        play.setOnClickListener(playlis);
+        pause.setOnClickListener(pauselis);
+        sb.setOnSeekBarChangeListener(sbLis);   
+        //监听器
+        Duration=mp.getDuration();
+        //音乐文件持续时间
+        sb.setMax(Duration);
+        //设置SeekBar最大值为音乐文件持续时间
+    &#125;
+
+    private OnClickListener playlis=new OnClickListener()&#123;
+
+        @Override
+        public void onClick(View v) &#123;
+            // TODO Auto-generated method stub
+            handler.post(start);
+            //调用handler播放
+
+        &#125;
+
+    &#125;;
+    Runnable start=new Runnable()&#123;
+
+        @Override
+        public void run() &#123;
+            // TODO Auto-generated method stub
+            mp.start();
+            handler.post(updatesb);
+            //用一个handler更新SeekBar
+        &#125;
+
+    &#125;;
+    Runnable updatesb =new Runnable()&#123;
+
+        @Override
+        public void run() &#123;
+            // TODO Auto-generated method stub
+            sb.setProgress(mp.getCurrentPosition());
+            handler.postDelayed(updatesb, 1000);
+            //每秒钟更新一次
+        &#125;
+
+    &#125;;
+    private OnClickListener pauselis=new OnClickListener()&#123;
+
+        @Override
+        public void onClick(View v) &#123;
+            // TODO Auto-generated method stub
+            mp.pause();        
+            //暂停
+        &#125;
+
+    &#125;;
+    private OnSeekBarChangeListener sbLis=new OnSeekBarChangeListener()&#123;
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                boolean fromUser) &#123;
+            // TODO Auto-generated method stub
+        &#125;
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) &#123;
+            // TODO Auto-generated method stub
+
+        &#125;
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) &#123;
+            // TODO Auto-generated method stub
+            mp.seekTo(sb.getProgress());
+            //SeekBar确定位置后，跳到指定位置
+        &#125;
+
+    &#125;;
+&#125;</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>

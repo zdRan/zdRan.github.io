@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sat Mar 31 2018 09:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 19 2019 15:37:04 GMT+0800">
+        <meta property="article:modified_time" content="Sat Dec 19 2020 11:48:40 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180331.html",
     "headline": "30. Substring with Concatenation of All Words",
     "datePublished": "Sat Mar 31 2018 09:22:22 GMT+0800",
-    "dateModified": "Thu Dec 19 2019 15:37:04 GMT+0800",
+    "dateModified": "Sat Dec 19 2020 11:48:40 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -522,18 +522,23 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <ul>
-<li><a href="https://github.com/zdRan/leetcode" target="_blank" rel="noopener">刷题仓库地址</a></li>
-<li><a href="https://zdran.com/20180327.html" target="_blank" rel="noopener">4. Median of Two Sorted Arrays</a></li>
-<li><a href="https://zdran.com/20180328.html" target="_blank" rel="noopener">10. Regular Expression Matching</a></li>
-<li><a href="https://zdran.com/20180329.html" target="_blank" rel="noopener">23. Merge k Sorted Lists</a></li>
-<li><a href="https://zdran.com/20180330.html" target="_blank" rel="noopener">25. Reverse Nodes in k-Group</a></li>
-<li><a href="https://zdran.com/20180331.html" target="_blank" rel="noopener">30. Substring with Concatenation of All Words</a></li>
-<li><a href="https://zdran.com/20180401.html" target="_blank" rel="noopener">32. Longest Valid Parentheses</a></li>
-<li><a href="https://zdran.com/20190321.html" target="_blank" rel="noopener">37. Sudoku Solver</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zdRan/leetcode">刷题仓库地址</a></li>
+<li><a href="https://zdran.com/20180327.html">4. Median of Two Sorted Arrays</a></li>
+<li><a href="https://zdran.com/20180328.html">10. Regular Expression Matching</a></li>
+<li><a href="https://zdran.com/20180329.html">23. Merge k Sorted Lists</a></li>
+<li><a href="https://zdran.com/20180330.html">25. Reverse Nodes in k-Group</a></li>
+<li><a href="https://zdran.com/20180331.html">30. Substring with Concatenation of All Words</a></li>
+<li><a href="https://zdran.com/20180401.html">32. Longest Valid Parentheses</a></li>
+<li><a href="https://zdran.com/20190321.html">37. Sudoku Solver</a></li>
 </ul>
 <hr>
 <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given a string, s, and a list of words, words, that are all of the same length.<br>Find all starting indices of substring(s) in s that is a concatenation of each word in<br>words exactly once and without any intervening characters.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">For example, given:</span><br><span class="line">s: &quot;barfoothefoobarman&quot;</span><br><span class="line">words: [&quot;foo&quot;, &quot;bar&quot;]</span><br><span class="line"></span><br><span class="line">You should return the indices: [0,9].</span><br><span class="line">(order does not matter).</span><br></pre></td></tr></table></figure>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><pre><code class="$xslt">For example, given:
+s: &quot;barfoothefoobarman&quot;
+words: [&quot;foo&quot;, &quot;bar&quot;]
+
+You should return the indices: [0,9].
+(order does not matter).</code></pre>
 <h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>给你一个字符串s和一个长度相同的单词列表。从s中找出所有以单词列表串起来的子串的起始位置，这些字符串中的每个单词只是一个字符串，没有任何中介字符。</p>
 <p>单词列表的串联顺序是任意的。意思就是找出s中恰好包含所有单词的子串的起始位置</p>
 <h2 id="Ideas"><a href="#Ideas" class="headerlink" title="Ideas"></a>Ideas</h2><p>滑块、或者叫窗口搜索。大致意思是定义两个指针，start、end，我们的最终目的是希望，从start至end能恰好包含所有的单词，<br>即，所有单词可以串联成start至end的字符串。</p>
@@ -545,7 +550,52 @@
 <p>关于重复单词的问题：</p>
 <p>定义两个map集合，一个用于记录原始的单词与个数的映射，一个用于记录滑块窗口的单词与个数的映射。</p>
 <p>每次移动end的时候，判断一下滑块里的当前单词个数是否超出了原始的单词个数，超出就移动start，临时数据清零</p>
-<h2 id="Accept-Code"><a href="#Accept-Code" class="headerlink" title="Accept Code"></a>Accept Code</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;Integer&gt; findSubstring(String s, String[] words) &#123;</span><br><span class="line">    Map&lt;String, Integer&gt; wordMap &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">    for (String word : words) &#123;</span><br><span class="line">        if (wordMap.containsKey(word)) &#123;</span><br><span class="line">            wordMap.put(word, wordMap.get(word) + 1);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            wordMap.put(word, 1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Integer&gt; temp &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">    List&lt;Integer&gt; ans &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    int start &#x3D; 0;</span><br><span class="line">    int end &#x3D; 0;</span><br><span class="line">    int wordLength &#x3D; words[0].length();</span><br><span class="line">    int arrLength &#x3D; words.length;</span><br><span class="line">    int tempArrLength &#x3D; 0;</span><br><span class="line">    while (end + wordLength &lt; s.length() + 1) &#123;</span><br><span class="line">        String tempWord &#x3D; s.substring(end, end + wordLength);</span><br><span class="line"></span><br><span class="line">        Integer value &#x3D; wordMap.get(tempWord);</span><br><span class="line">        Integer tempValue &#x3D; temp.get(tempWord);</span><br><span class="line"></span><br><span class="line">        if (value !&#x3D; null &amp;&amp; (tempValue &#x3D;&#x3D; null || tempValue &lt; value)) &#123;</span><br><span class="line">            if (tempValue &#x3D;&#x3D; null) &#123;</span><br><span class="line">                tempValue &#x3D; 0;</span><br><span class="line">            &#125;</span><br><span class="line">            temp.put(tempWord, tempValue + 1);</span><br><span class="line">            end +&#x3D; wordLength;</span><br><span class="line">            tempArrLength++;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            start++;</span><br><span class="line">            end &#x3D; start;</span><br><span class="line">            tempArrLength &#x3D; 0;</span><br><span class="line">            temp.clear();</span><br><span class="line">        &#125;</span><br><span class="line">        if (tempArrLength &#x3D;&#x3D; arrLength) &#123;</span><br><span class="line">            ans.add(start);</span><br><span class="line">            start++;</span><br><span class="line">            end &#x3D; start;</span><br><span class="line">            tempArrLength &#x3D; 0;</span><br><span class="line">            temp.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br></pre></td></tr></table></figure>
+<h2 id="Accept-Code"><a href="#Accept-Code" class="headerlink" title="Accept Code"></a>Accept Code</h2><pre><code>    public static List&lt;Integer&gt; findSubstring(String s, String[] words) &#123;
+        Map&lt;String, Integer&gt; wordMap = new HashMap&lt;&gt;();
+        for (String word : words) &#123;
+            if (wordMap.containsKey(word)) &#123;
+                wordMap.put(word, wordMap.get(word) + 1);
+            &#125; else &#123;
+                wordMap.put(word, 1);
+            &#125;
+        &#125;
+
+        Map&lt;String, Integer&gt; temp = new HashMap&lt;&gt;();
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        int start = 0;
+        int end = 0;
+        int wordLength = words[0].length();
+        int arrLength = words.length;
+        int tempArrLength = 0;
+        while (end + wordLength &lt; s.length() + 1) &#123;
+            String tempWord = s.substring(end, end + wordLength);
+
+            Integer value = wordMap.get(tempWord);
+            Integer tempValue = temp.get(tempWord);
+
+            if (value != null &amp;&amp; (tempValue == null || tempValue &lt; value)) &#123;
+                if (tempValue == null) &#123;
+                    tempValue = 0;
+                &#125;
+                temp.put(tempWord, tempValue + 1);
+                end += wordLength;
+                tempArrLength++;
+            &#125; else &#123;
+                start++;
+                end = start;
+                tempArrLength = 0;
+                temp.clear();
+            &#125;
+            if (tempArrLength == arrLength) &#123;
+                ans.add(start);
+                start++;
+                end = start;
+                tempArrLength = 0;
+                temp.clear();
+            &#125;
+        &#125;
+        return ans;
+</code></pre>
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>
