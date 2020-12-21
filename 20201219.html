@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sat Dec 19 2020 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Mon Dec 21 2020 18:52:20 GMT+0800">
+        <meta property="article:modified_time" content="Mon Dec 21 2020 19:00:22 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20201219.html",
     "headline": "Redis 集群内的数据同步",
     "datePublished": "Sat Dec 19 2020 16:47:43 GMT+0800",
-    "dateModified": "Mon Dec 21 2020 18:52:20 GMT+0800",
+    "dateModified": "Mon Dec 21 2020 19:00:22 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -595,7 +595,7 @@ CLUSTER DELSLOTS slot1 [slot2]：把多个 slot 从当前节点删除
 
 CLUSTER SETSLOT solt1 nodeB ：把 slot1 分配给 nodeB</code></pre><h2 id="3-主从模式"><a href="#3-主从模式" class="headerlink" title="3. 主从模式"></a>3. 主从模式</h2><p>一个 slot 会被保存多个副本，也就是一个 slot 会被保存到多个节点上， Redis 集群的复制是以节点为单位的，所以一个节点上的所有 slot 都会被复制。</p>
 <p>具体来说，一个节点负责这个节点上所有 slot 的写操作，这个节点被称为 master 节点，而复制这个节点数据的其他节点被称为 slave 节点（从节点）。一个 master 可以有多个 slave ，对于 master 节点上的所有写操作都会被复制到所有的 slave 节点上。所以 master 与 slave 具有相同的数据。</p>
-<p><img src="/images/20201219-3.png" alt="redis"></p>
+<p><img src="/images/20201219-4.png" alt="redis"></p>
 <p>master/slave 信息的数据会被保存到上文提到的 hash slot map 中，</p>
 <table>
 <thead>
@@ -629,7 +629,6 @@ CLUSTER SETSLOT solt1 nodeB ：把 slot1 分配给 nodeB</code></pre><h2 id="3-�
 <pre><code>SLAVEOF NO ONE ：停止 slave 节点的复制行为，并且将这个节点变成 master 节点
 SLAVEOF host port ： 停止 slave 节点的复制行为，丢弃数据，开始从 host 指定的节点上复制信息</code></pre><h2 id="4-Configuration"><a href="#4-Configuration" class="headerlink" title="4. Configuration"></a>4. Configuration</h2><p>node table 和 hash slot map 这两个信息被称为 Configuration 在其他的分布式系统中也叫元数据。这两份数据在集群创建的时候被创建出来，并且随着后续集群的变更而变更。变动会发生在一个节点上，并通过 gossip 协议传播到其他节点上，这两个信息在所有节点上都会保存，并且会最终达到一致。</p>
 <h2 id="5-gossip-协议"><a href="#5-gossip-协议" class="headerlink" title="5. gossip 协议"></a>5. gossip 协议</h2><p>gossip 协议是基于流行病传播方式的节点或者进程之间信息交换的协议。Gossip协议基本思想就是：一个节点想要分享一些信息给网络中的其他的一些节点。于是，它周期性的随机选择一些节点，并把信息传递给这些节点。这些收到信息的节点接下来会做同样的事情，即把这些信息传递给其他一些随机选择的节点。一般而言，信息会周期性的传递给N个目标节点，而不只是一个。</p>
-<p><img src="/images/20201219-4.png" alt="redis"></p>
 <h2 id="6-redis-客户端的读写操作"><a href="#6-redis-客户端的读写操作" class="headerlink" title="6. redis 客户端的读写操作"></a>6. redis 客户端的读写操作</h2><p>当客户端需要从 redis 集群中读取数据，或者向集群中写入数据时，虽然可以连接到任意一个节点，但是，在实际情况中客户端需要先根据 key 计算出具体存放该key 的 slot，然后连接到负责这个 slot 的节点进行操作。这样的话，客户端就需要知道 slot 和 node 的映射关系。也就是 hash slot map。所以客户端连接到服务端后，会缓存一份 hash slot map在本地。方便直接读取。但是需要解决缓存过期的问题。如果客户端读写数据时 server 端返回错误时，说明 hash slot map 发生了变化，这个时候 client 获取最新的 hash slot map，然后再次请求对应的 server。</p>
 <h2 id="7-MOVED-重定向"><a href="#7-MOVED-重定向" class="headerlink" title="7. MOVED 重定向"></a>7. MOVED 重定向</h2><p>hash slot map 会发生变化，这些变化会通过 gossip 协议最终同步到所有的 node 上。但是在同步期间，或者是client 端缓存过期的时候，server 端有可能就会出现收到需要其他节点处理的请求。比如，当服务端正在进行新增节点时，收到了 client的请求。client 缓存的  hash slot map 认为 slot =3 需要  node A，但是 node A 已经完成了 slot的重新分配，所以会返回给 client 端 MOVED 错误。在错误的消息中会告诉客户端需要哪个节点处理。</p>
 <p><img src="/images/20201219-5.png" alt="redis"></p>
