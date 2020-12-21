@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Redis 集群内的数据同步 | 
+        
+        U+2647&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="Redis 集群内的数据同步">
+    <meta name="keywords" content="java,U+2647,Redis">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        <!-- highlight 代码高亮 -->
+        
+            <style id="highlight_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("highlight_css","/css/highlight-styles/googlecode.css?psPj0oLv8UYArA4bjklUGQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(https://p.130014.xyz/2020/11/19/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="U+2647&#39;s blog">
+    <meta name="msapplication-starturl" content="https://zdran.com/20201219.html">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="U+2647&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="cjZqB5nJc_iCpbllUCFCsJfhsLKhkKeU2DeYvh56fcE" />
+    <meta name="baidu-site-verification" content="j93yLiKLFj" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://zdran.com/20201219.html">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Redis 集群内的数据同步 | U+2647&#39;s blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="Redis 集群内的数据同步">
+    <meta property="og:article:tag" content="Redis"> 
+
+    
+        <meta property="article:published_time" content="Sat Dec 19 2020 16:47:43 GMT+0800">
+        <meta property="article:modified_time" content="Mon Dec 21 2020 18:52:20 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://zdran.com/20201219.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://zdran.com/20201219.html",
+    "headline": "Redis 集群内的数据同步",
+    "datePublished": "Sat Dec 19 2020 16:47:43 GMT+0800",
+    "dateModified": "Mon Dec 21 2020 18:52:20 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "U+2647",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "evolving code monkey"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "U+2647&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",Redisjava,U+2647",
+    "description": "Redis 集群内的数据同步",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?b376fd998e9dfd55d67208bc0b8bf335';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle" style="background-color: rgba(255,251,251,0.7)">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon" style="background-color: rgba(255, 251, 251, 0.7); display: initial;">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Redis-%E9%9B%86%E7%BE%A4%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Redis 集群的搭建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 数据的存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 主从模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Configuration"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. Configuration</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-gossip-%E5%8D%8F%E8%AE%AE"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. gossip 协议</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-redis-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. redis 客户端的读写操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-MOVED-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="post-toc-number">7.</span> <span class="post-toc-text">7. MOVED 重定向</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-master%E9%80%89%E4%B8%BE"><span class="post-toc-number">8.</span> <span class="post-toc-text">8. master选举</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-ConfigEpoch"><span class="post-toc-number">9.</span> <span class="post-toc-text">9. ConfigEpoch</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-%E4%B8%BB%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="post-toc-number">10.</span> <span class="post-toc-text">10. 主从数据同步问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-Configuration%E7%9A%84%E5%AE%9E%E9%99%85%E5%AD%98%E5%82%A8"><span class="post-toc-number">11.</span> <span class="post-toc-text">11. Configuration的实际存储</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Redis 集群内的数据同步
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>U+2647</strong>
+        <span>12月 19, 2020</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/Redis/" rel="tag">Redis</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Redis 集群内的数据同步&url=https://zdran.com/20201219.html&pic=https://zdran.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Redis 集群内的数据同步&url=https://zdran.com/20201219.html&via=U+2647" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://zdran.com/20201219.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zdran.com/20201219.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=U+2647&#39;s blog&title=Redis 集群内的数据同步&summary=evolving code monkey&pics=https://zdran.com/img/favicon.png&url=https://zdran.com/20201219.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="1-Redis-集群的搭建"><a href="#1-Redis-集群的搭建" class="headerlink" title="1. Redis 集群的搭建"></a>1. Redis 集群的搭建</h2><p>Redis 集群包含 server 和 client 两个部分。一个Redis 集群可以包含多个 server，可以包含多个客户端。每个客户端可以连接任意的server，读取写入数据。保存在 Redis 集群中的数据会被分成多份，分散地保存在多个server中，并且每一份数据也会保存多个副本。</p>
+<p><img src="/images/20201219-1.png" alt="redis"></p>
+<p>在 Redis 集群中，数据会被保存到 server 中，每个 server 都是一个独立的进程，拥有独立的 IP 和端口。也被称为实例，或者叫 节点（Node）。client 通过 IP 和 端口来连接具体的 server ，每一个节点都会有一个全局唯一的 nodeId，它是在集群创建的时候随机生成的，一个节点的Id始终是不变的，但是节点的 IP 和端口是可以改变的。</p>
+<p>每个节点都保存了一份记录集群成员关系的表结构，类似于下面这张表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">IP</th>
+<th align="center">PORT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">12</td>
+<td align="center">127.0.0.1</td>
+<td align="center">5001</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td align="center">127.0.0.1</td>
+<td align="center">5002</td>
+</tr>
+<tr>
+<td align="center">678</td>
+<td align="center">127.0.0.1</td>
+<td align="center">5003</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+</tbody></table>
+<p>这张表被称为 node table。通过这张表集群中的每个节点，都能够清楚的知道其他节点的地址信息。当添加或者删除一个节点时，只需要将命令发给集群中的任意一个节点，这个节点会修改本地的 node table，并且这个修改，最终会复制到所有节点上。</p>
+<p><img src="/images/20201219-2.png" alt="redis"></p>
+<p>比如，当前集群包含 node A、node B，现在 client 向 node A 发送命令要将 node C 加入到集群中，那么 node A 首先会更新自己的 node table ，然后将自己的 node table 同步给  node B，同样，node A 也会把自己的 node table 同步给 node C ，这样整个集群里的所有节点的 node table 都是全量的了。但是这个时候 node C 还没有加入到集群中，还涉及到数据同步的问题。</p>
+<h2 id="2-数据的存储"><a href="#2-数据的存储" class="headerlink" title="2. 数据的存储"></a>2. 数据的存储</h2><p>Redis 集群会把数据分成多份，也叫把数据 分片。被分片后的每一份数据称之为 槽（Slot）。Redis 集群将数据分为 16384 份，也就是说，一个 Redis 集群有 16384 个槽位（PS：至于为什么是 16384 后面会说）。每一个槽位都会保存在 Redis 的一个节点中，具体哪个槽位保存在哪个节点中，就形成了一种类似于 Map 的结构。</p>
+<table>
+<thead>
+<tr>
+<th align="center">槽位</th>
+<th align="center">节点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">node A</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">node B</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">node C</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">16383</td>
+<td align="center">node N</td>
+</tr>
+</tbody></table>
+<p>这个 map 被称为 hash slot map ，同样，跟 note table 类似， hash slot map 在每个节点上都会保存一份，redis 集群负责节点间的数据同步。具体哪个 key 保存在哪个 slot 上，Redis 集群采用哈希机制来做拆分。首先，数据的 key 通过 CRC16 算法计算出一个哈希值，然后这个哈希值再对 16383 取余，这个余数就是槽位值。比如，某个 keyA通过计算后，槽位值是3，那么 keyA 将保存在 node B 中，如果槽位是2，则保存在node A 中。当然我们也可以通过命令直接将某个槽位分配给某个节点，比如，我们可以通过命令直接将槽位 1、2 分配给 node B。其实就是通过命令连接某个 node ，修改 hash slot map ，然后该 node 会将更新后的 hash slot map 同步给其他节点。</p>
+<p><img src="/images/20201219-3.png" alt="redis"></p>
+<p>可以通过命令来改变节点的主从状态</p>
+<pre><code>CLUSTER ADDSLOTS slot1 [slot2]：把多个 slot 分配到当前节点
+
+CLUSTER DELSLOTS slot1 [slot2]：把多个 slot 从当前节点删除
+
+CLUSTER SETSLOT solt1 nodeB ：把 slot1 分配给 nodeB</code></pre><h2 id="3-主从模式"><a href="#3-主从模式" class="headerlink" title="3. 主从模式"></a>3. 主从模式</h2><p>一个 slot 会被保存多个副本，也就是一个 slot 会被保存到多个节点上， Redis 集群的复制是以节点为单位的，所以一个节点上的所有 slot 都会被复制。</p>
+<p>具体来说，一个节点负责这个节点上所有 slot 的写操作，这个节点被称为 master 节点，而复制这个节点数据的其他节点被称为 slave 节点（从节点）。一个 master 可以有多个 slave ，对于 master 节点上的所有写操作都会被复制到所有的 slave 节点上。所以 master 与 slave 具有相同的数据。</p>
+<p><img src="/images/20201219-3.png" alt="redis"></p>
+<p>master/slave 信息的数据会被保存到上文提到的 hash slot map 中，</p>
+<table>
+<thead>
+<tr>
+<th align="center">槽位</th>
+<th align="center">节点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">nodeA，nodeA1(slave),nodeA2(slave)</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">nodeA，nodeA1(slave),nodeA2(slave)</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">nodeB，nodeB1(slave),nodeB2(slave)</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr>
+<td align="center">16383</td>
+<td align="center">nodeN，nodeN1(slave),nodeN2(slave)</td>
+</tr>
+</tbody></table>
+<p>可以通过命令来改变节点的主从状态：</p>
+<pre><code>SLAVEOF NO ONE ：停止 slave 节点的复制行为，并且将这个节点变成 master 节点
+SLAVEOF host port ： 停止 slave 节点的复制行为，丢弃数据，开始从 host 指定的节点上复制信息</code></pre><h2 id="4-Configuration"><a href="#4-Configuration" class="headerlink" title="4. Configuration"></a>4. Configuration</h2><p>node table 和 hash slot map 这两个信息被称为 Configuration 在其他的分布式系统中也叫元数据。这两份数据在集群创建的时候被创建出来，并且随着后续集群的变更而变更。变动会发生在一个节点上，并通过 gossip 协议传播到其他节点上，这两个信息在所有节点上都会保存，并且会最终达到一致。</p>
+<h2 id="5-gossip-协议"><a href="#5-gossip-协议" class="headerlink" title="5. gossip 协议"></a>5. gossip 协议</h2><p>gossip 协议是基于流行病传播方式的节点或者进程之间信息交换的协议。Gossip协议基本思想就是：一个节点想要分享一些信息给网络中的其他的一些节点。于是，它周期性的随机选择一些节点，并把信息传递给这些节点。这些收到信息的节点接下来会做同样的事情，即把这些信息传递给其他一些随机选择的节点。一般而言，信息会周期性的传递给N个目标节点，而不只是一个。</p>
+<p><img src="/images/20201219-4.png" alt="redis"></p>
+<h2 id="6-redis-客户端的读写操作"><a href="#6-redis-客户端的读写操作" class="headerlink" title="6. redis 客户端的读写操作"></a>6. redis 客户端的读写操作</h2><p>当客户端需要从 redis 集群中读取数据，或者向集群中写入数据时，虽然可以连接到任意一个节点，但是，在实际情况中客户端需要先根据 key 计算出具体存放该key 的 slot，然后连接到负责这个 slot 的节点进行操作。这样的话，客户端就需要知道 slot 和 node 的映射关系。也就是 hash slot map。所以客户端连接到服务端后，会缓存一份 hash slot map在本地。方便直接读取。但是需要解决缓存过期的问题。如果客户端读写数据时 server 端返回错误时，说明 hash slot map 发生了变化，这个时候 client 获取最新的 hash slot map，然后再次请求对应的 server。</p>
+<h2 id="7-MOVED-重定向"><a href="#7-MOVED-重定向" class="headerlink" title="7. MOVED 重定向"></a>7. MOVED 重定向</h2><p>hash slot map 会发生变化，这些变化会通过 gossip 协议最终同步到所有的 node 上。但是在同步期间，或者是client 端缓存过期的时候，server 端有可能就会出现收到需要其他节点处理的请求。比如，当服务端正在进行新增节点时，收到了 client的请求。client 缓存的  hash slot map 认为 slot =3 需要  node A，但是 node A 已经完成了 slot的重新分配，所以会返回给 client 端 MOVED 错误。在错误的消息中会告诉客户端需要哪个节点处理。</p>
+<p><img src="/images/20201219-5.png" alt="redis"></p>
+<h2 id="8-master选举"><a href="#8-master选举" class="headerlink" title="8. master选举"></a>8. master选举</h2><p>在主从模式下，当 master 节点宕机后，redis 集群会选择一个 slave 成为 master。redis 集群采用了一种类似于 Raft 算法的机制来保证只有一个 slave 成为 master。每个节点都会有叫做 currentEpoch、lastVoteEpoch 的两个值。在集群刚创建时，每个节点的 currentEpoch 都是0。当 slave 节点发现 master 宕机后，会将 currentEpoch 加 1，并向所有的 master节点发送 FAILOVER_AUTH_REQUEST 请求，并携带自己的 currentEpoch， master收到请求后，如果请求中的 currentEpoch 比自己的大，更新自己的 currentEpoch，并返回 FAILOVER_AUTH_ACK 消息给 slave，并且携带自己的 currentEpoch。</p>
+<p>我们以 5 个 master 节点的集群为例说明，master节点分别是 A、B、C、D、E，其中 A 节点有两个 slave 节点 A1、A2，当 A 节点宕机后，A1 给所有的 master 节点发送 FAILOVER_AUTH_REQUEST 并携带自己的 currentEpoch = 5，节点 B、C、D 收到请求后将自己的 currentEpoch 更新为 5，并且给 A1 回复 FAILOVER_AUTH_ACK，当再次收到 A2 的请求时，由于当前的 currentEpoch = 5，所以不会给 A2 返回 FAILOVER_AUTH_ACK，只有 E 节点，还没有收到 A1 的请求，会给 A2 返回 FAILOVER_AUTH_ACK。最终只有收到 FAILOVER_AUTH_ACK 超过半数的节点才会成为新的 master 。所以 A1 会成为最新的 master。</p>
+<p><img src="/images/20201219-6.png" alt="redis"></p>
+<p>上面的这种机制已经可以保证了只有一个 slave 会被选为master，但是除此之外，redis 还做了一层优化，那就是 master 回复了一个 FAILOVER_AUTH_ACK 后，不会再给这个 master 下的其他 slave 回复消息。</p>
+<p>对于 master 选举的过程，网上还有另外一种描述。以 master 节点为视角，当 A 节点宕机后，A 节点下的所有 slave 向其他 master 节点发送请求拉票（即发送FAILOVER_AUTH_REQUEST请求）。所有的 master节点进行投票（即回复 FAILOVER_AUTH_ACK消息），当某个 slave 节点收到半数以上的投票后即成为最新的 master 节点。</p>
+<h2 id="9-ConfigEpoch"><a href="#9-ConfigEpoch" class="headerlink" title="9. ConfigEpoch"></a>9. ConfigEpoch</h2><p>failover完成之后，新的 master节点会修改  hash slot map，将相应的 slot 记录的节点改成自己。并且将这次修改广播给其他节点。</p>
+<p>虽然 currentEpoch 和 lastVoteEpoch 已经可以保证一次选举只能有一个节点成为 master，但是如果发生两次 failover ，可能选举出两个不同的 master。由于对   hash slot map 数据的修改，是通过 gossip 协议异步传播的，所以就会造成其他节点收到两份不同的消息。还是以上面的图为例，如果 node A 宕机后，A1 成为了新的 master后，广播完 hash slot map 后，又发生了宕机，这个时候 A2 会成为新的 master。然后再次发送 hash slot map 修改的消息。如果 node C 先收到了A2 的消息，后收到了 A1 的消息，就会出现数据不一致的问题。configEpoch 就是为了解决整问题的。每个节点都会有一个 configEpoch值，这个值保存在 node table 中。类似于下面的表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">IP</th>
+<th align="center">PORT</th>
+<th align="center">configEpoch</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">12</td>
+<td align="center">127.0.0.1</td>
+<td align="center">5001</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td align="center">127.0.0.1</td>
+<td align="center">5002</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">678</td>
+<td align="center">127.0.0.1</td>
+<td align="center">5003</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<p>每次 failover 之后，新的 master 会用 currentEpoch 更新 configEpoch， failover 保证两次宕机产生的 currentEpoch 值一定不一样且后一次产生的一定比前一次产生的大。这样就保证了最后一次 failover 的消息会生效。也就是，如果 node C 收到了两份冲突的消息，会以 configEpoch 大的为准。并且最终所有的节点都会更新成最大的 configEpoch 带来的消息。</p>
+<p>savle 的 configEpoch 是其 master 的configEpoch。</p>
+<p>由于 gossip 协议的异步问题，在master选举时有可能会出现，configEpoch会小于当前master的configEpoch，这个时候，其他的 master节点是不能向该节点回复 FAILOVER_AUTH_ACK 消息的。比如， node A 的 configEpoch = 3，然后 A 向 A1、A2，分别发送更新消息。然后 A 宕机，如果这个时候 A1 的 configEpoch 还没有更新为 3 则发送的 FAILOVER_AUTH_REQUEST 是不会收到 FAILOVER_AUTH_ACK 消息的。</p>
+<h2 id="10-主从数据同步问题"><a href="#10-主从数据同步问题" class="headerlink" title="10. 主从数据同步问题"></a>10. 主从数据同步问题</h2><p>由于主从节点的数据复制是异步的，所以当发生宕机时，有可能 slave 还没有收到最新的数据。那么这部分写入的的数据就会丢失。 redis 集群做了一个优化。当 slave 发现 master 宕机后，它不会立即开始选举，而是会等待一个时间，这个时间的计算公式是：</p>
+<pre><code>DELAY = 500 milliseconds 
+        + random delay between 0 and 500 milliseconds 
+        + SLAVE_RANK * 1000 milliseconds</code></pre><p>这个公式中有三个部分：</p>
+<ul>
+<li>第一部分是固定的 500ms，这个是为了给其他 master 节点充分的时间，让他们也发现这个节点宕机的事件。</li>
+<li>第二部分是一个随机值，这个是为了避免多个 slave 同时开始选举，导致 master 被瓜分，从而本次选举失败的问题。</li>
+<li>第三部分是 slave 的 rank，rank 的值主要取决于 slave 的复制进度，复制的数据越多，则 rank 越小，等待时间也就越短。也就越先开始选举。有更大的可能成为 master。</li>
+</ul>
+<p>但这仅仅是个优化，并不能完全防止数据丢失。</p>
+<h2 id="11-Configuration的实际存储"><a href="#11-Configuration的实际存储" class="headerlink" title="11. Configuration的实际存储"></a>11. Configuration的实际存储</h2><p>在内存中用两个变量来存储 Hash slot map 和 node table。</p>
+<p>myself 变量: 代表当前节点，是 ClusterNode 类型。这个变量中记录了当前节点的 configEpoch、slaves（从节点指针）、slaveof（主节点指针）、slots 数组（节点负责的所有的slot的槽位值）。其中，slots 是一个由 2048 个 byte 组成的 bitmap，总共是 16384（2048 * 8），每个 bit 位代表一个槽位，bit = 1 表示这个节点负责该槽位。这个 bitmap 就是  Hash slot map。这也解释了为什么一个集群只能有 16384 个槽位。</p>
+<pre><code>#define CLUSTER_SLOTS 16384
+
+//... ...
+
+typedef struct clusterNode &#123;
+    mstime_t ctime; /* Node object creation time. */
+    char name[CLUSTER_NAMELEN]; /* Node name, hex string, sha1-size */
+    int flags;      /* CLUSTER_NODE_... */
+    uint64_t configEpoch; /* Last configEpoch observed for this node */
+    unsigned char slots[CLUSTER_SLOTS/8]; /* slots handled by this node */
+    int numslots;   /* Number of slots handled by this node */
+    int numslaves;  /* Number of slave nodes, if this is a master */
+    struct clusterNode **slaves; /* pointers to slave nodes */
+    struct clusterNode *slaveof; /* pointer to the master node. Note that it
+
+&#125; clusterNode;</code></pre><p>另外一个变量是cluster:代表了当前集群的状态。这个变量中记录了 currentEpoch、lastVoteEpoch 和 slots 数组。与 clusterNode 里的 slots 数组不同的是，这个 slots 数组是 ClusterNode 类型的。每一个元素都是一个 ClusterNode 指针，也就是说，这里记录了，当前集群里所有 slot 与 node 的对应关系，即 node table。</p>
+<pre><code>#define CLUSTER_SLOTS 16384
+//... ...
+
+
+typedef struct clusterState &#123;
+    clusterNode *myself;  /* This node */
+    uint64_t currentEpoch;
+
+    //... ...
+    clusterNode *slots[CLUSTER_SLOTS];
+
+    //... ...
+
+    /* The following fields are used by masters to take state on elections. */
+    uint64_t lastVoteEpoch;     /* Epoch of the last vote granted. */
+
+    //... ... 
+&#125; clusterState;</code></pre>
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            版权声明：本博客所有文章除特别声明外，均采用 <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 4.0 </a>许可协议。转载请注明出处！
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://zdran.com/20201219.html">https://zdran.com/20201219.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '07532e6021e94ce04ea5',
+            clientSecret: '511fa8b9dbc91a4520694798eb668931598eb678',
+            repo: 'zdran.github.io',
+            owner: 'zdRan',
+            admin: ['zdRan'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/20200909.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="U+2647's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        cm.zdran@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: cm.zdran@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2020/12/">十二月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/11/">十一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/09/">九月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">八月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/05/">五月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">二月 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Debug/">Debug<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/DesignPattern/">DesignPattern<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Dubbo/">Dubbo<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Flutter/">Flutter<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/LeetCode/">LeetCode<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Notes/">Notes<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Python/">Python<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Redis/">Redis<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/SpringBoot/">SpringBoot<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">cloud</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">58</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zdRan" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;U+2647's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+                <div class="footer-develop-div">Hosted by <a href="https://pages.coding.me" target="_blank" class="footer-develop-a">Coding Pages</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import highlight.js -->
+
+    
+        <script>lsloader.load("highlight_js","/js/highlight.pack.js?acYmXTaIUms2RHozguiBzg==", true)</script>
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            <!-- 加载 highlight 代码高亮-->
+            hljs.initHighlightingOnLoad();
+        
+    
+
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2017;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
