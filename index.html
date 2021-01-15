@@ -1087,11 +1087,13 @@
     var locatePost = $('.locate-thumbnail-symbol').next();
     for(var i = 0; i < 10; i++) {
         randomNum = Math.floor(Math.random() * 19 + 1);
+		var randomArr = 'https://tvax1.sinaimg.cn/large/005Kwq7yly1gmojceznzaj30p10fnjsb.jpg,https://tva2.sinaimg.cn/large/005Kwq7yly1gmojeo2aboj30p00fntag.jpg,https://tvax4.sinaimg.cn/large/005Kwq7yly1gmojeobxr8j30p00e2myu.jpg,https://tvax1.sinaimg.cn/large/005Kwq7yly1gmojeokniwj30p00fnq42.jpg,https://tva3.sinaimg.cn/large/005Kwq7yly1gmojeop2mwj30p00e43zi.jpg,https://tva3.sinaimg.cn/large/005Kwq7yly1gmojeouzbmj30p00fnmzg.jpg,https://tva4.sinaimg.cn/large/005Kwq7yly1gmojeoyks8j30h809pmy1.jpg,https://tvax3.sinaimg.cn/large/005Kwq7yly1gmojep2fsuj30p10g140v.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojepdqsxj30p00fogn1.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojepjecpj30p00fnjsb.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojepqyhyj30p10fnjsb.jpg,https://tvax4.sinaimg.cn/large/005Kwq7yly1gmojepux3lj30p00fnmyr.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojeq5mc0j30pk0gimxs.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojeqcxchj30p10fp76c.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojeqtcukj30pr0it40e.jpg,https://tva4.sinaimg.cn/large/005Kwq7yly1gmojer230hj30q90fdwg0.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojer8ioqj30p30gddhf.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojerbevej30ov0gkmyh.jpg,https://tvax1.sinaimg.cn/large/005Kwq7yly1gmojerg2v8j30pq0gp76h.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojern4zkj30px0ghgn3.jpg'.split(",");
 
         locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
 
+        locatePost.children('.post_thumbnail-random').attr('data-original', randomArr[randomNum]);
+    	$('.post_thumbnail-random').addClass('lazy');
+    	  
         locatePost = locatePost.next();
     }
 </script>
