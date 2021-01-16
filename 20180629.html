@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri Jun 29 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 17 2020 21:22:36 GMT+0800">
+        <meta property="article:modified_time" content="Sat Jan 16 2021 22:20:27 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180629.html",
     "headline": "Spring Boot 学习笔记(二) 整合 log4j2",
     "datePublished": "Fri Jun 29 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 17 2020 21:22:36 GMT+0800",
+    "dateModified": "Sat Jan 16 2021 22:20:27 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -636,15 +636,9 @@
 <p>如果你使用了这种配置在启动的时候会报一个</p>
 <pre><code>ERROR StatusLogger Cannot access RandomAccessFile java.io.IOException: 文件名、目录名或卷标语法不正确。
  java.io.IOException: 文件名、目录名或卷标语法不正确。</code></pre><p>这个错误是因为占位符不是有效的路径导致的，可以通过下面的方法配置：</p>
-<div align="center">
-    ![Edit Configurations...](/images/2001.jpg)
-</div>
-在 VM options 里配置一下参数 ```-Dlog4j.path=D:\sysLogs```。
-<div align="center">
-    ![VM options](/images/2002.jpg)
-</div>
-
-
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpweg759wj30hj03rjrm.jpg" alt="2001"></p>
+<p>在 VM options 里配置一下参数 <code>-Dlog4j.path=D:\sysLogs</code>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpweqkt73j30uo0k8ta5.jpg" alt="2002"></p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">

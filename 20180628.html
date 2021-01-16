@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu Jun 28 2018 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 17 2020 21:25:51 GMT+0800">
+        <meta property="article:modified_time" content="Sat Jan 16 2021 22:10:47 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180628.html",
     "headline": "Spring Boot 学习笔记(一) hello world",
     "datePublished": "Thu Jun 28 2018 16:47:43 GMT+0800",
-    "dateModified": "Thu Dec 17 2020 21:25:51 GMT+0800",
+    "dateModified": "Sat Jan 16 2021 22:10:47 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -553,15 +553,15 @@
 <p>当我们使用传统的Spring MVC 框架做开发的时候 ，往往需要大量的xml文件来做各种配置，比如包的扫描、bean的注入、静态资源的路径、mybaits的整合，视图解析器的配置，消息转换器的配置。稍有不慎就会导致各种问题。</p>
 <p>而 Spring Boot的主要目标就是简化配置。它使用 “约定大于配置” 的理念，可以让你不再关心繁琐的配置，可以很简单的搭建一个新的项目。</p>
 <h2 id="2-创建一个Spring-Boot-项目"><a href="#2-创建一个Spring-Boot-项目" class="headerlink" title="2. 创建一个Spring Boot 项目"></a>2. 创建一个Spring Boot 项目</h2><p>打开 IDEA, File -&gt; New -&gt; Project..</p>
-<p><img src="/images/001.jpg" alt="Spring Initializr 创建项目"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw2qwpkxj30u20gpmxw.jpg" alt="001"></p>
 <p>选择 Spring Initializr 配置好 JDK，然后 Next：</p>
-<p><img src="/images/002.jpg" alt="配置包名"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw2z8w6kj30u20gpdgi.jpg" alt="002"></p>
 <p>配置好包名，Next：</p>
-<p><img src="/images/003.jpg" alt="配置项目">  </p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw36u1vrj30u20gpgmn.jpg" alt="003"></p>
 <p>这里我们选择 Web，并勾选上 Web，新建一个 Web项目。Next：</p>
-<p><img src="/images/004.jpg" alt="配置项目"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw3epwccj30u20gp3yu.jpg" alt="004"></p>
 <p>选择新建项目的本地路径。 Finish：</p>
-<p><img src="/images/005.jpg" alt="配置项目"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw3lmlhkj30d30gat8z.jpg" alt="005"></p>
 <p>上面就是我们创建好的一个标准的 Sprint Boot Web项目。</p>
 <p>简单说一下目录结构：</p>
 <ul>
@@ -597,9 +597,10 @@ public class HelloWorldController &#123;
         return &quot;hello world,I am Spring Boot&quot;;
     &#125;
 &#125;</code></pre>
-<p>右击运行 SpringbootApplication 里的 mian() 方法：<br><img src="/images/006.jpg" alt="启动项目"></p>
+<p>右击运行 SpringbootApplication 里的 mian() 方法：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw3vi08oj30qi0ij759.jpg" alt="006"></p>
 <p>控制台出现下面的日志就说明启动成功了，端口号是8080：</p>
-<p><img src="/images/007.jpg" alt="启动日志"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw44fouij30ne0hx0vb.jpg" alt="007"></p>
 <p>在 浏览器访问下 <code>http://localhost:8080/helloWorld</code>，你就能看到效果了。</p>
 <h2 id="4-自定义配置"><a href="#4-自定义配置" class="headerlink" title="4. 自定义配置"></a>4. 自定义配置</h2><p>我们可以通过配置文件配置我们的url路径、端口号等。</p>
 <p>首先：<strong>修改properties文件为yaml文件</strong>，直接重命名就好。右击 application.properties 文件 选择 Refactor -&gt; Rename… 修改为 application.yml</p>

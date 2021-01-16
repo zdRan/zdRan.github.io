@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sat Dec 19 2020 16:47:43 GMT+0800">
-        <meta property="article:modified_time" content="Mon Dec 21 2020 19:16:06 GMT+0800">
+        <meta property="article:modified_time" content="Sat Jan 16 2021 22:32:15 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20201219.html",
     "headline": "Redis 集群内的数据同步",
     "datePublished": "Sat Dec 19 2020 16:47:43 GMT+0800",
-    "dateModified": "Mon Dec 21 2020 19:16:06 GMT+0800",
+    "dateModified": "Sat Jan 16 2021 22:32:15 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -523,7 +523,7 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="1-Redis-集群的搭建"><a href="#1-Redis-集群的搭建" class="headerlink" title="1. Redis 集群的搭建"></a>1. Redis 集群的搭建</h2><p>Redis 集群包含 server 和 client 两个部分。一个Redis 集群可以包含多个 server，可以包含多个客户端。每个客户端可以连接任意的server，读取写入数据。保存在 Redis 集群中的数据会被分成多份，分散地保存在多个server中，并且每一份数据也会保存多个副本。</p>
-<p><img src="/images/20201219-1.png" alt="redis"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwglgrr6j30vs0mg403.jpg" alt="20201219-1"></p>
 <p>在 Redis 集群中，数据会被保存到 server 中，每个 server 都是一个独立的进程，拥有独立的 IP 和端口。也被称为实例，或者叫 节点（Node）。client 通过 IP 和 端口来连接具体的 server ，每一个节点都会有一个全局唯一的 nodeId，它是在集群创建的时候随机生成的，一个节点的Id始终是不变的，但是节点的 IP 和端口是可以改变的。</p>
 <p>每个节点都保存了一份记录集群成员关系的表结构，类似于下面这张表：</p>
 <table>
@@ -556,7 +556,7 @@
 </tr>
 </tbody></table>
 <p>这张表被称为 node table。通过这张表集群中的每个节点，都能够清楚的知道其他节点的地址信息。当添加或者删除一个节点时，只需要将命令发给集群中的任意一个节点，这个节点会修改本地的 node table，并且这个修改，最终会复制到所有节点上。</p>
-<p><img src="/images/20201219-2.png" alt="redis"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwgsyo2oj30ua0iwgn1.jpg" alt="20201219-2"></p>
 <p>比如，当前集群包含 node A、node B，现在 client 向 node A 发送命令要将 node C 加入到集群中，那么 node A 首先会更新自己的 node table ，然后将自己的 node table 同步给  node B，同样，node A 也会把自己的 node table 同步给 node C ，这样整个集群里的所有节点的 node table 都是全量的了。但是这个时候 node C 还没有加入到集群中，还涉及到数据同步的问题。</p>
 <h2 id="2-数据的存储"><a href="#2-数据的存储" class="headerlink" title="2. 数据的存储"></a>2. 数据的存储</h2><p>Redis 集群会把数据分成多份，也叫把数据 分片。被分片后的每一份数据称之为 槽（Slot）。Redis 集群将数据分为 16384 份，也就是说，一个 Redis 集群有 16384 个槽位（PS：至于为什么是 16384 后面会说）。每一个槽位都会保存在 Redis 的一个节点中，具体哪个槽位保存在哪个节点中，就形成了一种类似于 Map 的结构。</p>
 <table>
@@ -588,7 +588,7 @@
 </tr>
 </tbody></table>
 <p>这个 map 被称为 hash slot map ，同样，跟 note table 类似， hash slot map 在每个节点上都会保存一份，redis 集群负责节点间的数据同步。具体哪个 key 保存在哪个 slot 上，Redis 集群采用哈希机制来做拆分。首先，数据的 key 通过 CRC16 算法计算出一个哈希值，然后这个哈希值再对 16383 取余，这个余数就是槽位值。比如，某个 keyA通过计算后，槽位值是3，那么 keyA 将保存在 node B 中，如果槽位是2，则保存在node A 中。当然我们也可以通过命令直接将某个槽位分配给某个节点，比如，我们可以通过命令直接将槽位 1、2 分配给 node B。其实就是通过命令连接某个 node ，修改 hash slot map ，然后该 node 会将更新后的 hash slot map 同步给其他节点。</p>
-<p><img src="/images/20201219-3.png" alt="redis"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwh43k3bj30w00lota4.jpg" alt="20201219-3"></p>
 <p>可以通过命令来改变节点的主从状态</p>
 <pre><code>CLUSTER ADDSLOTS slot1 [slot2]：把多个 slot 分配到当前节点
 
@@ -596,7 +596,7 @@ CLUSTER DELSLOTS slot1 [slot2]：把多个 slot 从当前节点删除
 
 CLUSTER SETSLOT solt1 nodeB ：把 slot1 分配给 nodeB</code></pre><h2 id="3-主从模式"><a href="#3-主从模式" class="headerlink" title="3. 主从模式"></a>3. 主从模式</h2><p>一个 slot 会被保存多个副本，也就是一个 slot 会被保存到多个节点上， Redis 集群的复制是以节点为单位的，所以一个节点上的所有 slot 都会被复制。</p>
 <p>具体来说，一个节点负责这个节点上所有 slot 的写操作，这个节点被称为 master 节点，而复制这个节点数据的其他节点被称为 slave 节点（从节点）。一个 master 可以有多个 slave ，对于 master 节点上的所有写操作都会被复制到所有的 slave 节点上。所以 master 与 slave 具有相同的数据。</p>
-<p><img src="/images/20201219-4.png" alt="redis"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwhb9k1uj315i0lmmz6.jpg" alt="20201219-4"></p>
 <p>master/slave 信息的数据会被保存到上文提到的 hash slot map 中，</p>
 <table>
 <thead>
@@ -630,12 +630,13 @@ CLUSTER SETSLOT solt1 nodeB ：把 slot1 分配给 nodeB</code></pre><h2 id="3-�
 <pre><code>SLAVEOF NO ONE ：停止 slave 节点的复制行为，并且将这个节点变成 master 节点
 SLAVEOF host port ： 停止 slave 节点的复制行为，丢弃数据，开始从 host 指定的节点上复制信息</code></pre><h2 id="4-Configuration"><a href="#4-Configuration" class="headerlink" title="4. Configuration"></a>4. Configuration</h2><p>node table 和 hash slot map 这两个信息被称为 Configuration 在其他的分布式系统中也叫元数据。这两份数据在集群创建的时候被创建出来，并且随着后续集群的变更而变更。变动会发生在一个节点上，并通过 gossip 协议传播到其他节点上，这两个信息在所有节点上都会保存，并且会最终达到一致。</p>
 <h2 id="5-gossip-协议"><a href="#5-gossip-协议" class="headerlink" title="5. gossip 协议"></a>5. gossip 协议</h2><p>gossip 协议是基于流行病传播方式的节点或者进程之间信息交换的协议。Gossip协议基本思想就是：一个节点想要分享一些信息给网络中的其他的一些节点。于是，它周期性的随机选择一些节点，并把信息传递给这些节点。这些收到信息的节点接下来会做同样的事情，即把这些信息传递给其他一些随机选择的节点。一般而言，信息会周期性的传递给N个目标节点，而不只是一个。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwhjnh5qj31240imwg8.jpg" alt="20201219-5"></p>
 <h2 id="6-redis-客户端的读写操作"><a href="#6-redis-客户端的读写操作" class="headerlink" title="6. redis 客户端的读写操作"></a>6. redis 客户端的读写操作</h2><p>当客户端需要从 redis 集群中读取数据，或者向集群中写入数据时，虽然可以连接到任意一个节点，但是，在实际情况中客户端需要先根据 key 计算出具体存放该key 的 slot，然后连接到负责这个 slot 的节点进行操作。这样的话，客户端就需要知道 slot 和 node 的映射关系。也就是 hash slot map。所以客户端连接到服务端后，会缓存一份 hash slot map在本地。方便直接读取。但是需要解决缓存过期的问题。如果客户端读写数据时 server 端返回错误时，说明 hash slot map 发生了变化，这个时候 client 获取最新的 hash slot map，然后再次请求对应的 server。</p>
 <h2 id="7-MOVED-重定向"><a href="#7-MOVED-重定向" class="headerlink" title="7. MOVED 重定向"></a>7. MOVED 重定向</h2><p>hash slot map 会发生变化，这些变化会通过 gossip 协议最终同步到所有的 node 上。但是在同步期间，或者是client 端缓存过期的时候，server 端有可能就会出现收到需要其他节点处理的请求。比如，当服务端正在进行新增节点时，收到了 client的请求。client 缓存的  hash slot map 认为 slot =3 需要  node A，但是 node A 已经完成了 slot的重新分配，所以会返回给 client 端 MOVED 错误。在错误的消息中会告诉客户端需要哪个节点处理。</p>
-<p><img src="/images/20201219-5.png" alt="redis"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwhr1tozj31aq0tuwgp.jpg" alt="20201219-6"></p>
 <h2 id="8-master选举"><a href="#8-master选举" class="headerlink" title="8. master选举"></a>8. master选举</h2><p>在主从模式下，当 master 节点宕机后，redis 集群会选择一个 slave 成为 master。redis 集群采用了一种类似于 Raft 算法的机制来保证只有一个 slave 成为 master。每个节点都会有叫做 currentEpoch、lastVoteEpoch 的两个值。在集群刚创建时，每个节点的 currentEpoch 都是0。当 slave 节点发现 master 宕机后，会将 currentEpoch 加 1，并向所有的 master节点发送 FAILOVER_AUTH_REQUEST 请求，并携带自己的 currentEpoch， master收到请求后，如果请求中的 currentEpoch 比自己的大，更新自己的 currentEpoch，并返回 FAILOVER_AUTH_ACK 消息给 slave，并且携带自己的 currentEpoch。</p>
 <p>我们以 5 个 master 节点的集群为例说明，master节点分别是 A、B、C、D、E，其中 A 节点有两个 slave 节点 A1、A2，当 A 节点宕机后，A1 给所有的 master 节点发送 FAILOVER_AUTH_REQUEST 并携带自己的 currentEpoch = 5，节点 B、C、D 收到请求后将自己的 currentEpoch 更新为 5，并且给 A1 回复 FAILOVER_AUTH_ACK，当再次收到 A2 的请求时，由于当前的 currentEpoch = 5，所以不会给 A2 返回 FAILOVER_AUTH_ACK，只有 E 节点，还没有收到 A1 的请求，会给 A2 返回 FAILOVER_AUTH_ACK。最终只有收到 FAILOVER_AUTH_ACK 超过半数的节点才会成为新的 master 。所以 A1 会成为最新的 master。</p>
-<p><img src="/images/20201219-6.png" alt="redis"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpwqxqloaj31ak0iijsy.jpg" alt="20201219-7"></p>
 <p>上面的这种机制已经可以保证了只有一个 slave 会被选为master，但是除此之外，redis 还做了一层优化，那就是 master 回复了一个 FAILOVER_AUTH_ACK 后，不会再给这个 master 下的其他 slave 回复消息。</p>
 <p>对于 master 选举的过程，网上还有另外一种描述。以 master 节点为视角，当 A 节点宕机后，A 节点下的所有 slave 向其他 master 节点发送请求拉票（即发送FAILOVER_AUTH_REQUEST请求）。所有的 master节点进行投票（即回复 FAILOVER_AUTH_ACK消息），当某个 slave 节点收到半数以上的投票后即成为最新的 master 节点。</p>
 <h2 id="9-ConfigEpoch"><a href="#9-ConfigEpoch" class="headerlink" title="9. ConfigEpoch"></a>9. ConfigEpoch</h2><p>failover完成之后，新的 master节点会修改  hash slot map，将相应的 slot 记录的节点改成自己。并且将这次修改广播给其他节点。</p>

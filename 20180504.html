@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Fri May 04 2018 13:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Sat Dec 19 2020 11:47:02 GMT+0800">
+        <meta property="article:modified_time" content="Sat Jan 16 2021 22:08:10 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20180504.html",
     "headline": "Spring Boot 2.0 实现优雅停机",
     "datePublished": "Fri May 04 2018 13:22:22 GMT+0800",
-    "dateModified": "Sat Dec 19 2020 11:47:02 GMT+0800",
+    "dateModified": "Sat Jan 16 2021 22:08:10 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -530,7 +530,8 @@
 <pre><code>#启用shutdown endpoint的HTTP访问
 endpoints.shutdown.enabled=true
 #不需要验证 
-endpoints.shutdown.sensitive=false</code></pre><p>启动的时候可以看到下面的日志，就说明成功了<br><img src="/images/%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97.png" alt="启动日志"></p>
+endpoints.shutdown.sensitive=false</code></pre><p>启动的时候可以看到下面的日志，就说明成功了</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gmpw1poamqj311p0c976l.jpg" alt="启动日志"></p>
 <h3 id="3-优雅停机"><a href="#3-优雅停机" class="headerlink" title="3. 优雅停机"></a>3. 优雅停机</h3><p>发送POST请求 <code>http://localhost:8080/shutdown</code><br>如果响应码是404 可以尝试POST <code>http://localhost:8080/actuator/shutdown</code></p>
 <h2 id="Spring-Boot-2-0"><a href="#Spring-Boot-2-0" class="headerlink" title="Spring Boot 2.0"></a>Spring Boot 2.0</h2><p>如果你使用的spring boot版本是2.x的就会发现，这些POST请求都会出现404的结果。</p>
 <p>下面是Spring Boot 2.0 优雅停机的实现方式。</p>
