@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sun Jan 17 2021 09:22:22 GMT+0800">
-        <meta property="article:modified_time" content="Fri Feb 05 2021 15:17:00 GMT+0800">
+        <meta property="article:modified_time" content="Fri Feb 05 2021 15:19:09 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "https://zdran.com/20210117.html",
     "headline": "面试笔记（三）MySQL事务深入学习",
     "datePublished": "Sun Jan 17 2021 09:22:22 GMT+0800",
-    "dateModified": "Fri Feb 05 2021 15:17:00 GMT+0800",
+    "dateModified": "Fri Feb 05 2021 15:19:09 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "U+2647",
@@ -360,7 +360,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="post-toc-number">1.</span> <span class="post-toc-text">2. 隔离性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%EF%BC%88Read-uncommitted%EF%BC%89"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">2.1 读未提交（Read uncommitted）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%EF%BC%88read-committed%EF%BC%89"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.2 读已提交（read committed）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88repeatable-read%EF%BC%89"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">2.3 可重复读（repeatable read）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%EF%BC%88MVCC%EF%BC%89"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">2.4 多版本并发控制（MVCC）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-%E4%B8%B2%E8%A1%8C%E5%8C%96%EF%BC%88Serializable%EF%BC%89"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">2.5 串行化（Serializable）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-6-%E5%B9%BB%E8%AF%BB"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">2.6 幻读</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E4%B8%80%E8%87%B4%E6%80%A7-amp-%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="post-toc-number">2.</span> <span class="post-toc-text">3.一致性&amp;原子性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E6%8C%81%E4%B9%85%E6%80%A7"><span class="post-toc-number">3.</span> <span class="post-toc-text">5.持久性</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 隔离性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%EF%BC%88Read-uncommitted%EF%BC%89"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 读未提交（Read uncommitted）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%EF%BC%88read-committed%EF%BC%89"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 读已提交（read committed）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88repeatable-read%EF%BC%89"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 可重复读（repeatable read）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%EF%BC%88MVCC%EF%BC%89"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">1.4 多版本并发控制（MVCC）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-5-%E4%B8%B2%E8%A1%8C%E5%8C%96%EF%BC%88Serializable%EF%BC%89"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1.5 串行化（Serializable）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-6-%E5%B9%BB%E8%AF%BB"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">1.6 幻读</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E4%B8%80%E8%87%B4%E6%80%A7-amp-%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.一致性&amp;原子性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E6%8C%81%E4%B9%85%E6%80%A7"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.持久性</span></a></li></ol>
     </ul>
     
 
@@ -523,9 +523,9 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p>上一篇文章 <a href="https://zdran.com/20200107.html">面试笔记（一）事务连环炮</a> 中，写了下事务的基本概念。这篇文章中将继续深入学习下 MySQL 事务的 ACID 四个特性的实现原理。</p>
-<h2 id="2-隔离性"><a href="#2-隔离性" class="headerlink" title="2. 隔离性"></a>2. 隔离性</h2><p>事务的隔离性实现是最复杂的，也是最难的，所以 MySQL 对隔离性做了四个级别的实现。事务的隔离性其实是指，两个事务之间的操作在未提交时相关不可见。这跟 Java 多线程里的可见性正好相反。MySQL 通过 MVCC、锁等手段</p>
-<h3 id="2-1-读未提交（Read-uncommitted）"><a href="#2-1-读未提交（Read-uncommitted）" class="headerlink" title="2.1 读未提交（Read uncommitted）"></a>2.1 读未提交（Read uncommitted）</h3><p>这种事务隔离级别下，读到的数据是其他事务没有提交的数据，所以不需要做特殊处理，可以直接读取当前数据即可。</p>
-<h3 id="2-2-读已提交（read-committed）"><a href="#2-2-读已提交（read-committed）" class="headerlink" title="2.2 读已提交（read committed）"></a>2.2 读已提交（read committed）</h3><p>MySQL 通过 <strong>多版本并发控制（MVCC）</strong> 实现了 <strong>一致性非锁定读    ** 的能力。当一个事务对某个记录进行操作时，会对该行记录进行加锁，在  RC 级别下，如果另外一个事务要读取当前数据的话，则不会等待锁释放，而是读取行记录的一个快照版本。所以才叫非锁定读。因为读的是快照数据，所以也叫</strong>快照读**。</p>
+<h2 id="1-隔离性"><a href="#1-隔离性" class="headerlink" title="1. 隔离性"></a>1. 隔离性</h2><p>事务的隔离性实现是最复杂的，也是最难的，所以 MySQL 对隔离性做了四个级别的实现。事务的隔离性其实是指，两个事务之间的操作在未提交时相关不可见。这跟 Java 多线程里的可见性正好相反。MySQL 通过 MVCC、锁等手段</p>
+<h3 id="1-1-读未提交（Read-uncommitted）"><a href="#1-1-读未提交（Read-uncommitted）" class="headerlink" title="1.1 读未提交（Read uncommitted）"></a>1.1 读未提交（Read uncommitted）</h3><p>这种事务隔离级别下，读到的数据是其他事务没有提交的数据，所以不需要做特殊处理，可以直接读取当前数据即可。</p>
+<h3 id="1-2-读已提交（read-committed）"><a href="#1-2-读已提交（read-committed）" class="headerlink" title="1.2 读已提交（read committed）"></a>1.2 读已提交（read committed）</h3><p>MySQL 通过 <strong>多版本并发控制（MVCC）</strong> 实现了 <strong>一致性非锁定读    ** 的能力。当一个事务对某个记录进行操作时，会对该行记录进行加锁，在  RC 级别下，如果另外一个事务要读取当前数据的话，则不会等待锁释放，而是读取行记录的一个快照版本。所以才叫非锁定读。因为读的是快照数据，所以也叫</strong>快照读**。</p>
 <p>下面我们开启两个事务看下 RC 级别下的快照读情况。</p>
 <p>首先修改 事务隔离级别为 RC 级别，并且设置binlog的模式</p>
 <pre><code class="sql">SET session transaction isolation level read committed;</code></pre>
@@ -595,7 +595,7 @@ select * from my_test;
 <td>select * from my_test; <br/>读取到更新的数据</td>
 </tr>
 </tbody></table>
-<h3 id="2-3-可重复读（repeatable-read）"><a href="#2-3-可重复读（repeatable-read）" class="headerlink" title="2.3 可重复读（repeatable read）"></a>2.3 可重复读（repeatable read）</h3><p>将事务隔离级别调整到 RR 级别。</p>
+<h3 id="1-3-可重复读（repeatable-read）"><a href="#1-3-可重复读（repeatable-read）" class="headerlink" title="1.3 可重复读（repeatable read）"></a>1.3 可重复读（repeatable read）</h3><p>将事务隔离级别调整到 RR 级别。</p>
 <pre><code class="sql">SET session transaction isolation level repeatable read;</code></pre>
 <p>在 RR 隔离级别下可以解决<strong>不可重复读</strong>的问题。使用的方法也是<strong>多版本并发控制（MVCC）</strong>。</p>
 <p>首先开启一个 事务 A。执行 读取数据。</p>
@@ -643,7 +643,7 @@ select * from my_test for update;
 +----+---------+------+
 2 rows in set (0.00 sec)</code></pre>
 <p>这是因为 MySQL 有两种读取方式。一种被称为<strong>快照读</strong>，一种被称为<strong>当前读</strong>。在 MVCC 中 <code>select * from my_test</code> 就是快照读，读取的是快照数据，而<code>select * from my_test lock in share mode;</code> 和 <code>select * from my_test for update;</code> 是当前读，会读取当前版本的数据。MySQL 通过 MVCC 实现了上面这种能力。</p>
-<h3 id="2-4-多版本并发控制（MVCC）"><a href="#2-4-多版本并发控制（MVCC）" class="headerlink" title="2.4 多版本并发控制（MVCC）"></a>2.4 多版本并发控制（MVCC）</h3><p>在MySQL中建表时，每个表都会有三列隐藏记录，其中和MVCC有关系的有两列。</p>
+<h3 id="1-4-多版本并发控制（MVCC）"><a href="#1-4-多版本并发控制（MVCC）" class="headerlink" title="1.4 多版本并发控制（MVCC）"></a>1.4 多版本并发控制（MVCC）</h3><p>在MySQL中建表时，每个表都会有三列隐藏记录，其中和MVCC有关系的有两列。</p>
 <ul>
 <li>记录的创建版本号 （DB_TRX_ID）</li>
 <li>记录的删除版本号（DB_ROLL_PT）</li>
@@ -730,8 +730,8 @@ select * from my_test;
 +----+--------+------+
 |  1 | 李四   |   11 |
 +----+--------+------+</code></pre><p>由于第二行数据的 DB_TRX_ID = 3 大于当前事务ID，所以读取不到更新的数据。这样就保证了同一个事务里是<strong>可重复读</strong>的。因为读取的是快照数据。而 RC 级别下能够读取到第二行数据，是因为 RC 级别下的 select 操作读取的永远是最新的数据。没有对这两个值进行校验。<strong>快照读</strong>的快照数据就是说的这里的快照。而<strong>MVCC</strong>里的版本，说的就是DB_TRX_ID和DB_ROLL_PT的数值。如果存在多个事务，同一条数据就会存在多个版本号。所以叫多版本。</p>
-<h3 id="2-5-串行化（Serializable）"><a href="#2-5-串行化（Serializable）" class="headerlink" title="2.5 串行化（Serializable）"></a>2.5 串行化（Serializable）</h3><p>所有 SQL 全部进行加锁处理，读加读锁排他锁，写加写排他锁。这样就不会有并发的问题了。但是性能很差。</p>
-<h3 id="2-6-幻读"><a href="#2-6-幻读" class="headerlink" title="2.6 幻读"></a>2.6 幻读</h3><p>网上的大部分资料上都有提到过，MySQL 的 Innodb 引擎需要在 Serializable 隔离级别下才能够解决幻读问题。下面我们在 RR 级别下来试下。</p>
+<h3 id="1-5-串行化（Serializable）"><a href="#1-5-串行化（Serializable）" class="headerlink" title="1.5 串行化（Serializable）"></a>1.5 串行化（Serializable）</h3><p>所有 SQL 全部进行加锁处理，读加读锁排他锁，写加写排他锁。这样就不会有并发的问题了。但是性能很差。</p>
+<h3 id="1-6-幻读"><a href="#1-6-幻读" class="headerlink" title="1.6 幻读"></a>1.6 幻读</h3><p>网上的大部分资料上都有提到过，MySQL 的 Innodb 引擎需要在 Serializable 隔离级别下才能够解决幻读问题。下面我们在 RR 级别下来试下。</p>
 <p>开启事务A：</p>
 <pre><code class="sql">begin; # 事务ID = 5
 select * from my_test;
@@ -854,7 +854,7 @@ insert into my_test value(null,&#39;赵六&#39;,5);</code></pre>
 （11,12]
 （12，positive infinity）</code></pre><p>事务7会使用 GAP 锁来锁定 (1,11] 这个区间。然后使用行锁锁定 11 这一行，所以你看到的现象就是有些 age 的值是可以插入成功的，因为没有落到 （1,11] 这个区间。需要注意的是。where 条件里的字段一定要有索引，因为没有索引，则这些字段也就没有排序，也就没有区间。除非该事务提交，否则其它事务无法插入任何数据。</p>
 <p>行锁防止别的事务修改或删除，GAP锁防止别的事务新增，行锁和GAP锁结合形成的的Next-Key锁共同解决了RR级别在写数据时的幻读问题。</p>
-<h2 id="3-一致性-amp-原子性"><a href="#3-一致性-amp-原子性" class="headerlink" title="3.一致性&amp;原子性"></a>3.一致性&amp;原子性</h2><p>事务的一致性和原子性是通过 <strong>undo log</strong>实现的。可以通过 undo log 将事务回滚到之前的装。undo log 是一种逻辑日志。当 Innodb 执行回滚时，会对每个 insert 操作执行一次 delete 操作，对于每个 delete 操作执行一次 insert 操作，对于每个 update 操作都会执行一次相反的 update。这样就实现了事务的一致性和原子性。</p>
+<h2 id="2-一致性-amp-原子性"><a href="#2-一致性-amp-原子性" class="headerlink" title="2.一致性&amp;原子性"></a>2.一致性&amp;原子性</h2><p>事务的一致性和原子性是通过 <strong>undo log</strong>实现的。可以通过 undo log 将事务回滚到之前的装。undo log 是一种逻辑日志。当 Innodb 执行回滚时，会对每个 insert 操作执行一次 delete 操作，对于每个 delete 操作执行一次 insert 操作，对于每个 update 操作都会执行一次相反的 update。这样就实现了事务的一致性和原子性。</p>
 <p>此外，undo log 还用于实现 MVCC ，<strong>即 Innodb 中的 MVCC 是通过 undo log 来实现的</strong> 网上的大部分资料都会像上文中一样，用所谓的”隐藏列”来解释MVCC，其实这种解释是一种概念上的说明，Innodb 是通过 undo log 来真正实现的  MVCC。</p>
 <p>由于 insert 操作只对当前事务可见，所以 Innodb 将 undo log 分为了 insert undo log 和 update undo log。其中 insert undo log 格式如下图：</p>
 <img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmys2f4dj30u010v0yo.jpg" alt="20200117-1" style="zoom:37%;" />
@@ -879,7 +879,7 @@ insert into my_test value(null,&#39;赵六&#39;,5);</code></pre>
 <li>update vector：记录的是每个列的修改信息。包括修改前和修改后的值。</li>
 </ul>
 <p>所以，当触发 MVCC 后，读取的数据其实是 undo log 里的数据。回滚的时候也是根据 update vector 里的数据执行的逆过程。</p>
-<h2 id="5-持久性"><a href="#5-持久性" class="headerlink" title="5.持久性"></a>5.持久性</h2><p>数据库的持久性是说事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。所以需要记录事务里的操作。能够在系统故障时恢复数据。这个功能就是通过 <strong>redo log</strong> 实现的。redo log又叫做 *<em>重做日志文件 *</em> 它由两部分组成一是重做日志缓冲（redo log buffer），是保存在内存里的，所以是易失的。二是重做日志文件（redo log file）是持久化的。与 undo log 不同，redo log 记录的内容不是逻辑日志，而是实际的值。</p>
+<h2 id="3-持久性"><a href="#3-持久性" class="headerlink" title="3.持久性"></a>3.持久性</h2><p>数据库的持久性是说事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。所以需要记录事务里的操作。能够在系统故障时恢复数据。这个功能就是通过 <strong>redo log</strong> 实现的。redo log又叫做 *<em>重做日志文件 *</em> 它由两部分组成一是重做日志缓冲（redo log buffer），是保存在内存里的，所以是易失的。二是重做日志文件（redo log file）是持久化的。与 undo log 不同，redo log 记录的内容不是逻辑日志，而是实际的值。</p>
 <p>为了确保日志缓冲每次都能够持久化到日志文件中，所以每次执行 commit 的时候都会执行一次 fsync 操作，所以尽量不要在for循环内使用事务，这样会导致大量的 fsync 操作。而 fsync 操作的效率取决于磁盘的性能。for循环量大时，有可能会影响业务。尽量使用批量操作，一次 commit。</p>
 
         
