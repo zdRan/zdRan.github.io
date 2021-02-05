@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            面试笔记（三）MySQL事务深入学习 | 
+        
+        U+2647&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="面试笔记（三）MySQL事务深入学习">
+    <meta name="keywords" content="java,U+2647,MySQL">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        <!-- highlight 代码高亮 -->
+        
+            <style id="highlight_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("highlight_css","/css/highlight-styles/googlecode.css?psPj0oLv8UYArA4bjklUGQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(https://s3.ax1x.com/2021/01/15/s06OXD.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="U+2647&#39;s blog">
+    <meta name="msapplication-starturl" content="https://zdran.com/20210117.html">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="U+2647&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="cjZqB5nJc_iCpbllUCFCsJfhsLKhkKeU2DeYvh56fcE" />
+    <meta name="baidu-site-verification" content="j93yLiKLFj" />
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://zdran.com/20210117.html">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="面试笔记（三）MySQL事务深入学习 | U+2647&#39;s blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="面试笔记（三）MySQL事务深入学习">
+    <meta property="og:article:tag" content="MySQL"> 
+
+    
+        <meta property="article:published_time" content="Sun Jan 17 2021 09:22:22 GMT+0800">
+        <meta property="article:modified_time" content="Fri Feb 05 2021 15:17:00 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://zdran.com/20210117.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://zdran.com/20210117.html",
+    "headline": "面试笔记（三）MySQL事务深入学习",
+    "datePublished": "Sun Jan 17 2021 09:22:22 GMT+0800",
+    "dateModified": "Fri Feb 05 2021 15:17:00 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "U+2647",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "evolving code monkey"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "U+2647&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",MySQLjava,U+2647",
+    "description": "面试笔记（三）MySQL事务深入学习",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?b376fd998e9dfd55d67208bc0b8bf335';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle" style="background-color: rgba(255,251,251,0.7)">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon" style="background-color: rgba(255, 251, 251, 0.7); display: initial;">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="post-toc-number">1.</span> <span class="post-toc-text">2. 隔离性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%EF%BC%88Read-uncommitted%EF%BC%89"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">2.1 读未提交（Read uncommitted）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%EF%BC%88read-committed%EF%BC%89"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.2 读已提交（read committed）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88repeatable-read%EF%BC%89"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">2.3 可重复读（repeatable read）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%EF%BC%88MVCC%EF%BC%89"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">2.4 多版本并发控制（MVCC）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-%E4%B8%B2%E8%A1%8C%E5%8C%96%EF%BC%88Serializable%EF%BC%89"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">2.5 串行化（Serializable）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-6-%E5%B9%BB%E8%AF%BB"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">2.6 幻读</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E4%B8%80%E8%87%B4%E6%80%A7-amp-%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="post-toc-number">2.</span> <span class="post-toc-text">3.一致性&amp;原子性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E6%8C%81%E4%B9%85%E6%80%A7"><span class="post-toc-number">3.</span> <span class="post-toc-text">5.持久性</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+    var randomArr = 'https://tvax1.sinaimg.cn/large/005Kwq7yly1gmojceznzaj30p10fnjsb.jpg,https://tva2.sinaimg.cn/large/005Kwq7yly1gmojeo2aboj30p00fntag.jpg,https://tvax4.sinaimg.cn/large/005Kwq7yly1gmojeobxr8j30p00e2myu.jpg,https://tvax1.sinaimg.cn/large/005Kwq7yly1gmojeokniwj30p00fnq42.jpg,https://tva3.sinaimg.cn/large/005Kwq7yly1gmojeop2mwj30p00e43zi.jpg,https://tva3.sinaimg.cn/large/005Kwq7yly1gmojeouzbmj30p00fnmzg.jpg,https://tva4.sinaimg.cn/large/005Kwq7yly1gmojeoyks8j30h809pmy1.jpg,https://tvax3.sinaimg.cn/large/005Kwq7yly1gmojep2fsuj30p10g140v.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojepdqsxj30p00fogn1.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojepjecpj30p00fnjsb.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojepqyhyj30p10fnjsb.jpg,https://tvax4.sinaimg.cn/large/005Kwq7yly1gmojepux3lj30p00fnmyr.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojeq5mc0j30pk0gimxs.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojeqcxchj30p10fp76c.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojeqtcukj30pr0it40e.jpg,https://tva4.sinaimg.cn/large/005Kwq7yly1gmojer230hj30q90fdwg0.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojer8ioqj30p30gddhf.jpg,https://tva1.sinaimg.cn/large/005Kwq7yly1gmojerbevej30ov0gkmyh.jpg,https://tvax1.sinaimg.cn/large/005Kwq7yly1gmojerg2v8j30pq0gp76h.jpg,https://tvax2.sinaimg.cn/large/005Kwq7yly1gmojern4zkj30px0ghgn3.jpg'.split(",");
+    $('.post_thumbnail-random').attr('data-original', randomArr[randomNum] );
+    $('.post_thumbnail-random').addClass('lazy');
+
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                面试笔记（三）MySQL事务深入学习
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>U+2647</strong>
+        <span>1月 17, 2021</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=面试笔记（三）MySQL事务深入学习&url=https://zdran.com/20210117.html&pic=https://zdran.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=面试笔记（三）MySQL事务深入学习&url=https://zdran.com/20210117.html&via=U+2647" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://zdran.com/20210117.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zdran.com/20210117.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=U+2647&#39;s blog&title=面试笔记（三）MySQL事务深入学习&summary=evolving code monkey&pics=https://zdran.com/img/favicon.png&url=https://zdran.com/20210117.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>上一篇文章 <a href="https://zdran.com/20200107.html">面试笔记（一）事务连环炮</a> 中，写了下事务的基本概念。这篇文章中将继续深入学习下 MySQL 事务的 ACID 四个特性的实现原理。</p>
+<h2 id="2-隔离性"><a href="#2-隔离性" class="headerlink" title="2. 隔离性"></a>2. 隔离性</h2><p>事务的隔离性实现是最复杂的，也是最难的，所以 MySQL 对隔离性做了四个级别的实现。事务的隔离性其实是指，两个事务之间的操作在未提交时相关不可见。这跟 Java 多线程里的可见性正好相反。MySQL 通过 MVCC、锁等手段</p>
+<h3 id="2-1-读未提交（Read-uncommitted）"><a href="#2-1-读未提交（Read-uncommitted）" class="headerlink" title="2.1 读未提交（Read uncommitted）"></a>2.1 读未提交（Read uncommitted）</h3><p>这种事务隔离级别下，读到的数据是其他事务没有提交的数据，所以不需要做特殊处理，可以直接读取当前数据即可。</p>
+<h3 id="2-2-读已提交（read-committed）"><a href="#2-2-读已提交（read-committed）" class="headerlink" title="2.2 读已提交（read committed）"></a>2.2 读已提交（read committed）</h3><p>MySQL 通过 <strong>多版本并发控制（MVCC）</strong> 实现了 <strong>一致性非锁定读    ** 的能力。当一个事务对某个记录进行操作时，会对该行记录进行加锁，在  RC 级别下，如果另外一个事务要读取当前数据的话，则不会等待锁释放，而是读取行记录的一个快照版本。所以才叫非锁定读。因为读的是快照数据，所以也叫</strong>快照读**。</p>
+<p>下面我们开启两个事务看下 RC 级别下的快照读情况。</p>
+<p>首先修改 事务隔离级别为 RC 级别，并且设置binlog的模式</p>
+<pre><code class="sql">SET session transaction isolation level read committed;</code></pre>
+<p>然后开启事务 A</p>
+<pre><code class="sql">begin;
+update my_test set name =&quot;李四&quot; where id = 1;</code></pre>
+<p>先不提交，然后我们再打开一个事务B。</p>
+<pre><code class="sql">begin;
+select * from my_test;
+
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 张三   |   11 |
++----+--------+------+
+1 row in set (0.00 sec)</code></pre>
+<p>然后我们提交一下事务A，发现事务B已经能够读取到最新的数据了。</p>
+<pre><code class="sql">begin;
+select * from my_test;
+
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 张三   |   11 |
++----+--------+------+
+1 row in set (0.00 sec)
+
+select * from my_test;
+
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+
+1 row in set (0.00 sec)</code></pre>
+<p>也就是说，我们可以直接读取到其他事务锁定的数据，这个就是<strong>非锁定读</strong>。读取到的数据是其他事务提交后的数据，没有提交的数据读取不到。所以隔离级别也叫<strong>读已提交</strong>。事务B两次查询请求的结果不一致的现象也叫<strong>不可重复读</strong>，即同一个事务里两次读取的结果不一致。这个问题在 RR 级别下就会解决。</p>
+<p>整个 SQL 执行过程：</p>
+<table>
+<thead>
+<tr>
+<th align="left">事务A</th>
+<th>事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">begin;</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">update my_test set name =”李四” where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>begin;</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>select * from my_test; <br/>没有读取到更新的数据</td>
+</tr>
+<tr>
+<td align="left">commit;</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>select * from my_test; <br/>读取到更新的数据</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-可重复读（repeatable-read）"><a href="#2-3-可重复读（repeatable-read）" class="headerlink" title="2.3 可重复读（repeatable read）"></a>2.3 可重复读（repeatable read）</h3><p>将事务隔离级别调整到 RR 级别。</p>
+<pre><code class="sql">SET session transaction isolation level repeatable read;</code></pre>
+<p>在 RR 隔离级别下可以解决<strong>不可重复读</strong>的问题。使用的方法也是<strong>多版本并发控制（MVCC）</strong>。</p>
+<p>首先开启一个 事务 A。执行 读取数据。</p>
+<pre><code class="sql">begin;
+select * from my_test;
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+</code></pre>
+<p>然后开始事务B，执行更新操作，并提交。</p>
+<pre><code class="sql">begin;
+update my_test set name = &quot;李四2&quot; where id = 1;
+commit;</code></pre>
+<p>然后事务A再执行读取操作，发现读取的结果没有变化。</p>
+<pre><code class="sql">begin;
+select * from my_test;
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+
+
+select * from my_test;
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+</code></pre>
+<p>所以是解决了<strong>不可重复读</strong>的问题。同一个事务里，第一次读取和第二次读取的数据是一致的。</p>
+<p>但是如果你使用下面的语句进行查询的话，就会发现会读到最新的数据</p>
+<pre><code class="sql">select * from my_test lock in share mode;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)
+
+select * from my_test for update;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)</code></pre>
+<p>这是因为 MySQL 有两种读取方式。一种被称为<strong>快照读</strong>，一种被称为<strong>当前读</strong>。在 MVCC 中 <code>select * from my_test</code> 就是快照读，读取的是快照数据，而<code>select * from my_test lock in share mode;</code> 和 <code>select * from my_test for update;</code> 是当前读，会读取当前版本的数据。MySQL 通过 MVCC 实现了上面这种能力。</p>
+<h3 id="2-4-多版本并发控制（MVCC）"><a href="#2-4-多版本并发控制（MVCC）" class="headerlink" title="2.4 多版本并发控制（MVCC）"></a>2.4 多版本并发控制（MVCC）</h3><p>在MySQL中建表时，每个表都会有三列隐藏记录，其中和MVCC有关系的有两列。</p>
+<ul>
+<li>记录的创建版本号 （DB_TRX_ID）</li>
+<li>记录的删除版本号（DB_ROLL_PT）</li>
+</ul>
+<p>这两列的值是事务的版本号。而事务的版本号是每开启一个新事务，事务版本号就会递增。每次在事务中进行操作时都会使用这两个值。</p>
+<p>在 RR 级别下：</p>
+<ul>
+<li>select时，读取 DB_TRX_ID 小于等于当前事务版本号，DB_ROLL_PT 为空或者大于当前事务版本号的数据。</li>
+<li>insert时，保存当前事务版本号为 DB_TRX_ID。</li>
+<li>delete时，保存当前事务版本号为 DB_ROLL_PT。</li>
+<li>update时，复制需要更新的行，并将当前事务的版本号保存为复制行的 DB_TRX_ID，并更新原行的 DB_ROLL_PT 为当前事务版本号</li>
+</ul>
+<p>这样就能够保证 RR 级别下的<strong>可重复读</strong>。</p>
+<p>下面我们梳理下 RR 级别的操作对 这两个值的影响。</p>
+<p>假如当前数据库的数据是下面这样：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>DB_TRX_ID</th>
+<th>DB_ROLL_PT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>李四</td>
+<td>11</td>
+<td>1</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<p>然后开启事务A 执行查询操作</p>
+<pre><code class="sql">begin; # 事务ID = 2
+select * from my_test;
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+</code></pre>
+<p>根据 MVCC 的要求，<strong>读取 DB_TRX_ID 小于等于当前事务版本号，DB_ROLL_PT 为空或者大于当前事务版本号的数据</strong>。id = 1 的行 DB_TRX_ID = 1 且 DB_ROLL_PT = NULL，所以可以读取到 id = 1 的记录。</p>
+<p>然后开启事务 B，执行更新操作，并提交。</p>
+<pre><code>begin; # 事务ID = 3
+update my_test set name = &quot;李四2&quot; where id = 1;
+commit;</code></pre><p>更新时会 <strong>复制需要更新的行，并将当前事务的版本号保存为复制行的 DB_TRX_ID，并更新原行的 DB_ROLL_PT 为当前事务版本号</strong>。所以数据库的数据会变成下面这样：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>DB_TRX_ID</th>
+<th>DB_ROLL_PT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>李四</td>
+<td>11</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>1</td>
+<td>李四2</td>
+<td>11</td>
+<td>3</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<p>然后事务 A 再执行查询操作。</p>
+<pre><code>begin; # 事务ID = 2
+select * from my_test;
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+
+
+select * from my_test;
++----+--------+------+
+| id | name   | age  |
++----+--------+------+
+|  1 | 李四   |   11 |
++----+--------+------+</code></pre><p>由于第二行数据的 DB_TRX_ID = 3 大于当前事务ID，所以读取不到更新的数据。这样就保证了同一个事务里是<strong>可重复读</strong>的。因为读取的是快照数据。而 RC 级别下能够读取到第二行数据，是因为 RC 级别下的 select 操作读取的永远是最新的数据。没有对这两个值进行校验。<strong>快照读</strong>的快照数据就是说的这里的快照。而<strong>MVCC</strong>里的版本，说的就是DB_TRX_ID和DB_ROLL_PT的数值。如果存在多个事务，同一条数据就会存在多个版本号。所以叫多版本。</p>
+<h3 id="2-5-串行化（Serializable）"><a href="#2-5-串行化（Serializable）" class="headerlink" title="2.5 串行化（Serializable）"></a>2.5 串行化（Serializable）</h3><p>所有 SQL 全部进行加锁处理，读加读锁排他锁，写加写排他锁。这样就不会有并发的问题了。但是性能很差。</p>
+<h3 id="2-6-幻读"><a href="#2-6-幻读" class="headerlink" title="2.6 幻读"></a>2.6 幻读</h3><p>网上的大部分资料上都有提到过，MySQL 的 Innodb 引擎需要在 Serializable 隔离级别下才能够解决幻读问题。下面我们在 RR 级别下来试下。</p>
+<p>开启事务A：</p>
+<pre><code class="sql">begin; # 事务ID = 5
+select * from my_test;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)
+</code></pre>
+<p>开启事务B：</p>
+<pre><code class="sql">begin; # 事务ID = 6
+select * from my_test;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)</code></pre>
+<p>两个事务里的查询结果是一样的，现在我们在事务ID = 3 的事务里插入一条数据,并提交：</p>
+<pre><code class="sql">begin; # 事务ID = 5
+select * from my_test;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)
+
+insert into my_test value(null,&#39;王五&#39;,1);
+
+commit;</code></pre>
+<p>根据<strong>MVCC</strong>的特性，我们先看下数据库的表结构。</p>
+<p>插入数据之前：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>DB_TRX_ID</th>
+<th>DB_ROLL_PT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>李四2</td>
+<td>11</td>
+<td>3</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<p>事务会<strong>读取 DB_TRX_ID 小于等于当前事务版本号，DB_ROLL_PT 为空或者大于当前事务版本号的数据</strong>。所以都能读到 id = 1 的数据，是没问题的，现在我们插入新的数据：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>DB_TRX_ID</th>
+<th>DB_ROLL_PT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>李四2</td>
+<td>11</td>
+<td>3</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>2</td>
+<td>王五</td>
+<td>1</td>
+<td>5</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<p>由于 id = 2 的 DB_TRX_ID = 5 小于 这两个事务，所以正常情况下事务 5 和事务 6 都会读取到最新的数据。这种情况就是<strong>幻读</strong>。我们可以说，事务 6 发生了幻读现象。</p>
+<p>但是，我们在事务 6 里执行下查询语句发现并没有出现幻读现象：</p>
+<pre><code class="sql">begin; # 事务ID = 6
+select * from my_test;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)
+
+select * from my_test;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四2   |   11 |
++----+---------+------+
+2 rows in set (0.00 sec)</code></pre>
+<p><strong>可见在MySQL的 RR级 别中，是解决了幻读的读问题的</strong>，上面的 select 是快照读，下面我们再看下当前读的场景。</p>
+<p>首先我们需要插入几条数据。目前的表数据如下：</p>
+<pre><code class="sql">mysql&gt; select * from my_test;
++----+---------+------+
+| id | name    | age  |
++----+---------+------+
+|  1 | 李四    |   11 |
+|  2 | 张三    |   12 |
+|  3 | 王五    |    1 |
++----+---------+------+
+3 rows in set (0.00 sec)</code></pre>
+<p>然后我们对 <code>age</code> 字段加一下辅助索引：</p>
+<pre><code class="sql">alter table my_test add index idx_age(age);</code></pre>
+<p>然后开启两个事务</p>
+<pre><code class="sql"> beign; # 事务 ID = 7
+ update my_test set age = 10 where age = 11;</code></pre>
+<p>执行更新数据但是并不提交，这个时候开启另外一个事务。</p>
+<pre><code class="sql">begin; #事务ID = 8
+insert into my_test value(null,&#39;赵六&#39;,5);</code></pre>
+<p>你会发现，事务8 阻塞在这里了。好像事务7对整张表都进行了加锁。我们执行 <code>rollback</code>命令将两个事务进行回滚。再执行下上面的过程。区别是修改下插入数据的 age 的数值。比如说把 5 改成 13，你会发现竟然执行成功了，没有阻塞。这个现象就是 Innodb 的 Next key 锁在起作用。Next key 锁定是 GAP lock （间隙锁）+ record lock （行锁）组合起来的。</p>
+<p>Innodb 首先会将上面的数据分成几段：</p>
+<pre><code>（negative infinity,1]
+（1,11]
+（11,12]
+（12，positive infinity）</code></pre><p>事务7会使用 GAP 锁来锁定 (1,11] 这个区间。然后使用行锁锁定 11 这一行，所以你看到的现象就是有些 age 的值是可以插入成功的，因为没有落到 （1,11] 这个区间。需要注意的是。where 条件里的字段一定要有索引，因为没有索引，则这些字段也就没有排序，也就没有区间。除非该事务提交，否则其它事务无法插入任何数据。</p>
+<p>行锁防止别的事务修改或删除，GAP锁防止别的事务新增，行锁和GAP锁结合形成的的Next-Key锁共同解决了RR级别在写数据时的幻读问题。</p>
+<h2 id="3-一致性-amp-原子性"><a href="#3-一致性-amp-原子性" class="headerlink" title="3.一致性&amp;原子性"></a>3.一致性&amp;原子性</h2><p>事务的一致性和原子性是通过 <strong>undo log</strong>实现的。可以通过 undo log 将事务回滚到之前的装。undo log 是一种逻辑日志。当 Innodb 执行回滚时，会对每个 insert 操作执行一次 delete 操作，对于每个 delete 操作执行一次 insert 操作，对于每个 update 操作都会执行一次相反的 update。这样就实现了事务的一致性和原子性。</p>
+<p>此外，undo log 还用于实现 MVCC ，<strong>即 Innodb 中的 MVCC 是通过 undo log 来实现的</strong> 网上的大部分资料都会像上文中一样，用所谓的”隐藏列”来解释MVCC，其实这种解释是一种概念上的说明，Innodb 是通过 undo log 来真正实现的  MVCC。</p>
+<p>由于 insert 操作只对当前事务可见，所以 Innodb 将 undo log 分为了 insert undo log 和 update undo log。其中 insert undo log 格式如下图：</p>
+<img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnbmys2f4dj30u010v0yo.jpg" alt="20200117-1" style="zoom:37%;" />
+
+
+
+<ul>
+<li>next：记录了下一个 undo log 的开始位置。</li>
+<li>type_cmpl：undo log 的类型，insert undo log 总为11</li>
+<li>undo no:：事务ID</li>
+<li>table id：对应的表对象</li>
+<li>start：记录的是 undo log 的开始位置</li>
+</ul>
+<p>中间这部分是记录了所有主键的列和值。如果需要 rollback 的话就可以根据这些数据直接定位到具体的行进行操作就可以了。</p>
+<p>update undo log 是记录了delete 和 update 两种操作的 undo log。其格式入下图所示：</p>
+<img src="https://tva1.sinaimg.cn/large/008eGmZEly1gnbnf5z0nxj30ny1cwtlr.jpg" alt="20200117-2" style="zoom:37%;" />
+
+<p>这里的内容比 insert undo log 要多很多。</p>
+<ul>
+<li>DATA_TRX_ID：用于 MVCC</li>
+<li>DATA_ROLL_PTR：用于 MVCC</li>
+<li>update vector：记录的是每个列的修改信息。包括修改前和修改后的值。</li>
+</ul>
+<p>所以，当触发 MVCC 后，读取的数据其实是 undo log 里的数据。回滚的时候也是根据 update vector 里的数据执行的逆过程。</p>
+<h2 id="5-持久性"><a href="#5-持久性" class="headerlink" title="5.持久性"></a>5.持久性</h2><p>数据库的持久性是说事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。所以需要记录事务里的操作。能够在系统故障时恢复数据。这个功能就是通过 <strong>redo log</strong> 实现的。redo log又叫做 *<em>重做日志文件 *</em> 它由两部分组成一是重做日志缓冲（redo log buffer），是保存在内存里的，所以是易失的。二是重做日志文件（redo log file）是持久化的。与 undo log 不同，redo log 记录的内容不是逻辑日志，而是实际的值。</p>
+<p>为了确保日志缓冲每次都能够持久化到日志文件中，所以每次执行 commit 的时候都会执行一次 fsync 操作，所以尽量不要在for循环内使用事务，这样会导致大量的 fsync 操作。而 fsync 操作的效率取决于磁盘的性能。for循环量大时，有可能会影响业务。尽量使用批量操作，一次 commit。</p>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            版权声明：本博客所有文章除特别声明外，均采用 <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 4.0 </a>许可协议。转载请注明出处！
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://zdran.com/20210117.html">https://zdran.com/20210117.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '07532e6021e94ce04ea5',
+            clientSecret: '511fa8b9dbc91a4520694798eb668931598eb678',
+            repo: 'zdran.github.io',
+            owner: 'zdRan',
+            admin: ['zdRan'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/20201219.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="U+2647's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        cm.zdran@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: cm.zdran@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2021/01/">一月 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/12/">十二月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/03/">三月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/12/">十二月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/11/">十一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/09/">九月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/08/">八月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/05/">五月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/02/">二月 2019<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Debug/">Debug<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/DesignPattern/">DesignPattern<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Dubbo/">Dubbo<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/Flutter/">Flutter<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/LeetCode/">LeetCode<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/Notes/">Notes<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/Python/">Python<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Redis/">Redis<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/SpringBoot/">SpringBoot<span class="sidebar_archives-count">18</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">cloud</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">59</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zdRan" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;U+2647's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+                <div class="footer-develop-div">Hosted by <a href="https://pages.coding.me" target="_blank" class="footer-develop-a">Coding Pages</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import highlight.js -->
+
+    
+        <script>lsloader.load("highlight_js","/js/highlight.pack.js?acYmXTaIUms2RHozguiBzg==", true)</script>
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            <!-- 加载 highlight 代码高亮-->
+            hljs.initHighlightingOnLoad();
+        
+    
+
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 2017;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
